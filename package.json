@@ -1,0 +1,48 @@
+{
+  "name": "rod-catch-returns-frontend-tests",
+  "version": "1.0.0",
+  "description": "Acceptance tests for the Data Returns service",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/wdio ./src/conf/local.conf.js",
+    "ci": "./node_modules/.bin/wdio ./src/conf/jenkins.conf.js",
+    "bstest": "./node_modules/.bin/wdio ./src/conf/browserstack.conf.js",
+    "lint": "./node_modules/eslint/bin/eslint.js *.js ./src/js/**",
+    "docker-build": "docker build -t defra/rod-catch-returns-frontend-tests . && docker images",
+    "docker-run": "docker run -it --network host -v \"$(pwd)/dockerlogs:/app/log/\" -e \"SERVICE_URL=http://localhost:3000/\" defra/rod-catch-returns-frontend-tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EnvironmentAgency/rod-catch-returns-frontend-tests.git"
+  },
+  "author": "Howard Davis",
+  "bugs": {
+    "url": "https://github.com/EnvironmentAgency/rod-catch-returns-frontend-tests/issues"
+  },
+  "homepage": "https://github.com/EnvironmentAgency/rod-catch-returns-frontend-tests#readme",
+  "dependencies": {
+    "chai": "4.1.2",
+    "fs-extra": "3.0.1",
+    "lodash": "^4.17.10",
+    "path": "0.12.7",
+    "request": "^2.88.0",
+    "wdio-browserstack-service": "0.1.16",
+    "wdio-cucumber-framework": "1.1.1",
+    "wdio-firefox-profile-service": "0.1.2",
+    "wdio-junit-reporter": "0.4.4",
+    "wdio-selenium-standalone-service": "0.0.10",
+    "wdio-spec-reporter": "0.1.5",
+    "webdriverio": "4.13.2",
+    "winston": "2.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.5.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "standard": "^12.0.1"
+  }
+}
