@@ -3,18 +3,23 @@ const Page = require('./page')
 const winston = require('winston')
 const waitForNav = require('../lib/wait-for-navigation-on-action')
 
-class ReviewPage extends Page {
+class DeletePage extends Page {
+  constructor(href) {
+    super()
+    this.href = href
+  }
+
   get url () {
-    return '/review'
+    return this.href
   }
 
   clickCancel () {
-    console.log('About to click Cancel link')
+    console.log('About to click Cancel')
     const clickCancel = browser.element(`#return-summary`)
     waitForNav(function () {
       clickCancel.click()
     })
-
   }
 }
-module.exports = new ReviewPage()
+
+module.exports = DeletePage

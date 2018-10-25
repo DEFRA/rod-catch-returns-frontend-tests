@@ -66,7 +66,6 @@ defineStep('I select the released yes radio button', function () {
   LargeCatch.clickLargeCatchButtons(LargeCatch.releaseButtons.release1Button.id)
   winston.info('Continuing....')
   LargeCatch.continue()
-
 })
 
 defineStep('I select the released no radio button', function () {
@@ -76,7 +75,7 @@ defineStep('I select the released no radio button', function () {
 
 })
 
-defineStep('I select a river', function () {
+defineStep('I select a large river', function () {
   LargeCatch.selectLargeRiver()
 })
 

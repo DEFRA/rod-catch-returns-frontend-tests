@@ -2,8 +2,7 @@
 const Page = require('./page')
 const winston = require('winston')
 
-class AddActivitiesPage extends Page {
-
+class AddLargeFishPage extends Page {
   get url () {
     return '/catches/add'
   }
@@ -58,8 +57,10 @@ class AddActivitiesPage extends Page {
   selectLargeRiver () {
     const riverSelector = browser.$('#river')
     console.log('>>>>>>>' + JSON.stringify(riverSelector))
-    riverSelector.selectByValue(`rivers/4`)
-    console.log(riverSelector.getValue())
+    if (riverSelector.isVisible()) {
+      riverSelector.selectByValue(`rivers/2`)
+      console.log(riverSelector.getValue())
+    }
   }
 
   enterDateDay () {
@@ -113,7 +114,6 @@ class AddActivitiesPage extends Page {
       throw new Error('Unknown Sector link')
     }
   }
-
 }
 
-module.exports = new AddActivitiesPage()
+module.exports = new AddLargeFishPage()

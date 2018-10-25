@@ -21,8 +21,15 @@ class AddActivitiesPage extends Page {
     console.log(riverSelector.getValue())
   }
 
-  enterDays () {
-    var input = browser.$('#days')
+  enterDaysJan () {
+    var input = browser.$('#daysFishedWithMandatoryRelease')
+    console.log('>>>>>>>' + JSON.stringify(input))
+    input.setValue('2')
+    console.log(input.getValue()) // outputs: 'test123'
+  }
+
+  enterDaysJun () {
+    var input = browser.$('#daysFishedOther')
     console.log('>>>>>>>' + JSON.stringify(input))
     input.setValue('2')
     console.log(input.getValue()) // outputs: 'test123'
