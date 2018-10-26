@@ -14,13 +14,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EnvironmentAgency/rod-catch-returns-frontend-tests.git"
+    "url": "https://github.com/DEFRA/rod-catch-returns-frontend-tests.git"
   },
   "author": "Howard Davis",
   "bugs": {
-    "url": "https://github.com/EnvironmentAgency/rod-catch-returns-frontend-tests/issues"
+    "url": "https://github.com/DEFRA/rod-catch-returns-frontend-tests.git/issues"
   },
-  "homepage": "https://github.com/EnvironmentAgency/rod-catch-returns-frontend-tests#readme",
+  "homepage": "https://github.com/DEFRA/rod-catch-returns-frontend-tests.git#readme",
   "dependencies": {
     "chai": "4.1.2",
     "fs-extra": "3.0.1",
