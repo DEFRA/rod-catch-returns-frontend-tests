@@ -20,7 +20,7 @@ RUN	apt-get update; \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 8.11.1
+ENV NODE_VERSION 8.12.0
 
 # Replace shell with bash so we can source files
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
@@ -42,7 +42,7 @@ WORKDIR /app
 VOLUME /app/log
 
 # Install packages
-COPY ./package.json /app/package.json
+COPY ./package*.json /app/
 RUN npm install
 
 # Copy source
