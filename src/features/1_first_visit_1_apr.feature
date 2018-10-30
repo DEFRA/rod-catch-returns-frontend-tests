@@ -2,14 +2,14 @@ Feature: Login to Rod Catch returns update, delete, first time to the service an
 
   Background:
     Given I am on the login page
-    And I submit a username and password
-    And I am on the which season page
-    And I select season 1 and I click continue
-
+    And I submit the username and password for test user 1
+#    And I am on the which season page
+#    And I select season 1 and I click continue
 
   Scenario: First login - Save
     When I am on the did you fish page
     And  I select yes and I click continue
+
     And  I am on the summary page and select the add river link
     And I fished the river Ystrad
     And I fished 5 days with mandatory release and 10 other days

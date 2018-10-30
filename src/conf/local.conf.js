@@ -18,11 +18,6 @@ const localConfig = {
         args: ['--no-sandbox']
       }
     }
-    /* ,
-    {
-         browserName: 'firefox',
-         maxInstances: 1
-     }*/
   ],
 
   /*

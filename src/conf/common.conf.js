@@ -3,6 +3,7 @@ const util = require('util')
 const path = require('path')
 const winston = require('winston')
 const fs = require('fs-extra')
+const userManager = require('../js/lib/user-manager')
 
 // Selenium logging verbosity: silent | verbose | command | data | result | error
 const seleniumLogLevel = process.env.SELENIUM_LOG_LEVEL || 'error'
@@ -239,8 +240,10 @@ exports.config = {
    */
 
   // Cucumber specific hooks
-  beforeFeature: function (feature) {
+  beforeFeature: async function (feature) {
     winston.info(`Running feature: ${feature.name}`)
+    // winston.info(`Removing existing submissions for 2018`)
+    await userManager.deleteAllUserSubmissions(2018)
   },
   beforeScenario: function (scenario) {
     winston.info(`Running scenario: ${scenario.name}`)
