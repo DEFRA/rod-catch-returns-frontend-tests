@@ -264,9 +264,9 @@ exports.config = {
    */
   seleniumLogs: './logs/selenium',
   seleniumArgs: {
-    version: '3.4.0'
+    version: '3.14.0'
   },
   seleniumInstallArgs: {
-    version: '3.4.0'
+    version: '3.14.0'
   }
 }
