@@ -2,117 +2,58 @@
 const Page = require('./page')
 const winston = require('winston')
 
+const RADIO_RELEASED_YES_ID = '#released-1'
+const RADIO_RELEASED_NO_ID = '#released-2'
+const RADIO_IMPERIAL_ID = '#system-1'
+const RADIO_METRIC_ID = '#system-2'
+
 class AddLargeFishPage extends Page {
   get url () {
     return '/catches/add'
   }
 
-  get fishButtons () {
-    return {
-      type1Button: {
-        id: '#type-1'
-      },
-      type2Button: {
-        id: '#type-2'
-      }
-    }
+  setDate (dayOfMonth, monthNumber) {
+    browser.$('#date-day').setValue(dayOfMonth)
+    browser.$('#date-month').setValue(monthNumber)
   }
 
-  get weightButtons () {
-    return {
-      system1Button: {
-        id: '#system-1'
-      },
-      system2Button: {
-        id: '#system-2'
-      }
-    }
-  }
-
-  get methodButtons () {
-    return {
-      method1Button: {
-        id: '#method-1'
-      },
-      method2Button: {
-        id: '#method-2'
-      },
-      method3Button: {
-        id: '#method-3'
-      }
-    }
-  }
-
-  get releaseButtons () {
-    return {
-      release1Button: {
-        id: '#released-1'
-      },
-      release2Button: {
-        id: '#released-2'
-      }
-    }
-  }
-
-  selectLargeRiver () {
-    const riverSelector = browser.$('#river')
-    console.log('>>>>>>>' + JSON.stringify(riverSelector))
-    if (riverSelector.isVisible()) {
-      riverSelector.selectByValue(`rivers/2`)
-      console.log(riverSelector.getValue())
-    }
-  }
-
-  enterDateDay () {
-    var input = browser.$('#date-day')
-    console.log('>>>>>>>' + JSON.stringify(input))
-    input.setValue('02')
-    console.log(input.getValue()) // outputs: 'test123'
-  }
-
-  enterDateMonth () {
-    var input = browser.$('#date-month')
-    console.log('>>>>>>>' + JSON.stringify(input))
-    input.setValue('02')
-    console.log(input.getValue()) // outputs: 'test123'
-  }
-
-  enterDays () {
-    var input = browser.$('#date-day')
-    console.log('>>>>>>>' + JSON.stringify(input))
-    input.setValue('2')
-    console.log(input.getValue()) // outputs: 'test123'
-  }
-
-  enterPounds () {
-    var input = browser.$('#pounds')
-    console.log('>>>>>>>' + JSON.stringify(input))
-    input.setValue('2')
-    console.log(input.getValue()) // outputs: 'test123'
-  }
-
-  enterOunces () {
-    var input = browser.$('#ounces')
-    console.log('>>>>>>>' + JSON.stringify(input))
-    input.setValue('2')
-    console.log(input.getValue()) // outputs: 'test123'
-  }
-
-  enterKilos () {
-    var input = browser.$('#kilograms')
-    console.log('>>>>>>>' + JSON.stringify(input))
-    input.setValue('10')
-    console.log(input.getValue()) // outputs: 'test123'
-  }
-
-  clickLargeCatchButtons (buttonSelector) {
-    if (buttonSelector && browser.isExisting(buttonSelector)) {
-      winston.info('Clicking the button ' + buttonSelector)
-      browser.click(buttonSelector)
+  setRiver (riverName) {
+    if (browser.isVisible('#river')) {
+      const riverSelector = browser.$('#river')
+      riverSelector.selectByVisibleText(riverName)
     } else {
-      winston.error('Unable to find link in Sector.page.clickLink()')
-      throw new Error('Unknown Sector link')
+      // No river chooser visible, ensure that the river has been preselected and is in the title (this happens with only a single activity defined)
+      let pageHeading = browser.$('h1')
+      if (!pageHeading.getText().includes(`river ${riverName}`)) {
+        throw new Error(`Expected ${riverName} to be preselected but it wasn't!`)
+      }
     }
+  }
+
+  setSpecies (speciesName) {
+    let speciesLabel = browser.$(`label=${speciesName}`)
+    speciesLabel.click()
+  }
+
+  setReleased (released) {
+    let target = released ? RADIO_RELEASED_YES_ID : RADIO_RELEASED_NO_ID
+    browser.$(target).click()
+  }
+
+  setMethod (methodName) {
+    let methodLabel = browser.$(`label=${methodName}`)
+    methodLabel.click()
+  }
+
+  setMetricMass (kilos) {
+    browser.$(RADIO_METRIC_ID).click()
+    browser.$('#kilograms').setValue(kilos)
+  }
+
+  setImperialMass (lbs, oz) {
+    browser.$(RADIO_IMPERIAL_ID).click()
+    browser.$('#pounds').setValue(lbs)
+    browser.$('#ounces').setValue(oz)
   }
 }
 

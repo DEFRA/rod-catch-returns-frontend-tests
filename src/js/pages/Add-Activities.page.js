@@ -1,38 +1,21 @@
 'use strict'
 const Page = require('./page')
-const winston = require('winston')
-const waitForNav = require('../lib/wait-for-navigation-on-action')
-let riverIndex = 1
 
 class AddActivitiesPage extends Page {
-
   get url () {
     return '/activities/add'
   }
 
-  selectRiver () {
-    this.selectRiverForId(riverIndex++)
+  selectRiver (riverName) {
+    browser.$('#river').selectByVisibleText(riverName)
   }
 
-  selectRiverForId (riverId) {
-    const riverSelector = browser.$('#river')
-    console.log('>>>>>>>' + JSON.stringify(riverSelector))
-    riverSelector.selectByValue(`rivers/${riverId}`)
-    console.log(riverSelector.getValue())
+  setDaysFishedWithMandatoryRelease (days) {
+    browser.$('#daysFishedWithMandatoryRelease').setValue(days)
   }
 
-  enterDaysJan () {
-    var input = browser.$('#daysFishedWithMandatoryRelease')
-    console.log('>>>>>>>' + JSON.stringify(input))
-    input.setValue('2')
-    console.log(input.getValue()) // outputs: 'test123'
-  }
-
-  enterDaysJun () {
-    var input = browser.$('#daysFishedOther')
-    console.log('>>>>>>>' + JSON.stringify(input))
-    input.setValue('2')
-    console.log(input.getValue()) // outputs: 'test123'
+  setDaysFishedOther (days) {
+    browser.$('#daysFishedOther').setValue(days)
   }
 
 }
