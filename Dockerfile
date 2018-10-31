@@ -43,14 +43,10 @@ VOLUME /app/log
 
 # Install packages
 COPY ./package*.json /app/
-RUN npm -ddd install
+RUN npm -d install
 
 # Copy source
 COPY ./src /app/src
 COPY ./docker-entrypoint.sh /app/docker-entrypoint.sh
-
-RUN echo "Installation folder:" && ls -lah
-RUN echo "Modules:" && ls -lah node_modules/
-ENV DISPLAY :99
 
 CMD [ "bash", "-c", "./docker-entrypoint.sh ${RUN_SCRIPT}" ]

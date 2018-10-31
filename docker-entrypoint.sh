@@ -13,4 +13,6 @@ fi
 
 export DISPLAY=:99
 
+printenv
+
 npm run $1
