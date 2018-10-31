@@ -16,7 +16,7 @@ Feature: Login to Rod Catch returns update, delete, first time to the service an
     And I confirm my activity details and continue
 
     And  I am on the summary page and select the large catch link
-    And  I caught a fish weighing 3.5 kilos
+    And  I caught a fish weighing 3.5kg
     And  The catch date was 5 of January
     And  The catch river is Ystrad
     And  The catch species is Salmon
