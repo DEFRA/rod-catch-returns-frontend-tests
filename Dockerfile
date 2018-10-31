@@ -43,7 +43,7 @@ VOLUME /app/logs
 
 # Install packages
 COPY ./package*.json /app/
-RUN npm -d install
+RUN npm install
 
 # Copy source
 COPY ./src /app/src

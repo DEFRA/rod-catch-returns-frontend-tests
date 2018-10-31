@@ -14,5 +14,5 @@ fi
 export DISPLAY=:99
 
 printenv
-
+echo "Starting test run on $(date)"
 npm run $1
