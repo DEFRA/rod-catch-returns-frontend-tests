@@ -1,6 +1,6 @@
 'use strict'
 const Page = require('./page')
-const winston = require('winston')
+const { logger } = require('defra-logging-facade')
 
 class SelectDYFPage extends Page {
   get url () {
@@ -20,10 +20,10 @@ class SelectDYFPage extends Page {
 
   clickDidYouFishButtons (buttonSelector) {
     if (buttonSelector && browser.isExisting(buttonSelector)) {
-      winston.info('Clicking the button ' + buttonSelector)
+      logger.info('Clicking the button ' + buttonSelector)
       browser.click(buttonSelector)
     } else {
-      winston.error('Unable to find radio button')
+      logger.error('Unable to find radio button')
       throw new Error('Unknown Radio Button')
     }
   }

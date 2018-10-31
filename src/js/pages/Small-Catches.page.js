@@ -33,7 +33,7 @@ class AddSmallFishPage extends Page {
   }
 
   saveAndAddAnother () {
-    var element = browser.element('//*[@name="add"]')
+    const element = browser.element('//*[@name="add"]')
     element.click()
   }
 }

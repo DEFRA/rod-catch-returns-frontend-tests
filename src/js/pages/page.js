@@ -1,7 +1,5 @@
 'use strict'
-const winston = require('winston')
-
-const waitForNav = require('../lib/wait-for-navigation-on-action')
+const { logger } = require('defra-logging-facade')
 
 class Page {
   /**
@@ -13,10 +11,8 @@ class Page {
 
   open () {
     const self = this
-    winston.debug(`Opening url ${this.url}`)
-    // waitForNav(function () {
+    logger.debug(`Opening url ${this.url}`)
     browser.url(self.url)
-    // });
   }
 
   isOpen () {
@@ -25,38 +21,38 @@ class Page {
 
   checkOpen () {
     if (!this.isOpen()) {
-      winston.debug(`Page.checkOpen waiting for browser URL ${browser.getUrl()} to match ${this.url}`)
+      logger.debug(`Page.checkOpen waiting for browser URL ${browser.getUrl()} to match ${this.url}`)
       const fn = this.isOpen.bind(this)
       const url = this.url
       try {
         browser.waitUntil(fn, browser.options.waitforTimeout, `Expected URL '${browser.getUrl()}' to contain '${url}'`, 1000)
       } catch (e) {
-        winston.error('Error checking if page is open ', e)
+        logger.error('Error checking if page is open ', e)
         throw e
       }
     }
-    winston.debug(`Page.checkOpen - checking for ${this.url} completed successfully`)
+    logger.debug(`Page.checkOpen - checking for ${this.url} completed successfully`)
   }
 
   static doContinue () {
-    winston.info(`Waiting for continue button on ${browser.getUrl()} to be enabled....`)
+    logger.info(`Waiting for continue button on ${browser.getUrl()} to be enabled....`)
     try {
       browser.waitUntil(function () {
         const isDisabled = browser.getAttribute('//*[@name="continue"]', 'disabled') === 'true'
         if (isDisabled) {
-          winston.info(`Waiting for continue button on ${browser.getUrl()} to be enabled before continuing. (isDisabled=${isDisabled})`)
+          logger.info(`Waiting for continue button on ${browser.getUrl()} to be enabled before continuing. (isDisabled=${isDisabled})`)
         }
         return !isDisabled
       }, browser.options.waitforTimeout, `Continue button on ${browser.getUrl()} not enabled within the allowed time.`, browser.options.waitforInterval)
     } catch (e) {
-      winston.error(`Error waiting for continue button to be enabled on ${browser.getUrl()}`, e)
+      logger.error(`Error waiting for continue button to be enabled on ${browser.getUrl()}`, e)
       throw e
     }
 
-    waitForNav(function () {
-      var element = browser.element('//*[@name="continue"]')
-      element.click()
-    })
+    // waitForNav(function () {
+    const element = browser.element('//*[@name="continue"]')
+    element.click()
+    // })
   }
 
   continue () {

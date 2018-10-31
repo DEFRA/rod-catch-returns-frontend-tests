@@ -72,8 +72,6 @@ const browserStackConfig = {
    *
    */
   _projectConfiguration: {
-    // Winston log level (used by step definitions) (defaults to 'info', see winston for options)
-    winstonLogLevel: 'info',
     // timeout that specifies a time to wait for the implicit element location strategy when locating elements using the element or elements commands
     implicitTimeout: 0,
     // time to wait for the page loading to complete (allow much longer when running on browserstack)

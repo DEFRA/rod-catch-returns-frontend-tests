@@ -1,5 +1,5 @@
 'use strict'
-const {defineStep} = require('cucumber')
+const { defineStep } = require('cucumber')
 const LargeCatch = require('../../pages/Large-Catches.page')
 
 defineStep(/^I save the large catch and (return to the summary|add another)$/, function (action) {

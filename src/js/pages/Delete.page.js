@@ -1,10 +1,9 @@
 'use strict'
 const Page = require('./page')
-const winston = require('winston')
-const waitForNav = require('../lib/wait-for-navigation-on-action')
+const { logger } = require('defra-logging-facade')
 
 class DeletePage extends Page {
-  constructor(href) {
+  constructor (href) {
     super()
     this.href = href
   }
@@ -14,11 +13,9 @@ class DeletePage extends Page {
   }
 
   clickCancel () {
-    console.log('About to click Cancel')
+    logger.log('About to click Cancel')
     const clickCancel = browser.element(`#return-summary`)
-    waitForNav(function () {
-      clickCancel.click()
-    })
+    clickCancel.click()
   }
 }
 

@@ -1,7 +1,6 @@
 'use strict'
 const Page = require('./page')
-const winston = require('winston')
-const waitForNav = require('../lib/wait-for-navigation-on-action')
+const { logger } = require('defra-logging-facade')
 
 class ReviewPage extends Page {
   get url () {
@@ -9,12 +8,10 @@ class ReviewPage extends Page {
   }
 
   clickCancel () {
-    console.log('About to click Cancel link')
+    logger.log('About to click Cancel link')
     const clickCancel = browser.element(`#return-summary`)
-    waitForNav(function () {
-      clickCancel.click()
-    })
-
+    clickCancel.click()
   }
 }
+
 module.exports = new ReviewPage()

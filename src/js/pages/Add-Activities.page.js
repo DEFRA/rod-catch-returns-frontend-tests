@@ -1,4 +1,3 @@
-'use strict'
 const Page = require('./page')
 
 class AddActivitiesPage extends Page {
@@ -17,7 +16,6 @@ class AddActivitiesPage extends Page {
   setDaysFishedOther (days) {
     browser.$('#daysFishedOther').setValue(days)
   }
-
 }
 
 module.exports = new AddActivitiesPage()

@@ -1,6 +1,5 @@
 'use strict'
 const Page = require('./page')
-const winston = require('winston')
 
 const RADIO_RELEASED_YES_ID = '#released-1'
 const RADIO_RELEASED_NO_ID = '#released-2'
@@ -57,7 +56,7 @@ class AddLargeFishPage extends Page {
   }
 
   saveAndAddAnother () {
-    var element = browser.element('//*[@name="add"]')
+    const element = browser.element('//*[@name="add"]')
     element.click()
   }
 }

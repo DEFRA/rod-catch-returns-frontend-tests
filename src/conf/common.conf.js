@@ -1,15 +1,13 @@
 'use strict'
 const util = require('util')
 const path = require('path')
-const winston = require('winston')
+const { logger } = require('defra-logging-facade')
 const fs = require('fs-extra')
 const userManager = require('../js/lib/user-manager')
 const moment = require('moment')
 
 // Selenium logging verbosity: silent | verbose | command | data | result | error
 const seleniumLogLevel = process.env.SELENIUM_LOG_LEVEL || 'error'
-// Winston log level (used by step definitions) (defaults to 'info', see winston for options)
-const winstonLogLevel = process.env.WINSTON_LOG_LEVEL || 'info'
 
 // Ensure logs folder exists
 const logDir = path.resolve(__dirname, 'logs')
@@ -80,8 +78,6 @@ exports.config = {
    *
    */
   _projectConfiguration: {
-    // Winston log level (used by step definitions) (defaults to 'info', see winston for options)
-    winstonLogLevel: winstonLogLevel,
     // timeout that specifies a time to wait for the implicit element location strategy when locating elements using the element or elements commands
     implicitTimeout: 0,
     // time to wait for the page loading to complete
@@ -139,9 +135,9 @@ exports.config = {
    * Gets executed once before all workers get launched.
    */
   onPrepare: function (config, capabilities) {
-    const prettyConfig = util.inspect(config, {depth: null, colors: true})
-    const prettyCapabilities = util.inspect(capabilities, {depth: null, colors: true})
-    winston.info(`Running tests with configuration: \nCapabilities: ${prettyCapabilities}}\n\nConfiguration:${prettyConfig}`)
+    const prettyConfig = util.inspect(config, { depth: null, colors: true })
+    const prettyCapabilities = util.inspect(capabilities, { depth: null, colors: true })
+    logger.info(`Running tests with configuration: \nCapabilities: ${prettyCapabilities}}\n\nConfiguration:${prettyConfig}`)
   },
 
   /*
@@ -155,35 +151,7 @@ exports.config = {
     // reference to the current session identifier
     const testSessionId = browser.session().sessionId
 
-    /**
-     * Configure winston logging
-     */
-    winston.configure({
-      transports: [
-        new (winston.transports.Console)({
-          'level': cfg._projectConfiguration.winstonLogLevel || 'info',
-          'colorize': true,
-          'silent': false,
-          'timestamp': true,
-          'json': false,
-          'showLevel': true,
-          'handleExceptions': false,
-          'humanReadableUnhandledException': false
-        })
-      ],
-      filters: [
-        function (level, msg, meta) {
-          const sessionTxt = testSessionId ? testSessionId + ': ' : ''
-          const cap = browser.desiredCapabilities
-          // let env = `${cap.os} ${cap.os_version} ${cap.browserName} ${cap.browser_version}`;
-          const env = `${cap.browserName || 'Unknown'} ${cap.browser_version || ''}`
-
-          return `[0;35m[${sessionTxt}${env}][0;39m ${msg}`
-        }
-      ]
-    })
-
-    winston.info('Configuring test framework')
+    logger.info('Configuring test framework')
 
     // Setup the Chai assertion framework
     const chai = require('chai')
@@ -246,11 +214,11 @@ exports.config = {
 
   // Cucumber specific hooks
   beforeFeature: async function (feature) {
-    winston.info(`Running feature: ${feature.name}`)
+    logger.info(`Running feature: ${feature.name}`)
     await userManager.deleteAllUserSubmissions(moment().year())
   },
   beforeScenario: function (scenario) {
-    winston.info(`Running scenario: ${scenario.name}`)
+    logger.info(`Running scenario: ${scenario.name}`)
   },
   /*
    * beforeStep: function (step) {

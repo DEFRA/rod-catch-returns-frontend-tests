@@ -1,4 +1,5 @@
-const winston = require('winston')
+'use strict'
+const { logger } = require('defra-logging-facade')
 const rp = require('request-promise')
 const API_URL = process.env.API_URL || 'http://localhost:9580/'
 if (!API_URL.endsWith('/')) {
@@ -36,7 +37,7 @@ let self = module.exports = {
 
   deleteAllUserSubmissions: async function (season) {
     for (let user of users) {
-      winston.info(`Clearing existing ${season} submission data for ${user.username}`)
+      logger.info(`Clearing existing ${season} submission data for ${user.username}`)
       await self.deleteSubmission(user, season)
     }
   },
@@ -48,7 +49,7 @@ let self = module.exports = {
         await rp(requestObject)
         return true
       } catch (e) {
-        winston.error(`Error deleting ${season} submission for username=${user.username} and password=${user.password}`, e)
+        logger.error(`Error deleting ${season} submission for username=${user.username} and password=${user.password}`, e)
         throw e
       }
     }
@@ -65,7 +66,7 @@ let self = module.exports = {
       if (e.statusCode === 404) {
         return null
       }
-      winston.error(`Error finding submissions contact id ${user.contactId} with username=${user.username} and password=${user.password}`, e)
+      logger.error(`Error finding submissions contact id ${user.contactId} with username=${user.username} and password=${user.password}`, e)
       throw e
     }
   },
@@ -76,7 +77,7 @@ let self = module.exports = {
       let result = await rp(requestObject)
       return result.contact.id
     } catch (e) {
-      winston.error(`Error fetching contact detail for with username=${user.username} and password=${user.password}`, e)
+      logger.error(`Error fetching contact detail for with username=${user.username} and password=${user.password}`, e)
       throw e
     }
   }
@@ -100,7 +101,7 @@ let self = module.exports = {
       }
       user.contactId = await self.getContactId(user)
       users.push(user)
-      winston.info(`Adding user ${i} with username=${username} and password=${password}`)
+      logger.info(`Adding user ${i} with username=${username} and password=${password}`)
     }
   }
 })()

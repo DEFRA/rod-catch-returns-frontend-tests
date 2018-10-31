@@ -29,7 +29,6 @@ class LoginPage extends Page {
     this.enterPassword(postcode)
     this.continue()
   }
-
 }
 
 module.exports = new LoginPage()

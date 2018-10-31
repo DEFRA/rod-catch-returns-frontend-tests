@@ -24,6 +24,7 @@
   "homepage": "https://github.com/DEFRA/rod-catch-returns-frontend-tests.git#readme",
   "dependencies": {
     "chai": "4.2.0",
+    "defra-logging-facade": "git+https://github.com/DEFRA/defra-logging-facade.git",
     "fs-extra": "3.0.1",
     "lodash": "4.17.11",
     "moment": "^2.22.2",
@@ -35,8 +36,7 @@
     "wdio-junit-reporter": "0.4.4",
     "wdio-selenium-standalone-service": "0.0.10",
     "wdio-spec-reporter": "0.1.5",
-    "webdriverio": "4.14.0",
-    "winston": "2.4.1"
+    "webdriverio": "4.14.0"
   },
   "devDependencies": {
     "eslint": "5.8.0",
@@ -44,7 +44,6 @@
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-node": "8.0.0",
     "eslint-plugin-promise": "4.0.1",
-    "eslint-plugin-standard": "4.0.0",
-    "standard": "12.0.1"
+    "eslint-plugin-standard": "4.0.0"
   }
 }
