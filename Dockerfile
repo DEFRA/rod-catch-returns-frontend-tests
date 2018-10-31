@@ -6,7 +6,7 @@ ENV RUN_SCRIPT=docker-local-browser
 RUN set -ex; \
 	apt-get update; \
 	apt-get upgrade -y; \
-	apt-get install -y --no-install-recommends wget curl gnupg xvfb openjdk-8-jdk
+	apt-get install -y --no-install-recommends wget curl gnupg git xvfb openjdk-8-jdk
 
 # Install google-chrome repo
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
