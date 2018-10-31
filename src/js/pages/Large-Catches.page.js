@@ -45,15 +45,20 @@ class AddLargeFishPage extends Page {
     methodLabel.click()
   }
 
-  setMetricMass (kilos) {
+  setMetricMass (kg) {
     browser.$(RADIO_METRIC_ID).click()
-    browser.$('#kilograms').setValue(kilos)
+    browser.$('#kilograms').setValue(kg)
   }
 
   setImperialMass (lbs, oz) {
     browser.$(RADIO_IMPERIAL_ID).click()
     browser.$('#pounds').setValue(lbs)
     browser.$('#ounces').setValue(oz)
+  }
+
+  saveAndAddAnother () {
+    var element = browser.element('//*[@name="add"]')
+    element.click()
   }
 }
 

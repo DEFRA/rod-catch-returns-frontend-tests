@@ -36,6 +36,7 @@ let self = module.exports = {
 
   deleteAllUserSubmissions: async function (season) {
     for (let user of users) {
+      winston.info(`Clearing existing ${season} submission data for ${user.username}`)
       await self.deleteSubmission(user, season)
     }
   },

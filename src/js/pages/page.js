@@ -54,7 +54,6 @@ class Page {
     }
 
     waitForNav(function () {
-      //browser.click('#continueBtn');
       var element = browser.element('//*[@name="continue"]')
       element.click()
     })
