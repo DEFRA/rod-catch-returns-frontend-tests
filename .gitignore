@@ -1,5 +1,4 @@
 .idea/
 logs/
-dockerlogs/
 *.iml
 node_modules/

@@ -37,9 +37,9 @@ ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 # Create app directory
 RUN mkdir -p /app
-RUN mkdir -p /app/log
+RUN mkdir -p /app/logs
 WORKDIR /app
-VOLUME /app/log
+VOLUME /app/logs
 
 # Install packages
 COPY ./package*.json /app/
