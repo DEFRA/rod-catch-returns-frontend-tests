@@ -33,7 +33,7 @@ const seleiumDefaults = {
   }
 }
 
-exports.config = {
+const self = exports.config = {
   /*
    * ==================
    * Specify Test Files
@@ -146,24 +146,18 @@ exports.config = {
    * variables, such as `browser`. It is the perfect place to define custom commands.
    */
   before: function before (capabilities, specs) {
-    // reference to configuration object
-    const cfg = this
-    // reference to the current session identifier
-    const testSessionId = browser.session().sessionId
-
-    logger.info('Configuring test framework')
-
     // Setup the Chai assertion framework
     const chai = require('chai')
-
     global.expect = chai.expect
     global.assert = chai.assert
     global.should = chai.should()
 
     // // Set up project specific timeout configuration settings
-    browser.timeouts('implicit', cfg._projectConfiguration.implicitTimeout)
-    browser.timeouts('script', cfg._projectConfiguration.scriptTimeout)
-    browser.timeouts('page load', cfg._projectConfiguration.pageTimeout)
+    browser.timeouts({
+      'script': self._projectConfiguration.scriptTimeout,
+      'pageLoad': self._projectConfiguration.pageTimeout,
+      'implicit': self._projectConfiguration.implicitTimeout
+    })
   },
   /*
    *

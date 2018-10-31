@@ -36,7 +36,6 @@ ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 # Create app directory
-RUN mkdir -p /app
 RUN mkdir -p /app/logs
 WORKDIR /app
 VOLUME /app/logs
