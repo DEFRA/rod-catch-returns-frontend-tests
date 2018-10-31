@@ -4,6 +4,7 @@ const path = require('path')
 const winston = require('winston')
 const fs = require('fs-extra')
 const userManager = require('../js/lib/user-manager')
+const moment = require('moment')
 
 // Selenium logging verbosity: silent | verbose | command | data | result | error
 const seleniumLogLevel = process.env.SELENIUM_LOG_LEVEL || 'error'
@@ -13,6 +14,26 @@ const winstonLogLevel = process.env.WINSTON_LOG_LEVEL || 'info'
 // Ensure logs folder exists
 const logDir = path.resolve(__dirname, 'logs')
 fs.ensureDirSync(logDir)
+
+/*
+   Selenium standalone options.
+
+   Allow's for the selenium server version and browser driver version to be defined when running standalone.
+   Drivers should be updated as necessary when new browser releases dictate it.
+ */
+const seleiumDefaults = {
+  version: '3.14.0',
+  drivers: {
+    chrome: {
+      // See https://chromedriver.storage.googleapis.com/index.html'
+      version: '2.43'
+    },
+    firefox: {
+      // See https://github.com/mozilla/geckodriver/releases
+      version: '0.23.0'
+    }
+  }
+}
 
 exports.config = {
   /*
@@ -171,26 +192,10 @@ exports.config = {
     global.assert = chai.assert
     global.should = chai.should()
 
-    // Set up project specific timeout configuration settings
+    // // Set up project specific timeout configuration settings
     browser.timeouts('implicit', cfg._projectConfiguration.implicitTimeout)
     browser.timeouts('script', cfg._projectConfiguration.scriptTimeout)
     browser.timeouts('page load', cfg._projectConfiguration.pageTimeout)
-
-    winston.info('Adding custom browser commands')
-    /**
-     * Safe version of the browser.isExisting() functionality
-     *
-     * Safari driver on browserstack likes to throw exceptions when you call isExisting on an element which doesn't exist.
-     * This function protects against this.
-     */
-    browser.addCommand('isExistingSafe', function (selector) {
-      try {
-        return browser.isExisting(selector)
-      } catch (e) {
-        winston.warn('Ignoring exception thrown on isExisting call.')
-        return false
-      }
-    })
   },
   /*
    *
@@ -242,8 +247,7 @@ exports.config = {
   // Cucumber specific hooks
   beforeFeature: async function (feature) {
     winston.info(`Running feature: ${feature.name}`)
-    // winston.info(`Removing existing submissions for 2018`)
-    await userManager.deleteAllUserSubmissions(2018)
+    await userManager.deleteAllUserSubmissions(moment().year())
   },
   beforeScenario: function (scenario) {
     winston.info(`Running scenario: ${scenario.name}`)
@@ -263,10 +267,6 @@ exports.config = {
    * Common selenium properties (only applicable when services configured with: ['selenium-standalone'],
    */
   seleniumLogs: './logs/selenium',
-  seleniumArgs: {
-    version: '3.14.0'
-  },
-  seleniumInstallArgs: {
-    version: '3.14.0'
-  }
+  seleniumArgs: seleiumDefaults,
+  seleniumInstallArgs: seleiumDefaults
 }

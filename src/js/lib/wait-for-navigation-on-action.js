@@ -5,7 +5,7 @@ util.inspect.defaultOptions = {depth: null, colors: true}
 
 module.exports = function (action) {
   // Page Id element is embedded on each page by the frontend layout.html
-  const oldPageId = browser.isExistingSafe('#pgid') ? browser.getValue('#pgid') : 'NO_OLD_PAGE_ID_FOUND'
+  const oldPageId = browser.isExisting('#pgid') ? browser.getValue('#pgid') : 'NO_OLD_PAGE_ID_FOUND'
   const oldPageUrl = browser.getUrl()
   let currentPageId = null
   try {
