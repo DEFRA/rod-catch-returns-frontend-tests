@@ -32,7 +32,7 @@ Feature: Login to Rod Catch returns update, delete, first time to the service an
     And  I enter number of fish caught bait
     And  I enter number of fish released
     And  I am on the summary page and I save and exit the service
-    And  I am on the draft saved page and I click the return to licence page
+    And  I am on the draft saved page
 
 #  Scenario: First login - delete
 #    When I am on the delete river page and I click delete

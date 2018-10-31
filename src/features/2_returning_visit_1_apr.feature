@@ -25,7 +25,7 @@ Feature: Login to Rod Catch returns update and return to service, submit
     And  The catch wasn't released
     And  I am on the summary page
     And  I am on the summary page and I save and exit the service
-    And  I am on the draft saved page and I click the return to licence page
+    And  I am on the draft saved page
 
 
   Scenario: Return login - Submit
