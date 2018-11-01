@@ -16,7 +16,7 @@ const setupCapabilities = function (capabilitiesArray) {
   return capabilitiesArray.map(cap => lodash.defaultsDeep(cap, {
     'build': `${process.env.USER}@${os.hostname()} ${buildTimestamp}`.replace(/[^A-Za-z0-9 :._@]/g, '_'),
     'maxInstances': 1,
-    'project': 'Data Returns',
+    'project': 'Rod Catch Returns',
     'browserstack.local': true,
     'browserstack.debug': true,
     'browserstack.video': true,
@@ -85,66 +85,53 @@ const browserStackConfig = {
   // ============
   maxInstances: 1,
   capabilities: setupCapabilities([
+    // iPhone
+    {
+      'os_version': '12.0',
+      'device': 'iPhone XS',
+      'real_mobile': 'true'
+    },
+    // Android
+    {
+      'os_version': '7.0',
+      'device': 'Samsung Galaxy S8',
+      'real_mobile': 'true'
+    },
+    // Edge 17
+    {
+      'os': 'Windows',
+      'os_version': '10',
+      'browserName': 'Edge',
+      'browser_version': '17.0'
+    },
+    // Win 7 / IE11
     {
       'os': 'Windows',
       'os_version': '7',
-      'browserName': 'ie',
-      'browser_version': '8.0'
+      'browserName': 'IE',
+      'browser_version': '11.0'
+    },
+    // MacOSX "Mojave" Safari
+    {
+      'os': 'OS X',
+      'os_version': 'Mojave',
+      'browserName': 'Safari',
+      'browser_version': '12.0'
+    },
+    // Windows 10 Firefox
+    {
+      'os': 'Windows',
+      'os_version': '10',
+      'browserName': 'Firefox',
+      'browser_version': '63.0'
+    },
+    // Windows 10 Chrome
+    {
+      'os': 'Windows',
+      'os_version': '10',
+      'browserName': 'Chrome',
+      'browser_version': '70.0'
     }
-    // ,
-    // {
-    //     'os': 'Windows',
-    //     'os_version': '7',
-    //     'browserName': 'ie',
-    //     'browser_version': '9.0'
-    // },
-    // {
-    //     'os': 'Windows',
-    //     'os_version': '7',
-    //     'browserName': 'ie',
-    //     'browser_version': '10.0'
-    // },
-    // {
-    //     'os': 'Windows',
-    //     'os_version': '7',
-    //     'browserName': 'ie',
-    //     'browser_version': '11.0'
-    // },
-    // {
-    //     'os': 'Windows',
-    //     'os_version': '10',
-    //     'browserName': 'edge',
-    //     // The automation driver for this browser does support file uploads - use data returns preloading to load data and establish sessions.
-    //     'preloadFiles': true
-    // },
-    // {
-    //     'os': 'OS X',
-    //     'os_version': 'Sierra',
-    //     'browserName': 'safari',
-    //     'browser_version': '10.0',
-    //     'browserstack.safari.allowAllCookies': true,
-    //     // The automation driver for this browser does support file uploads - use data returns preloading to load data and establish sessions.
-    //     'preloadFiles': true
-    // },
-    // {
-    //     'os': 'android',
-    //     'os_version': '4.4',
-    //     'browser': 'android',
-    //     'device': 'Samsung Galaxy S5',
-    //     'browser_version': null,
-    //     // The automation driver for this browser does support file uploads - use data returns preloading to load data and establish sessions.
-    //     'preloadFiles': true
-    // },
-    // {
-    //     'os': 'ios',
-    //     'os_version': '9.1',
-    //     'browserName': 'iphone',
-    //     'browser_version': null,
-    //     'device': 'iPhone 6S Plus',
-    //     'browserstack.safari.allowAllCookies': true,
-    //     // The automation driver for this browser does support file uploads - use data returns preloading to load data and establish sessions.
-    //     'preloadFiles': true
-    // }
   ]),
 
   // ===================

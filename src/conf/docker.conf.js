@@ -2,7 +2,10 @@
 const lodash = require('lodash')
 const commonConfig = require('./common.conf').config
 
-const localConfig = {
+/*
+  Configuration for running with local browsers inside the docker container built from this project's Dockerfile
+ */
+const dockerConfig = {
   /*
    * ============
    * Capabilities
@@ -34,13 +37,6 @@ const localConfig = {
    * with "/", then the base url gets prepended.
    */
   baseUrl: process.env.SERVICE_URL || 'http://localhost:3000',
-
-  /*
-   * Test runner services
-   * Services take over a specific job you don't want to take care of. They enhance
-   * your test setup with almost no effort. Unlike plugins, they don't add new
-   * commands. Instead, they hook themselves up into the test process.
-   */
   services: ['selenium-standalone']
 }
-exports.config = lodash.defaultsDeep(localConfig, commonConfig)
+exports.config = lodash.defaultsDeep(dockerConfig, commonConfig)

@@ -45,7 +45,6 @@ const self = exports.config = {
   exclude: [
     // 'path/to/excluded/files'
   ],
-
   // execArgv: ['--inspect'],
 
   /*
@@ -75,7 +74,6 @@ const self = exports.config = {
    * Project-specific configuration options
    *
    * Add any project-specific configuration options here (keep things separate from the standard wdio config)
-   *
    */
   _projectConfiguration: {
     // timeout that specifies a time to wait for the implicit element location strategy when locating elements using the element or elements commands
@@ -86,12 +84,7 @@ const self = exports.config = {
     scriptTimeout: 30000
   },
 
-  /*
-   * Default timeout in milliseconds for request
-   * if Selenium Grid doesn't send response
-   */
   connectionRetryTimeout: 90000,
-  // Default request retries count
   connectionRetryCount: 3,
   // Framework to run specs with.
   framework: 'cucumber',
@@ -127,13 +120,9 @@ const self = exports.config = {
    * =====
    * Hooks
    * =====
-   * WebdriverIO provides several hooks you can use to interfere with the test process in order to enhance
-   * it and to build services around it. You can either apply a single function or an array of
-   * methods to it. If one of them returns with a promise, WebdriverIO will wait until that promise got
-   * resolved to continue.
-   *
-   * Gets executed once before all workers get launched.
+   * See http://webdriver.io/guide/testrunner/configurationfile.html for reference
    */
+  // Gets executed once before all workers get launched.
   onPrepare: function (config, capabilities) {
     const prettyConfig = util.inspect(config, { depth: null, colors: true })
     const prettyCapabilities = util.inspect(capabilities, { depth: null, colors: true })
@@ -141,7 +130,6 @@ const self = exports.config = {
   },
 
   /*
-   *
    * Gets executed before test execution begins. At this point you can access all global
    * variables, such as `browser`. It is the perfect place to define custom commands.
    */
@@ -159,53 +147,6 @@ const self = exports.config = {
       'implicit': self._projectConfiguration.implicitTimeout
     })
   },
-  /*
-   *
-   * Hook that gets executed before the suite starts
-   * beforeSuite: function (suite) {
-   * },
-   *
-   * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
-   * beforeEach in Mocha)
-   * beforeHook: function () {
-   * },
-   *
-   * Hook that gets executed _after_ a hook within the suite starts (e.g. runs after calling
-   * afterEach in Mocha)
-   * afterHook: function () {
-   * },
-   *
-   * Function to be executed before a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
-   * beforeTest: function (test) {
-   * },
-   *
-   * Runs before a WebdriverIO command gets executed.
-   * beforeCommand: function (commandName, args) {
-   * },
-   *
-   * Runs after a WebdriverIO command gets executed
-   * afterCommand: function (commandName, args, result, error) {
-   * },
-   *
-   * Function to be executed after a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
-   * afterTest: function (test) {
-   * },
-   *
-   * Hook that gets executed after the suite has ended
-   * afterSuite: function (suite) {
-   * },
-   *
-   * Gets executed after all tests are done. You still have access to all global variables from
-   * the test.
-   * after: function (result, capabilities, specs) {
-   * },
-   *
-   * Gets executed after all workers got shut down and the process is about to exit. It is not
-   * possible to defer the end of the process using a promise.
-   * onComplete: function(exitCode) {
-   * }
-   */
-
   // Cucumber specific hooks
   beforeFeature: async function (feature) {
     logger.info(`Running feature: ${feature.name}`)
@@ -214,20 +155,15 @@ const self = exports.config = {
   beforeScenario: function (scenario) {
     logger.info(`Running scenario: ${scenario.name}`)
   },
-  /*
-   * beforeStep: function (step) {
-   * },
-   * afterStep: function (stepResult) {
-   * },
-   * afterScenario: function (scenario) {
-   * },
-   * afterFeature: function (feature) {
-   * }
-   */
-
-  /*
-   * Common selenium properties (only applicable when services configured with: ['selenium-standalone'],
-   */
+  beforeStep: function (step) {
+    logger.debug('*****************************************')
+    logger.debug(`Running step: ${step.text}`)
+    logger.debug('*****************************************')
+  },
+  // Runs before a WebdriverIO command gets executed
+  beforeCommand: function (commandName, args) {
+    logger.debug(`Running command ${commandName} with args ${args}`)
+  },
   seleniumLogs: './logs/selenium',
   seleniumArgs: seleiumDefaults,
   seleniumInstallArgs: seleiumDefaults
