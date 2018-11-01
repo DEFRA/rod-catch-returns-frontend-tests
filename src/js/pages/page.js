@@ -1,5 +1,7 @@
 'use strict'
-const { logger } = require('defra-logging-facade')
+const {logger} = require('defra-logging-facade')
+const waitForNav = require('../lib/wait-for-navigation-on-action')
+const SELECTOR_CONTINUE = '//*[@name="continue"]'
 
 class Page {
   /**
@@ -20,7 +22,7 @@ class Page {
 
   checkOpen () {
     if (!this.isOpen()) {
-      logger.warn(`Page.checkOpen - async waiting for browser URL ${browser.getUrl()} to match ${this.url}`)
+      logger.debug(`Page.checkOpen - async waiting for browser URL ${browser.getUrl()} to match ${this.url}`)
       const fn = this.isOpen.bind(this)
       const url = this.url
       try {
@@ -29,14 +31,29 @@ class Page {
         logger.error('Error checking if page is open ', e)
         throw e
       }
-      logger.info(`Page.checkOpen - async checking for ${this.url} completed successfully`)
+      logger.debug(`Page.checkOpen - async checking for ${this.url} completed successfully`)
     }
   }
 
   continue () {
     this.checkOpen()
-    const element = browser.element('//*[@name="continue"]')
-    element.click()
+    this.clickNavigationLink(SELECTOR_CONTINUE)
+  }
+
+  clickNavigationLink (selector) {
+    waitForNav(function () {
+      browser.click(selector)
+    })
+  }
+
+  static clickRadioButton (selector) {
+    // GOV.UK Radio Buttons cannot be clicked via the input field in some browsers (IE/Safari)
+    // The workaround is to use the label instead
+    let sel = selector.trim()
+    if (!sel.endsWith('+ label')) {
+      sel += '+ label'
+    }
+    browser.click(sel)
   }
 }
 

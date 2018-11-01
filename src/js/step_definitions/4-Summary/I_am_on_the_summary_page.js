@@ -4,7 +4,7 @@ const Summary = require('../../pages/Summary.page')
 
 defineStep('I am on the summary page and select the add river link', function () {
   Summary.checkOpen()
-  Summary.clickAddRIver()
+  Summary.clickAddRiver()
 })
 
 defineStep('I am on the summary page and select the large catch link', function () {

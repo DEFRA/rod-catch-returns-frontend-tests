@@ -9,22 +9,19 @@ class SummaryPage extends Page {
     return '/summary'
   }
 
-  clickAddRIver () {
+  clickAddRiver () {
     logger.debug('About to click Add River Link')
-    const addRiverLink = browser.element(`#activities-add`)
-    addRiverLink.click()
+    this.clickNavigationLink(`#activities-add`)
   }
 
   clickAddSmallCatch () {
     logger.debug('Add a small catch of under 1 lb link')
-    const addSmallCatchLink = browser.element(`#small-catches-add`)
-    addSmallCatchLink.click()
+    this.clickNavigationLink(`#small-catches-add`)
   }
 
   clickAddLargeCatch () {
     logger.debug('About to click Add a salmon or large sea trout link')
-    const clickLargeCatchLink = browser.element(`#catches-add`)
-    clickLargeCatchLink.click()
+    this.clickNavigationLink(`#catches-add`)
   }
 
   clickDeleteRiver () {
@@ -53,8 +50,7 @@ class SummaryPage extends Page {
 
   clickSaveAsDraft () {
     logger.debug('About to click Save as draft')
-    const clickSaveAsDraftLink = browser.element(`#save`)
-    clickSaveAsDraftLink.click()
+    this.clickNavigationLink(`#save`)
   }
 
   checkActivityTableLength (expectedLength) {

@@ -35,8 +35,7 @@ class AddLargeFishPage extends Page {
   }
 
   setReleased (released) {
-    let target = released ? RADIO_RELEASED_YES_ID : RADIO_RELEASED_NO_ID
-    browser.$(target).click()
+    Page.clickRadioButton(released ? RADIO_RELEASED_YES_ID : RADIO_RELEASED_NO_ID)
   }
 
   setMethod (methodName) {
@@ -45,19 +44,18 @@ class AddLargeFishPage extends Page {
   }
 
   setMetricMass (kg) {
-    browser.$(RADIO_METRIC_ID).click()
+    Page.clickRadioButton(RADIO_METRIC_ID)
     browser.$('#kilograms').setValue(kg)
   }
 
   setImperialMass (lbs, oz) {
-    browser.$(RADIO_IMPERIAL_ID).click()
+    Page.clickRadioButton(RADIO_IMPERIAL_ID)
     browser.$('#pounds').setValue(lbs)
     browser.$('#ounces').setValue(oz)
   }
 
   saveAndAddAnother () {
-    const element = browser.element('//*[@name="add"]')
-    element.click()
+    this.clickNavigationLink('//*[@name="add"]')
   }
 }
 
