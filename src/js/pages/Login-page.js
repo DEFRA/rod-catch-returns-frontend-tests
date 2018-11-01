@@ -3,7 +3,7 @@ const Page = require('./page')
 
 class LoginPage extends Page {
   get url () {
-    return '/licence'
+    return '/licence-auth'
   }
 
   enterUsername (licence) {

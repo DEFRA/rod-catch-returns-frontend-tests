@@ -26,7 +26,6 @@ const localConfig = {
     }
   ],
 
-
   /**
    * Project-specific configuration options
    *

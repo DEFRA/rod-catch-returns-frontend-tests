@@ -1,7 +1,7 @@
 'use strict'
-const {defineStep} = require('cucumber')
+const { defineStep } = require('cucumber')
 const SelectYear = require('../../pages/Season-Select.page')
-const {logger} = require('defra-logging-facade')
+const { logger } = require('defra-logging-facade')
 
 defineStep('I select season 1 and I click continue', function () {
   logger.debug('Select Year Object:', SelectYear)

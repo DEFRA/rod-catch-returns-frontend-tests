@@ -1,5 +1,5 @@
 'use strict'
-const {logger} = require('defra-logging-facade')
+const { logger } = require('defra-logging-facade')
 
 class Page {
   /**
@@ -10,9 +10,8 @@ class Page {
   }
 
   open () {
-    const self = this
     logger.debug(`Opening url ${this.url}`)
-    browser.url(self.url)
+    browser.url(this.url)
   }
 
   isOpen () {

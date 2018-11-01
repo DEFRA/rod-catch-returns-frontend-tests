@@ -2,18 +2,16 @@
 const { logger } = require('defra-logging-facade')
 const rp = require('request-promise')
 const API_URL = process.env.API_URL || 'http://localhost:9580/'
+
 if (!API_URL.endsWith('/')) {
   throw new Error('API_URL environment variable must end with a /')
 }
-let users = []
 
 function defaultRequestOptions (user, path, method = 'GET', qs = {}) {
   if (path.startsWith('/')) {
     path = path.substring(1)
   }
-
   let uri = path.startsWith('http') ? path : API_URL + path
-
   return {
     method: method,
     uri: uri,
@@ -28,20 +26,44 @@ function defaultRequestOptions (user, path, method = 'GET', qs = {}) {
 }
 
 let self = module.exports = {
+  users: [],
+  initialise: async function () {
+    logger.debug('Loading users from environment')
+    let i = 0
+    let found = true
+
+    while (found && ++i) {
+      let username = process.env[`RCR_USER${i}_USERNAME`]
+      let password = process.env[`RCR_USER${i}_PASSWORD`]
+      found = !!username && !!password
+
+      if (found) {
+        let user = {
+          username: username.trim(),
+          password: password.trim(),
+          contactId: null
+        }
+        user.contactId = await self.getContactId(user)
+        self.users.push(user)
+        logger.debug(`Adding user ${i} with username=${username} and password=${password}`)
+      }
+    }
+  },
   getUser: function (userNumber) {
-    if (userNumber < 1 || userNumber > users.length) {
+    if (userNumber < 1 || userNumber > self.users.length) {
       throw new Error(`Unable to find user with number ${userNumber}`)
     }
-    return users[userNumber - 1]
+    return self.users[userNumber - 1]
   },
 
   deleteAllUserSubmissions: async function (season) {
-    for (let user of users) {
-      logger.info(`Clearing existing ${season} submission data for ${user.username}`)
+    logger.debug(`Clearing all submission data for ${season}`)
+    for (let user of self.users) {
       await self.deleteSubmission(user, season)
     }
   },
   deleteSubmission: async function (user, season) {
+    logger.debug(`Clearing existing ${season} submission data for ${user.username}`)
     let sub = await self.getSubmission(user, season)
     if (sub && sub._links.self.href) {
       const requestObject = defaultRequestOptions(user, sub._links.self.href, 'DELETE')
@@ -81,27 +103,4 @@ let self = module.exports = {
       throw e
     }
   }
-};
-
-(async function () {
-  users = []
-  let i = 0
-  let found = true
-
-  while (found && ++i) {
-    let username = process.env[`RCR_USER${i}_USERNAME`]
-    let password = process.env[`RCR_USER${i}_PASSWORD`]
-    found = !!username && !!password
-
-    if (found) {
-      let user = {
-        username: username.trim(),
-        password: password.trim(),
-        contactId: null
-      }
-      user.contactId = await self.getContactId(user)
-      users.push(user)
-      logger.debug(`Adding user ${i} with username=${username} and password=${password}`)
-    }
-  }
-})()
+}

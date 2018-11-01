@@ -134,36 +134,42 @@ const self = exports.config = {
    * variables, such as `browser`. It is the perfect place to define custom commands.
    */
   before: function before (capabilities, specs) {
-    // Setup the Chai assertion framework
-    const chai = require('chai')
-    global.expect = chai.expect
-    global.assert = chai.assert
-    global.should = chai.should()
-
-    // // Set up project specific timeout configuration settings
+    // Set up project specific timeout configuration settings
     browser.timeouts({
       'script': self._projectConfiguration.scriptTimeout,
       'pageLoad': self._projectConfiguration.pageTimeout,
       'implicit': self._projectConfiguration.implicitTimeout
     })
+
+    browser.addCommand('getUser', async (number) => {
+      return userManager.getUser(number)
+    })
+
+    // Reset submission for all RCR users identified in the test configuration before each feature runs
+    return new Promise(async (resolve) => {
+      await userManager.initialise()
+      await userManager.deleteAllUserSubmissions(moment().year())
+      resolve()
+    })
   },
+
   // Cucumber specific hooks
-  beforeFeature: async function (feature) {
-    logger.info('*****************************************')
-    logger.info(`Running feature: ${feature.name}`)
-    logger.info('*****************************************')
-    await userManager.deleteAllUserSubmissions(moment().year())
+  beforeFeature: function (feature) {
+    logger.info('**********************************************************************************')
+    logger.info(`Test session id:     ${browser.session().sessionId}`)
+    logger.info(`Running feature:     ${feature.name}`)
   },
+
   beforeScenario: function (scenario) {
-    logger.info('*****************************************')
-    logger.info(`Running scenario: ${scenario.name}`)
-    logger.info('*****************************************')
+    logger.info('**********************************************************************************')
+    logger.info(`Running scenario:    ${scenario.name}`)
   },
+
   beforeStep: function (step) {
-    logger.debug('*****************************************')
-    logger.debug(`Running step: ${step.text}`)
-    logger.debug('*****************************************')
+    logger.debug('**********************************************************************************')
+    logger.debug(`Running step:       ${step.text}`)
   },
+
   // Runs before a WebdriverIO command gets executed
   beforeCommand: function (commandName, args) {
     logger.debug(`Running command ${commandName} with args ${args}`)
