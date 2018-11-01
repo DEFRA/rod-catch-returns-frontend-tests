@@ -85,25 +85,46 @@ const browserStackConfig = {
   // ============
   maxInstances: 1,
   capabilities: setupCapabilities([
-    // iPhone
+    // iPhone XS
     {
       'os_version': '12.0',
       'device': 'iPhone XS',
       'real_mobile': 'true'
     },
-    // Android
+    // iPhone 8 Plus
     {
-      'os_version': '7.0',
-      'device': 'Samsung Galaxy S8',
+      'os_version': '11.0',
+      'device': 'iPhone 8 Plus',
       'real_mobile': 'true'
     },
-    // Edge 17
+    // TODO: Temporary test to see we can use browserName to set the the name and not cause an issue with browserstack
     {
-      'os': 'Windows',
-      'os_version': '10',
-      'browserName': 'Edge',
-      'browser_version': '17.0'
+      'browserName': 'iPhone 8 Plus Real Device',
+      'os_version': '11.0',
+      'device': 'iPhone 8 Plus',
+      'real_mobile': 'true'
     },
+    // TODO: Temporary test to see we can use browserName to set the the name and not cause an issue with browserstack
+    {
+      'name': 'iPhone 8 Plus Real Device Test 2 Name property',
+      'browserName': 'iPhone 8 Plus Real Device Test 2',
+      'os_version': '11.0',
+      'device': 'iPhone 8 Plus',
+      'real_mobile': 'true'
+    },
+    // // Android
+    // {
+    //   'os_version': '7.0',
+    //   'device': 'Samsung Galaxy S8',
+    //   'real_mobile': 'true'
+    // },
+    // // Edge 17
+    // {
+    //   'os': 'Windows',
+    //   'os_version': '10',
+    //   'browserName': 'Edge',
+    //   'browser_version': '17.0'
+    // },
     // Win 7 / IE11
     {
       'os': 'Windows',
@@ -111,27 +132,42 @@ const browserStackConfig = {
       'browserName': 'IE',
       'browser_version': '11.0'
     },
-    // MacOSX "Mojave" Safari
+    // Win 10 / IE11
+    {
+      'os': 'Windows',
+      'os_version': '10',
+      'browserName': 'IE',
+      'browser_version': '11.0'
+    },
+    // MacOSX "Mojave" Safari 12
     {
       'os': 'OS X',
       'os_version': 'Mojave',
       'browserName': 'Safari',
       'browser_version': '12.0'
     },
-    // Windows 10 Firefox
+    // MacOSX "High Sierra" Safari 11
     {
-      'os': 'Windows',
-      'os_version': '10',
-      'browserName': 'Firefox',
-      'browser_version': '63.0'
-    },
-    // Windows 10 Chrome
-    {
-      'os': 'Windows',
-      'os_version': '10',
-      'browserName': 'Chrome',
-      'browser_version': '70.0'
+      'os': 'OS X',
+      'os_version': 'High Sierra',
+      'browserName': 'Safari',
+      'browser_version': '11.1',
+      'browserstack.safari.allowAllCookies': 'true'
     }
+    // // Windows 10 Firefox
+    // {
+    //   'os': 'Windows',
+    //   'os_version': '10',
+    //   'browserName': 'Firefox',
+    //   'browser_version': '63.0'
+    // },
+    // // Windows 10 Chrome
+    // {
+    //   'os': 'Windows',
+    //   'os_version': '10',
+    //   'browserName': 'Chrome',
+    //   'browser_version': '70.0'
+    // }
   ]),
 
   // ===================
