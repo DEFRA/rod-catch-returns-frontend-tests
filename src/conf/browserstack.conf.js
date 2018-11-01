@@ -72,8 +72,8 @@ const browserStackConfig = {
    *
    */
   _projectConfiguration: {
-    // timeout that specifies a time to wait for the implicit element location strategy when locating elements using the element or elements commands
-    implicitTimeout: 0,
+    // timeout that specifies a time to wait for the implicit element location strategy when locating elements
+    implicitTimeout: 5000,
     // time to wait for the page loading to complete (allow much longer when running on browserstack)
     pageTimeout: 90000,
     // time to wait for asynchronous scripts to run

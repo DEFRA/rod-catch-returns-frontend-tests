@@ -7,8 +7,7 @@ Feature: Login to Rod Catch returns update, delete, first time to the service an
 #    And I select season 1 and I click continue
 
   Scenario: First login - Save
-    When I am on the did you fish page
-    And  I select yes and I click continue
+    Given I did fish during the season
 
     And  I am on the summary page and select the add river link
     *    I fished the river Ystrad for 2 days with mandatory release and 0 other days

@@ -13,7 +13,6 @@ class DeletePage extends Page {
   }
 
   clickCancel () {
-    logger.log('About to click Cancel')
     const clickCancel = browser.element(`#return-summary`)
     clickCancel.click()
   }

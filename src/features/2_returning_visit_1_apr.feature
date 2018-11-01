@@ -7,8 +7,7 @@ Feature: Login to Rod Catch returns update and return to service, submit
 #    And I select season 1 and I click continue
 
   Scenario: First login - Save
-    When I am on the did you fish page
-    And  I select yes and I click continue
+    Given I did fish during the season
     And  I am on the summary page and select the add river link
     *    I fished the river Frome for 15 days with mandatory release and 1 other days
     And I confirm my activity details and continue

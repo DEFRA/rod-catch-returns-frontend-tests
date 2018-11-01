@@ -101,7 +101,7 @@ let self = module.exports = {
       }
       user.contactId = await self.getContactId(user)
       users.push(user)
-      logger.info(`Adding user ${i} with username=${username} and password=${password}`)
+      logger.debug(`Adding user ${i} with username=${username} and password=${password}`)
     }
   }
 })()

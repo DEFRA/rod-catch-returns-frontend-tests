@@ -31,9 +31,6 @@ if (patternArg) {
   }
 }
 
-logger.info('doDelete=' + doDelete)
-logger.info('pattern=' + pattern)
-
 const browserstackUser = process.env.BROWSERSTACK_USERNAME
 const browserstackKey = process.env.BROWSERSTACK_ACCESS_KEY
 const auth = Buffer.from(`${browserstackUser}:${browserstackKey}`).toString('base64')

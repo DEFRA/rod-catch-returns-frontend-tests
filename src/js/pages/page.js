@@ -1,5 +1,5 @@
 'use strict'
-const { logger } = require('defra-logging-facade')
+const {logger} = require('defra-logging-facade')
 
 class Page {
   /**
@@ -21,7 +21,7 @@ class Page {
 
   checkOpen () {
     if (!this.isOpen()) {
-      logger.debug(`Page.checkOpen waiting for browser URL ${browser.getUrl()} to match ${this.url}`)
+      logger.warn(`Page.checkOpen - async waiting for browser URL ${browser.getUrl()} to match ${this.url}`)
       const fn = this.isOpen.bind(this)
       const url = this.url
       try {
@@ -30,35 +30,14 @@ class Page {
         logger.error('Error checking if page is open ', e)
         throw e
       }
+      logger.info(`Page.checkOpen - async checking for ${this.url} completed successfully`)
     }
-    logger.debug(`Page.checkOpen - checking for ${this.url} completed successfully`)
-  }
-
-  static doContinue () {
-    logger.info(`Waiting for continue button on ${browser.getUrl()} to be enabled....`)
-    try {
-      browser.waitUntil(function () {
-        const isDisabled = browser.getAttribute('//*[@name="continue"]', 'disabled') === 'true'
-        if (isDisabled) {
-          logger.info(`Waiting for continue button on ${browser.getUrl()} to be enabled before continuing. (isDisabled=${isDisabled})`)
-        }
-        return !isDisabled
-      }, browser.options.waitforTimeout, `Continue button on ${browser.getUrl()} not enabled within the allowed time.`, browser.options.waitforInterval)
-    } catch (e) {
-      logger.error(`Error waiting for continue button to be enabled on ${browser.getUrl()}`, e)
-      throw e
-    }
-
-    // waitForNav(function () {
-    const element = browser.element('//*[@name="continue"]')
-    element.click()
-    // })
   }
 
   continue () {
-    const self = this
-    self.checkOpen()
-    Page.doContinue()
+    this.checkOpen()
+    const element = browser.element('//*[@name="continue"]')
+    element.click()
   }
 }
 

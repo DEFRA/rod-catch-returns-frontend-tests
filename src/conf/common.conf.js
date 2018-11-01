@@ -76,10 +76,10 @@ const self = exports.config = {
    * Add any project-specific configuration options here (keep things separate from the standard wdio config)
    */
   _projectConfiguration: {
-    // timeout that specifies a time to wait for the implicit element location strategy when locating elements using the element or elements commands
-    implicitTimeout: 0,
+    // timeout that specifies a time to wait for the implicit element location strategy when locating elements
+    implicitTimeout: 5000,
     // time to wait for the page loading to complete
-    pageTimeout: 30000,
+    pageTimeout: 5000,
     // time to wait for asynchronous scripts to run
     scriptTimeout: 30000
   },
@@ -149,11 +149,15 @@ const self = exports.config = {
   },
   // Cucumber specific hooks
   beforeFeature: async function (feature) {
+    logger.info('*****************************************')
     logger.info(`Running feature: ${feature.name}`)
+    logger.info('*****************************************')
     await userManager.deleteAllUserSubmissions(moment().year())
   },
   beforeScenario: function (scenario) {
+    logger.info('*****************************************')
     logger.info(`Running scenario: ${scenario.name}`)
+    logger.info('*****************************************')
   },
   beforeStep: function (step) {
     logger.debug('*****************************************')

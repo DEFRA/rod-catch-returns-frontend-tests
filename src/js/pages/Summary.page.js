@@ -10,25 +10,25 @@ class SummaryPage extends Page {
   }
 
   clickAddRIver () {
-    logger.log('About to click Add River Link')
+    logger.debug('About to click Add River Link')
     const addRiverLink = browser.element(`#activities-add`)
     addRiverLink.click()
   }
 
   clickAddSmallCatch () {
-    logger.log('Add a small catch of under 1 lb link')
+    logger.debug('Add a small catch of under 1 lb link')
     const addSmallCatchLink = browser.element(`#small-catches-add`)
     addSmallCatchLink.click()
   }
 
   clickAddLargeCatch () {
-    logger.log('About to click Add a salmon or large sea trout link')
+    logger.debug('About to click Add a salmon or large sea trout link')
     const clickLargeCatchLink = browser.element(`#catches-add`)
     clickLargeCatchLink.click()
   }
 
   clickDeleteRiver () {
-    logger.log('About to click Delete River Link')
+    logger.debug('About to click Delete River Link')
     const clickDeleteRiverLink = browser.element('table#river tr:first-child td:nth-child(5) span a:nth-child(2)')
     let deleteRiverPage = new DeletePage(clickDeleteRiverLink.getAttribute('href'))
     clickDeleteRiverLink.click()
@@ -36,7 +36,7 @@ class SummaryPage extends Page {
   }
 
   clickDeleteSmallCatch () {
-    logger.log('Delete small catch')
+    logger.debug('Delete small catch')
     const clickDeleteSmallCatch = browser.element('table#small tr:first-child td:nth-child(7) span a:nth-child(2)')
     let deleteSmallPage = new DeletePage(clickDeleteSmallCatch.getAttribute('href'))
     clickDeleteSmallCatch.click()
@@ -44,7 +44,7 @@ class SummaryPage extends Page {
   }
 
   clickDeleteLargeCatch () {
-    logger.log('About to click Add a salmon or large sea trout link')
+    logger.debug('About to click Add a salmon or large sea trout link')
     const clickDeleteLargeCatch = browser.element('table#large tr:first-child td:nth-child(7) span a:nth-child(2)')
     let deleteLargePage = new DeletePage(clickDeleteRiverLink.getAttribute('href'))
     clickDeleteLargeCatch.click()
@@ -52,7 +52,7 @@ class SummaryPage extends Page {
   }
 
   clickSaveAsDraft () {
-    logger.log('About to click Save as draft')
+    logger.debug('About to click Save as draft')
     const clickSaveAsDraftLink = browser.element(`#save`)
     clickSaveAsDraftLink.click()
   }
