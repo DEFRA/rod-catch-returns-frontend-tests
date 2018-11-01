@@ -33,7 +33,7 @@ const seleiumDefaults = {
   }
 }
 
-const self = exports.config = {
+exports.config = {
   /*
    * ==================
    * Specify Test Files
@@ -69,20 +69,6 @@ const self = exports.config = {
   waitforTimeout: 120000,
   // Default interval for all waitFor* commands (number of ms between checks to see if the runner should stop waiting)
   waitforInterval: 500,
-
-  /**
-   * Project-specific configuration options
-   *
-   * Add any project-specific configuration options here (keep things separate from the standard wdio config)
-   */
-  _projectConfiguration: {
-    // timeout that specifies a time to wait for the implicit element location strategy when locating elements
-    implicitTimeout: 5000,
-    // time to wait for the page loading to complete
-    pageTimeout: 5000,
-    // time to wait for asynchronous scripts to run
-    scriptTimeout: 30000
-  },
 
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,
@@ -134,13 +120,6 @@ const self = exports.config = {
    * variables, such as `browser`. It is the perfect place to define custom commands.
    */
   before: function before (capabilities, specs) {
-    // Set up project specific timeout configuration settings
-    browser.timeouts({
-      'script': self._projectConfiguration.scriptTimeout,
-      'pageLoad': self._projectConfiguration.pageTimeout,
-      'implicit': self._projectConfiguration.implicitTimeout
-    })
-
     browser.addCommand('getUser', async (number) => {
       return userManager.getUser(number)
     })

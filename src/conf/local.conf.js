@@ -25,21 +25,6 @@ const localConfig = {
       }
     }
   ],
-
-  /**
-   * Project-specific configuration options
-   *
-   * Add any project-specific configuration options here (keep things separate from the standard wdio config)
-   *
-   */
-  _projectConfiguration: {
-    // timeout that specifies a time to wait for the implicit element location strategy when locating elements
-    implicitTimeout: 5000,
-    // time to wait for the page loading to complete (allow much longer when running on browserstack)
-    pageTimeout: 90000,
-    // time to wait for asynchronous scripts to run
-    scriptTimeout: 30000
-  },
   /*
    * ===================
    * Test Configurations

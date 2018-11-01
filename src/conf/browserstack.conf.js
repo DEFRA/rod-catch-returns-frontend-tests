@@ -65,21 +65,6 @@ const browserStackConfig = {
   screenshotPath: null,
   screenshotOnReject: false,
 
-  /**
-   * Project-specific configuration options
-   *
-   * Add any project-specific configuration options here (keep things separate from the standard wdio config)
-   *
-   */
-  _projectConfiguration: {
-    // timeout that specifies a time to wait for the implicit element location strategy when locating elements
-    implicitTimeout: 5000,
-    // time to wait for the page loading to complete (allow much longer when running on browserstack)
-    pageTimeout: 90000,
-    // time to wait for asynchronous scripts to run
-    scriptTimeout: 30000
-  },
-
   // ============
   // Capabilities
   // ============
@@ -87,33 +72,21 @@ const browserStackConfig = {
   capabilities: setupCapabilities([
     // iPhone XS
     {
+      'browserName': 'iPhone XS Real Device',
       'os_version': '12.0',
       'device': 'iPhone XS',
       'real_mobile': 'true'
     },
     // iPhone 8 Plus
     {
-      'os_version': '11.0',
-      'device': 'iPhone 8 Plus',
-      'real_mobile': 'true'
-    },
-    // TODO: Temporary test to see we can use browserName to set the the name and not cause an issue with browserstack
-    {
       'browserName': 'iPhone 8 Plus Real Device',
-      'os_version': '11.0',
-      'device': 'iPhone 8 Plus',
-      'real_mobile': 'true'
-    },
-    // TODO: Temporary test to see we can use browserName to set the the name and not cause an issue with browserstack
-    {
-      'name': 'iPhone 8 Plus Real Device Test 2 Name property',
-      'browserName': 'iPhone 8 Plus Real Device Test 2',
       'os_version': '11.0',
       'device': 'iPhone 8 Plus',
       'real_mobile': 'true'
     },
     // // Android
     // {
+    //   'browserName': 'Samsung Galaxy S8 Real Device',
     //   'os_version': '7.0',
     //   'device': 'Samsung Galaxy S8',
     //   'real_mobile': 'true'
@@ -151,8 +124,7 @@ const browserStackConfig = {
       'os': 'OS X',
       'os_version': 'High Sierra',
       'browserName': 'Safari',
-      'browser_version': '11.1',
-      'browserstack.safari.allowAllCookies': 'true'
+      'browser_version': '11.1'
     }
     // // Windows 10 Firefox
     // {
