@@ -19,7 +19,7 @@ pipeline {
                     ansiColor('xterm') {
                         def mounts = [ "type=bind,source=${WORKSPACE}/logs,target=/app/logs"]
                         sh "mkdir -p ${WORKSPACE}/logs"
-                        dockerRun('defra/rod-catch-returns-frontend-tests', env.getEnvironment(), mounts)
+                        dockerRun('defra/rod-catch-returns-frontend-tests', null, mounts)
                     }
                 }
             }
