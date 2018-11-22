@@ -11,7 +11,7 @@
     "lint": "./node_modules/eslint/bin/eslint.js **/*.js",
     "lint-fix": "npm run lint -- --fix",
     "docker-build": "docker build -t defra/rod-catch-returns-frontend-tests . && docker images",
-    "docker-run": "docker run -it --network host -v \"$(pwd)/logs:/app/logs/\" -e \"SERVICE_URL=http://localhost:3000/\" -e \"API_URL=http://localhost:9580/\" -e \"RCR_USER1_USERNAME=B7A718\" -e \"RCR_USER1_PASSWORD=WA4 1HT\" defra/rod-catch-returns-frontend-tests",
+    "docker-run": "docker run -it --network host -v \"$(pwd)/logs:/app/logs/\" -e \"SERVICE_URL=http://localhost:3000/\" -e \"API_URL=http://localhost:9580/\" -e \"RCR_USER1_USERNAME=B7A718\" -e \"RCR_USER1_PASSWORD=WA4 8HT\" defra/rod-catch-returns-frontend-tests",
     "docker-test": "npm run docker-build && npm run docker-run"
   },
   "repository": {

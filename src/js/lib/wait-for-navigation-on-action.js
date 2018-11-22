@@ -1,7 +1,7 @@
 'use strict'
-const {logger} = require('defra-logging-facade')
+const { logger } = require('defra-logging-facade')
 const util = require('util')
-util.inspect.defaultOptions = {depth: null, colors: true}
+util.inspect.defaultOptions = { depth: null, colors: true }
 
 module.exports = function (action) {
   // Page Id element is embedded on each page by the frontend layout.html

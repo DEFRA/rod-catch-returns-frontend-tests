@@ -16,11 +16,6 @@ function defaultRequestOptions (user, path, method = 'GET', qs = {}) {
     method: method,
     uri: uri,
     qs: qs,
-    auth: {
-      user: user.username,
-      pass: user.password,
-      sendImmediately: true
-    },
     json: true
   }
 }
@@ -71,7 +66,7 @@ let self = module.exports = {
         await rp(requestObject)
         return true
       } catch (e) {
-        logger.error(`Error deleting ${season} submission for username=${user.username} and password=${user.password}`, e)
+        logger.error(`Error deleting ${season} submission for username=${user.username} and password=${user.password}`)
         throw e
       }
     }
@@ -88,19 +83,17 @@ let self = module.exports = {
       if (e.statusCode === 404) {
         return null
       }
-      logger.error(`Error finding submissions contact id ${user.contactId} with username=${user.username} and password=${user.password}`, e)
-      throw e
+      logger.error(`Error finding submissions contact id ${user.contactId} with username=${user.username} and password=${user.password}`)
     }
   },
 
   getContactId: async function (user) {
-    const requestObject = defaultRequestOptions(user, `/api/licence/${user.username}`)
+    const requestObject = defaultRequestOptions(user, `/api/licence/${user.username}?verification=${user.password}`)
     try {
       let result = await rp(requestObject)
       return result.contact.id
     } catch (e) {
-      logger.error(`Error fetching contact detail for with username=${user.username} and password=${user.password}`, e)
-      throw e
+      logger.error(`Error fetching contact detail for with username=${user.username} and password=${user.password}`)
     }
   }
 }

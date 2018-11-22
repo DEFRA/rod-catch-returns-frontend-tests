@@ -1,5 +1,5 @@
 'use strict'
-const {logger} = require('defra-logging-facade')
+const { logger } = require('defra-logging-facade')
 const waitForNav = require('../lib/wait-for-navigation-on-action')
 const SELECTOR_CONTINUE = '//*[@name="continue"]'
 
