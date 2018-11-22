@@ -1,0 +1,251 @@
+id,name
+rivers/1,Aber
+rivers/2,Adur
+rivers/3,Aeron
+rivers/4,Afan
+rivers/5,Aled
+rivers/6,Allen (SW)
+rivers/7,Allen (Tyne)
+rivers/8,Aln
+rivers/9,Alwen
+rivers/10,Alyn / Alun
+rivers/11,Amman
+rivers/12,Annas
+rivers/13,Arth
+rivers/14,Artro
+rivers/15,Arun
+rivers/16,Avon (Devon)
+rivers/17,Avon (Hants)
+rivers/18,Avon (Water Hants)
+rivers/19,Axe
+rivers/20,Banwy
+rivers/21,Barle
+rivers/22,Beaulieu
+rivers/23,Bela
+rivers/24,Black Beck
+rivers/25,Blyth (NE)
+rivers/26,Bollin
+rivers/27,Borrow Beck
+rivers/28,Bovey
+rivers/29,Brathay
+rivers/30,Bray
+rivers/31,Brit
+rivers/32,Brock
+rivers/33,Browney
+rivers/34,Bure
+rivers/35,Calder (Cumbria)
+rivers/36,Calder (Lancashire)
+rivers/37,Calder (Yorkshire)
+rivers/38,Caldew
+rivers/39,Camel
+rivers/40,Caseg
+rivers/41,Cefni
+rivers/42,Cegin Menai Strait
+rivers/43,Ceiriog
+rivers/44,Ceirw
+rivers/45,Cennen
+rivers/46,Ceri
+rivers/47,Char
+rivers/48,Cleddau (Eastern)
+rivers/49,Cleddau (Western)
+rivers/50,Cleifon
+rivers/51,Clettwr
+rivers/52,Clwyd
+rivers/53,Clywedog
+rivers/54,Cocker
+rivers/55,Colwyn
+rivers/56,Coly
+rivers/57,Conder
+rivers/58,Conwy
+rivers/59,Coquet
+rivers/60,Coron Lake Anglesea
+rivers/61,Cothi
+rivers/62,Cover
+rivers/63,Crake
+rivers/64,Cresswell
+rivers/65,Cych
+rivers/66,Cynin
+rivers/67,Cywyn / Cowin
+rivers/68,Darent
+rivers/69,Dart
+rivers/70,Dee
+rivers/71,Derwent (Cumbria)
+rivers/72,Derwent (Tyne)
+rivers/73,Derwent (Yorkshire)
+rivers/74,Dewi Fawr
+rivers/75,Don
+rivers/76,Duad
+rivers/77,Duddon
+rivers/78,Dulas (Colwyn Bay)
+rivers/79,Dulas (North)
+rivers/80,Dulas (South)
+rivers/81,Dwyfach
+rivers/82,Dwyfawr
+rivers/83,Dwyryd
+rivers/84,Dyfi / Dovey
+rivers/85,Dysynni
+rivers/86,Eamont
+rivers/87,Ebbw
+rivers/88,Eden (Cumbria)
+rivers/89,Eden (Wales)
+rivers/90,Ehen
+rivers/91,Ellen
+rivers/92,Elwy
+rivers/93,Ely
+rivers/94,Erch
+rivers/95,Erme
+rivers/96,Esk (Border)
+rivers/97,Esk (Cumbria)
+rivers/98,Esk (Yorkshire)
+rivers/99,Etherow
+rivers/100,Ewenny
+rivers/101,Exe
+rivers/102,Fal
+rivers/103,Fowey
+rivers/104,Frome
+rivers/105,Gannel
+rivers/106,Garw
+rivers/107,Gelt
+rivers/108,Glaslyn
+rivers/109,Grannell
+rivers/110,Greta (Keswick)
+rivers/111,Greta (Lancaster)
+rivers/112,Greta (Tees Bcastle)
+rivers/113,Gwaun
+rivers/114,Gwendraeth (Fach)
+rivers/115,Gwendraeth (Fawr)
+rivers/116,Gwili
+rivers/117,Gwyrfai
+rivers/118,Hamble
+rivers/119,Hayle
+rivers/120,Hindburn
+rivers/121,Hodder
+rivers/122,Hull
+rivers/123,Inny
+rivers/124,Irfon
+rivers/125,Irt
+rivers/126,Irthing
+rivers/127,Itchen
+rivers/128,Ithon
+rivers/129,Keer
+rivers/130,Kenfig
+rivers/131,Kent
+rivers/132,Leri
+rivers/133,Leven
+rivers/134,Lickle
+rivers/135,Liddle
+rivers/136,Lledr
+rivers/137,Lleiniog
+rivers/138,Llifon
+rivers/139,Lliw Swansea
+rivers/140,Llugwy
+rivers/141,Llyfni
+rivers/142,Llynfi
+rivers/143,Looe
+rivers/144,Loughor
+rivers/145,Lud
+rivers/146,Lugg
+rivers/147,Lune
+rivers/148,Lyd
+rivers/149,Lymington
+rivers/150,Lyn
+rivers/151,Lyne
+rivers/152,Lynher
+rivers/153,Marron
+rivers/154,Mawddach
+rivers/155,Meavy
+rivers/156,Medway
+rivers/157,Meon
+rivers/158,Mersey
+rivers/159,Mint
+rivers/160,Mole
+rivers/161,Morlais
+rivers/162,Nadder
+rivers/163,Nar
+rivers/164,Neath
+rivers/165,Nene
+rivers/166,Nevern
+rivers/167,Ogmore
+rivers/168,Ogwen
+rivers/169,Okement
+rivers/170,Orwell
+rivers/171,Otter
+rivers/172,Ottery
+rivers/173,Ouse (Sussex)
+rivers/174,Ouse (Yorkshire)
+rivers/175,Parkmill Stream Gower
+rivers/176,Parrett
+rivers/177,Piddle
+rivers/178,Plym
+rivers/179,Rawthay
+rivers/180,Rede
+rivers/181,Rheidol
+rivers/182,Rhyd-hir
+rivers/183,Rhymney
+rivers/184,Ribble
+rivers/185,Rothay
+rivers/186,Rother (Eastern)
+rivers/187,Rother (Petworth)
+rivers/188,Rusland Pool
+rivers/189,Sawdde
+rivers/190,Scalby Beck
+rivers/191,Seaton
+rivers/192,Seiont
+rivers/193,Severn
+rivers/194,Soch
+rivers/195,Solva
+rivers/196,Sprint
+rivers/197,St Austell
+rivers/198,Stock Ghyll
+rivers/199,Stour (Kent)
+rivers/200,Stour (SW)
+rivers/201,Swale
+rivers/202,Syfynwy
+rivers/203,Taf
+rivers/204,Taff
+rivers/205,Tamar
+rivers/206,Tanat
+rivers/207,Tavy
+rivers/208,Taw
+rivers/209,Tawe
+rivers/210,Tees
+rivers/211,Teifi
+rivers/212,Teign
+rivers/213,Teme
+rivers/214,Test
+rivers/215,Thames
+rivers/216,Thaw
+rivers/217,Tiddy
+rivers/218,Tone
+rivers/219,Torridge
+rivers/220,Trent
+rivers/221,Tresilian
+rivers/222,Trout Beck
+rivers/223,Tryweryn
+rivers/224,Twymyn
+rivers/225,Tyne (Main)
+rivers/226,Tyne (North)
+rivers/227,Tyne (South)
+rivers/228,Tywi / Towy
+rivers/229,Ure
+rivers/230,Usk
+rivers/231,Vyrnwy
+rivers/232,Walkham
+rivers/233,Wandle
+rivers/234,Wansbeck
+rivers/235,Wear
+rivers/236,Wenning
+rivers/237,Wharfe
+rivers/238,Witham
+rivers/239,Wnion
+rivers/240,Wye
+rivers/241,Wygyr Anglesea
+rivers/242,Wyre NW
+rivers/243,Wyre Wales
+rivers/244,Yare
+rivers/245,Yarty
+rivers/246,Yealm
+rivers/247,Yscir
+rivers/248,Ysgethin Barmouth
+rivers/249,Ystrad
+rivers/250,Ystwyth
