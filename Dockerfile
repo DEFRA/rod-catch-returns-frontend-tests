@@ -1,12 +1,11 @@
 FROM ubuntu:bionic
-
-ENV RUN_SCRIPT=docker-local-browser
+ENV TEST_CONFIG ./src/conf/docker.conf.js
 
 # Install packages required by this script
 RUN set -ex; \
 	apt-get update; \
 	apt-get upgrade -y; \
-	apt-get install -y --no-install-recommends wget curl gnupg git xvfb openjdk-8-jdk
+	apt-get install -y --no-install-recommends wget curl gnupg git xvfb default-jdk
 
 # Install google-chrome repo
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
@@ -20,7 +19,7 @@ RUN	apt-get update; \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 8.12.0
+ENV NODE_VERSION 10.13.0
 
 # Replace shell with bash so we can source files
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
@@ -46,6 +45,6 @@ RUN npm install
 
 # Copy source
 COPY ./src /app/src
-COPY ./docker-entrypoint.sh /app/docker-entrypoint.sh
+COPY ./*.js /app/
 
-CMD [ "bash", "-c", "./docker-entrypoint.sh ${RUN_SCRIPT}" ]
+CMD [ "node", "headless-test.js" ]
