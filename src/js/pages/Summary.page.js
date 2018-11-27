@@ -26,7 +26,7 @@ class SummaryPage extends Page {
 
   clickDeleteRiver () {
     logger.debug('About to click Delete River Link')
-    const clickDeleteRiverLink = browser.element('table#river tr:first-child td:nth-child(5) span a:nth-child(2)')
+    const clickDeleteRiverLink = browser.element('table#river tr:first-child td:nth-child(4) span a:nth-child(2)')
     let deleteRiverPage = new DeletePage(clickDeleteRiverLink.getAttribute('href'))
     clickDeleteRiverLink.click()
     deleteRiverPage.continue()
@@ -43,7 +43,7 @@ class SummaryPage extends Page {
   clickDeleteLargeCatch () {
     logger.debug('About to click Add a salmon or large sea trout link')
     const clickDeleteLargeCatch = browser.element('table#large tr:first-child td:nth-child(7) span a:nth-child(2)')
-    let deleteLargePage = new DeletePage(clickDeleteRiverLink.getAttribute('href'))
+    let deleteLargePage = new DeletePage(clickDeleteLargeCatch.getAttribute('href'))
     clickDeleteLargeCatch.click()
     deleteLargePage.continue()
   }
@@ -58,13 +58,12 @@ class SummaryPage extends Page {
     expect(activityTableBodyRows.length).to.equal(expectedLength)
   }
 
-  checkActivityTableContains (riverName, daysFishedWithMandatoryRelease, daysFishedOther, fishCaught) {
+  checkActivityTableContains (riverName, daysFishedWithMandatoryRelease, daysFishedOther) {
     const activityTableBody = browser.$('#river tbody')
     const riverNameCell = activityTableBody.$(`td=${riverName}`)
     const rowForRiver = riverNameCell.$('..')
     expect(rowForRiver.$('td:nth-child(2)').getText()).to.equal(daysFishedWithMandatoryRelease)
     expect(rowForRiver.$('td:nth-child(3)').getText()).to.equal(daysFishedOther)
-    expect(rowForRiver.$('td:nth-child(4)').getText()).to.equal(fishCaught)
   }
 }
 

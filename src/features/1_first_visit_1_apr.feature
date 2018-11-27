@@ -36,9 +36,9 @@ Feature: Login to Rod Catch returns update, delete, first time to the service an
     And  I save the small catch and return to the summary
 
     And I expect the summary page to show the following activities
-      | River  | DaysFishedWithMandatoryRelease | DaysFishedOther | FishCaught |
-      | Frome  | 0                              | 30              | 30         |
-      | Ystrad | 2                              | 0               | 20         |
+      | River  | DaysFishedWithMandatoryRelease | DaysFishedOther |
+      | Frome  | 0                              | 30              |
+      | Ystrad | 2                              | 0               |
 
     And  I am on the summary page and I save and exit the service
     And  I am on the draft saved page
