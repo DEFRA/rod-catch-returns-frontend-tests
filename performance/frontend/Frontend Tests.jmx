@@ -120,7 +120,7 @@ Notes:
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">40</stringProp>
+        <stringProp name="ThreadGroup.num_threads">50</stringProp>
         <stringProp name="ThreadGroup.ramp_time">300</stringProp>
         <longProp name="ThreadGroup.start_time">1370726934000</longProp>
         <longProp name="ThreadGroup.end_time">1370726934000</longProp>
@@ -178,7 +178,7 @@ Notes:
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">80</stringProp>
+        <stringProp name="ThreadGroup.num_threads">150</stringProp>
         <stringProp name="ThreadGroup.ramp_time">300</stringProp>
         <longProp name="ThreadGroup.start_time">1370726934000</longProp>
         <longProp name="ThreadGroup.end_time">1370726934000</longProp>
@@ -252,7 +252,7 @@ Notes:
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">80</stringProp>
+        <stringProp name="ThreadGroup.num_threads">400</stringProp>
         <stringProp name="ThreadGroup.ramp_time">300</stringProp>
         <longProp name="ThreadGroup.start_time">1370726934000</longProp>
         <longProp name="ThreadGroup.end_time">1370726934000</longProp>
@@ -364,13 +364,14 @@ Notes:
             <stringProp name="TestPlan.comments">Detected the start of a redirect chain</stringProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Reset Test Variables for User" enabled="true">
-              <boolProp name="resetInterpreter">false</boolProp>
-              <stringProp name="parameters"></stringProp>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Reset Test Variables for User" enabled="true">
+              <stringProp name="cacheKey">true</stringProp>
               <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
               <stringProp name="script">vars.putObject(&quot;usedMonths&quot;, null);
 vars.put(&quot;month&quot;, null);</stringProp>
-            </BeanShellPreProcessor>
+              <stringProp name="scriptLanguage">java</stringProp>
+            </JSR223PreProcessor>
             <hashTree/>
             <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extract Crumb Token Name" enabled="true">
               <stringProp name="RegexExtractor.useHeaders">false</stringProp>
@@ -390,7 +391,7 @@ vars.put(&quot;month&quot;, null);</stringProp>
               <stringProp name="RegexExtractor.match_number">0</stringProp>
             </RegexExtractor>
             <hashTree/>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="false">
               <collectionProp name="Asserion.test_strings">
                 <stringProp name="1458573224">Enter your licence details and postcode</stringProp>
               </collectionProp>
@@ -398,6 +399,7 @@ vars.put(&quot;month&quot;, null);</stringProp>
               <stringProp name="Assertion.test_field">Assertion.response_data_as_document</stringProp>
               <boolProp name="Assertion.assume_success">false</boolProp>
               <intProp name="Assertion.test_type">16</intProp>
+              <stringProp name="TestPlan.comments">**for debugging only, should be disabled when load testing**</stringProp>
             </ResponseAssertion>
             <hashTree/>
           </hashTree>
@@ -564,7 +566,7 @@ vars.put(&quot;month&quot;, null);</stringProp>
               <stringProp name="TestPlan.comments">Recorded:3776ms</stringProp>
             </UniformRandomTimer>
             <hashTree/>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="false">
               <collectionProp name="Asserion.test_strings">
                 <stringProp name="-1555808058">Your \d{4} catch return</stringProp>
               </collectionProp>
@@ -572,6 +574,7 @@ vars.put(&quot;month&quot;, null);</stringProp>
               <stringProp name="Assertion.test_field">Assertion.response_data_as_document</stringProp>
               <boolProp name="Assertion.assume_success">false</boolProp>
               <intProp name="Assertion.test_type">2</intProp>
+              <stringProp name="TestPlan.comments">**for debugging only, should be disabled when load testing**</stringProp>
             </ResponseAssertion>
             <hashTree/>
           </hashTree>
@@ -667,7 +670,7 @@ vars.put(&quot;month&quot;, null);</stringProp>
               <stringProp name="TestPlan.comments">Recorded:3776ms</stringProp>
             </UniformRandomTimer>
             <hashTree/>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="false">
               <collectionProp name="Asserion.test_strings">
                 <stringProp name="-1555808058">Your \d{4} catch return</stringProp>
               </collectionProp>
@@ -675,6 +678,7 @@ vars.put(&quot;month&quot;, null);</stringProp>
               <stringProp name="Assertion.test_field">Assertion.response_data_as_document</stringProp>
               <boolProp name="Assertion.assume_success">false</boolProp>
               <intProp name="Assertion.test_type">2</intProp>
+              <stringProp name="TestPlan.comments">**for debugging only, should be disabled when load testing**</stringProp>
             </ResponseAssertion>
             <hashTree/>
           </hashTree>
@@ -784,11 +788,12 @@ vars.put(&quot;month&quot;, null);</stringProp>
               <stringProp name="TestPlan.comments">Recorded:3776ms</stringProp>
             </UniformRandomTimer>
             <hashTree/>
-            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Pick counts" enabled="true">
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Setup small catch data" enabled="true">
+              <stringProp name="cacheKey">true</stringProp>
               <stringProp name="filename"></stringProp>
               <stringProp name="parameters"></stringProp>
-              <boolProp name="resetInterpreter">false</boolProp>
-              <stringProp name="script">Random random = new Random();
+              <stringProp name="script">// Catch counts
+Random random = new Random();
 Integer method1Count = random.nextInt(9) + 1; // number between 1 and 10
 Integer method2Count = random.nextInt(9) + 1; // number between 1 and 10
 Integer method3Count = random.nextInt(9) + 1; // number between 1 and 10
@@ -796,20 +801,15 @@ Integer releasedCount = random.nextInt(method1Count + method2Count + method3Coun
 vars.put(&quot;flyCount&quot;, method1Count.toString());
 vars.put(&quot;baitCount&quot;, method2Count.toString());
 vars.put(&quot;spinnerCount&quot;, method3Count.toString());
-vars.put(&quot;releasedCount&quot;, releasedCount.toString());</stringProp>
-            </BeanShellPreProcessor>
-            <hashTree/>
-            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Pick a month" enabled="true">
-              <stringProp name="filename"></stringProp>
-              <stringProp name="parameters"></stringProp>
-              <boolProp name="resetInterpreter">false</boolProp>
-              <stringProp name="script">Random random = new Random();
+vars.put(&quot;releasedCount&quot;, releasedCount.toString());
+
+// Month of the small catch entry
 Integer monthIndex = null;
 String[] months = new String[] { &quot;JANUARY&quot;, &quot;FEBRUARY&quot;, &quot;MARCH&quot;, &quot;APRIL&quot;, &quot;MAY&quot;, &quot;JUNE&quot;, &quot;JULY&quot;, &quot;AUGUST&quot;, &quot;SEPTEMBER&quot;, &quot;OCTOBER&quot;, &quot;NOVEMBER&quot;, &quot;DECEMBER&quot; };
 Set usedMonths = vars.getObject(&quot;usedMonths&quot;);
 
 if (usedMonths == null) {
-	usedMonths = new HashSet(); 
+	usedMonths = new HashSet();
 }
 
 if (usedMonths.size() == months.length) {
@@ -825,9 +825,10 @@ while (monthIndex == null || usedMonths.contains(monthIndex)) {
 usedMonths.add(monthIndex);
 vars.putObject(&quot;usedMonths&quot;, usedMonths);
 vars.put(&quot;month&quot;, months[monthIndex]);</stringProp>
-            </BeanShellPreProcessor>
+              <stringProp name="scriptLanguage">java</stringProp>
+            </JSR223PreProcessor>
             <hashTree/>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="false">
               <collectionProp name="Asserion.test_strings">
                 <stringProp name="-1555808058">Your \d{4} catch return</stringProp>
               </collectionProp>
@@ -835,6 +836,7 @@ vars.put(&quot;month&quot;, months[monthIndex]);</stringProp>
               <stringProp name="Assertion.test_field">Assertion.response_data_as_document</stringProp>
               <boolProp name="Assertion.assume_success">false</boolProp>
               <intProp name="Assertion.test_type">2</intProp>
+              <stringProp name="TestPlan.comments">**for debugging only, should be disabled when load testing**</stringProp>
             </ResponseAssertion>
             <hashTree/>
           </hashTree>
@@ -972,46 +974,34 @@ vars.put(&quot;month&quot;, months[monthIndex]);</stringProp>
               <stringProp name="TestPlan.comments">Recorded:3776ms</stringProp>
             </UniformRandomTimer>
             <hashTree/>
-            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Pick Released at Random" enabled="true">
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Setup large catch data" enabled="true">
+              <stringProp name="cacheKey">true</stringProp>
               <stringProp name="filename"></stringProp>
               <stringProp name="parameters"></stringProp>
-              <boolProp name="resetInterpreter">false</boolProp>
-              <stringProp name="script">String[] options = new String[]{&quot;true&quot;, &quot;false&quot;};
-Random random = new Random();
+              <stringProp name="script">Random random = new Random();
+
+// The date caught
+vars.put(&quot;dayNumber&quot;, &quot;&quot; + (random.nextInt(28) + 1));
+vars.put(&quot;monthNumber&quot;, &quot;&quot; + (random.nextInt(12) + 1));
+
+// Was the catch released
+String[] options = new String[]{&quot;true&quot;, &quot;false&quot;};
 int i = random.nextInt(options.length);
-vars.put(&quot;released&quot;, options[i]);</stringProp>
-            </BeanShellPreProcessor>
-            <hashTree/>
-            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Pick Method at Random" enabled="true">
-              <stringProp name="filename"></stringProp>
-              <stringProp name="parameters"></stringProp>
-              <boolProp name="resetInterpreter">false</boolProp>
-              <stringProp name="script">String[] options = new String[]{&quot;methods/1&quot;, &quot;methods/2&quot;, &quot;methods/3&quot;};
-Random random = new Random();
+vars.put(&quot;released&quot;, options[i]);
+
+// The catch method
+String[] options = new String[]{&quot;methods/1&quot;, &quot;methods/2&quot;, &quot;methods/3&quot;};
 int i = random.nextInt(options.length);
-vars.put(&quot;method&quot;, options[i]);</stringProp>
-            </BeanShellPreProcessor>
-            <hashTree/>
-            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Pick Species at Random" enabled="true">
-              <stringProp name="filename"></stringProp>
-              <stringProp name="parameters"></stringProp>
-              <boolProp name="resetInterpreter">false</boolProp>
-              <stringProp name="script">String[] options = new String[]{&quot;species/1&quot;, &quot;species/2&quot;};
-Random random = new Random();
+vars.put(&quot;method&quot;, options[i]);
+
+// The species caught
+String[] options = new String[]{&quot;species/1&quot;, &quot;species/2&quot;};
 int i = random.nextInt(options.length);
 vars.put(&quot;species&quot;, options[i]);</stringProp>
-            </BeanShellPreProcessor>
+              <stringProp name="scriptLanguage">java</stringProp>
+            </JSR223PreProcessor>
             <hashTree/>
-            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Pick a date" enabled="true">
-              <stringProp name="filename"></stringProp>
-              <stringProp name="parameters"></stringProp>
-              <boolProp name="resetInterpreter">false</boolProp>
-              <stringProp name="script">Random random = new Random();
-vars.put(&quot;dayNumber&quot;, &quot;&quot; + (random.nextInt(28) + 1));
-vars.put(&quot;monthNumber&quot;, &quot;&quot; + (random.nextInt(12) + 1));</stringProp>
-            </BeanShellPreProcessor>
-            <hashTree/>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="false">
               <collectionProp name="Asserion.test_strings">
                 <stringProp name="-1555808058">Your \d{4} catch return</stringProp>
               </collectionProp>
@@ -1019,6 +1009,7 @@ vars.put(&quot;monthNumber&quot;, &quot;&quot; + (random.nextInt(12) + 1));</str
               <stringProp name="Assertion.test_field">Assertion.response_data_as_document</stringProp>
               <boolProp name="Assertion.assume_success">false</boolProp>
               <intProp name="Assertion.test_type">2</intProp>
+              <stringProp name="TestPlan.comments">**for debugging only, should be disabled when load testing**</stringProp>
             </ResponseAssertion>
             <hashTree/>
           </hashTree>
@@ -1066,7 +1057,7 @@ vars.put(&quot;monthNumber&quot;, &quot;&quot; + (random.nextInt(12) + 1));</str
               <stringProp name="TestPlan.comments">Recorded:3776ms</stringProp>
             </UniformRandomTimer>
             <hashTree/>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="false">
               <collectionProp name="Asserion.test_strings">
                 <stringProp name="-256888370">Your \d{4} catch return report</stringProp>
               </collectionProp>
@@ -1074,6 +1065,7 @@ vars.put(&quot;monthNumber&quot;, &quot;&quot; + (random.nextInt(12) + 1));</str
               <stringProp name="Assertion.test_field">Assertion.response_data_as_document</stringProp>
               <boolProp name="Assertion.assume_success">false</boolProp>
               <intProp name="Assertion.test_type">2</intProp>
+              <stringProp name="TestPlan.comments">**for debugging only, should be disabled when load testing**</stringProp>
             </ResponseAssertion>
             <hashTree/>
           </hashTree>
@@ -1135,7 +1127,7 @@ vars.put(&quot;monthNumber&quot;, &quot;&quot; + (random.nextInt(12) + 1));</str
         </hashTree>
       </hashTree>
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
-        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <boolProp name="ResultCollector.error_logging">true</boolProp>
         <objProp>
           <name>saveConfig</name>
           <value class="SampleSaveConfiguration">
