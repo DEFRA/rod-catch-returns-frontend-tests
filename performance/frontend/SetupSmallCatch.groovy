@@ -21,13 +21,13 @@ if (usedMonths == null) {
 if (usedMonths.size() == months.length) {
     log.error("No more months available, you can only have " + months.length + " small catches.")
     ctx.getEngine().stopTest()
-    return;
+    return
 }
 
 while (monthIndex == null || usedMonths.contains(monthIndex)) {
     monthIndex = random.nextInt(months.length)
 }
 
-usedMonths.add(monthIndex);
+usedMonths.add(monthIndex)
 vars.putObject("usedMonths", usedMonths)
 vars.put("month", months[monthIndex])
