@@ -1,8 +1,9 @@
 Feature: Login to Rod Catch returns update, delete, first time to the service and submit
 
   Background:
-    Given I am on the login page
-    And   I submit the username and password for test user 1
+    Given I am an external user
+    And   I am on the licence entry page
+    Then  I submit the licence and postcode for test user 1
 
 
   Scenario: First login - Save

@@ -20,35 +20,50 @@ function defaultRequestOptions (user, path, method = 'GET', qs = {}) {
   }
 }
 
+async function readUsersFromEnvironment (userCallback, userType = 'USER') {
+  logger.debug('Loading users from environment')
+  let i = 0
+  let found = true
+
+  while (found && ++i) {
+    let username = process.env[`RCR_${userType}${i}_USERNAME`]
+    let password = process.env[`RCR_${userType}${i}_PASSWORD`]
+    found = !!username && !!password
+
+    if (found) {
+      let user = {
+        username: username.trim(),
+        password: password.trim(),
+        contactId: null
+      }
+      await userCallback(user)
+    }
+  }
+}
+
 let self = module.exports = {
   users: [],
+  admins: [],
   initialise: async function () {
-    logger.debug('Loading users from environment')
-    let i = 0
-    let found = true
-
-    while (found && ++i) {
-      let username = process.env[`RCR_USER${i}_USERNAME`]
-      let password = process.env[`RCR_USER${i}_PASSWORD`]
-      found = !!username && !!password
-
-      if (found) {
-        let user = {
-          username: username.trim(),
-          password: password.trim(),
-          contactId: null
-        }
-        user.contactId = await self.getContactId(user)
-        self.users.push(user)
-        logger.debug(`Adding user ${i} with username=${username} and password=${password}`)
-      }
-    }
+    await readUsersFromEnvironment(async (user) => {
+      user.contactId = await self.getContactId(user)
+      self.users.push(user)
+    }, 'USER')
+    await readUsersFromEnvironment(async (user) => {
+      self.admins.push(user)
+    }, 'ADMIN')
   },
   getUser: function (userNumber) {
     if (userNumber < 1 || userNumber > self.users.length) {
       throw new Error(`Unable to find user with number ${userNumber}`)
     }
     return self.users[userNumber - 1]
+  },
+  getAdmin: function (adminNumber) {
+    if (adminNumber < 1 || adminNumber > self.admins.length) {
+      throw new Error(`Unable to find user with number ${adminNumber}`)
+    }
+    return self.admins[adminNumber - 1]
   },
 
   deleteAllUserSubmissions: async function (season) {

@@ -1,6 +1,6 @@
 'use strict'
-const {logger} = require('defra-logging-facade')
-const {fork} = require('child_process')
+const { logger } = require('defra-logging-facade')
+const { fork } = require('child_process')
 const headless = require('headless')
 const headlessOptions = {
   display: {
@@ -31,7 +31,7 @@ headless(headlessOptions, function (err, xvfbProc, serverNum) {
     }
   }
 
-  let testProcessEnv = Object.assign({}, process.env, {'DISPLAY': `:${serverNum}`})
+  let testProcessEnv = Object.assign({}, process.env, { 'DISPLAY': `:${serverNum}` })
 
   try {
     testProc = fork('./node_modules/.bin/wdio', [testConfig], {

@@ -1,13 +1,15 @@
-Feature: Login to Rod Catch returns update, delete, first time to the service and submit
+Feature: Administrative users can manage paper based returns
 
   Background:
-    Given I am an external user
-    And   I am on the licence entry page
-    Then  I submit the licence and postcode for test user 1
+    Given I am an administrative user
+    And   I am on the admin login page
+    Then  I submit the username and password for admin user 1
+    When  I am on the licence entry page
+    Then   I submit the licence and postcode for test user 1
 #    And I am on the which season page
 #    And I select season 1 and I click continue
 
-  Scenario: First login - Save
+  Scenario: Enter a new paper return
     Given I did fish during the season
 
     And  I am on the summary page and select the add river link
@@ -41,8 +43,6 @@ Feature: Login to Rod Catch returns update, delete, first time to the service an
       | Frome  | 0                              | 30              |
       | Ystrad | 2                              | 0               |
 
-    And  I am on the summary page and I save and exit the service
-    And  I am on the draft saved page
-
-#  Scenario: First login - delete
-#    When I am on the delete river page and I click delete
+    And  I am on the summary page and I click review catch return
+    And  I am on the review page and I click submit
+    And  I am on the confirmation page

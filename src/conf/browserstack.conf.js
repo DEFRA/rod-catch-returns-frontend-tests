@@ -135,7 +135,9 @@ const browserStackConfig = {
 
   // Set a base URL in order to shorten url command calls. If your url parameter starts
   // with "/", then the base url gets prepended.
-  baseUrl: process.env.SERVICE_URL || 'http://localhost:3000',
+  baseExternalUrl: process.env.SERVICE_URL || 'http://localhost:3000',
+  baseAdminUrl: process.env.ADMIN_SERVICE_URL || 'http://localhost:4000',
+  baseUrl: this.baseExternalUrl,
 
   // Test runner services
   services: ['browserstack'],

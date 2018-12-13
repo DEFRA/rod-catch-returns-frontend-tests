@@ -123,7 +123,9 @@ exports.config = {
     browser.addCommand('getUser', async (number) => {
       return userManager.getUser(number)
     })
-
+    browser.addCommand('getAdmin', async (number) => {
+      return userManager.getAdmin(number)
+    })
     // Reset submission for all RCR users identified in the test configuration before each feature runs
     return new Promise(async (resolve) => {
       await userManager.initialise()
