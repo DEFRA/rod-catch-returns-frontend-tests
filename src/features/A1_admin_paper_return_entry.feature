@@ -6,8 +6,7 @@ Feature: Administrative users can manage paper based returns
     Then  I submit the username and password for admin user 1
     When  I am on the licence entry page
     Then   I submit the licence and postcode for test user 1
-#    And I am on the which season page
-#    And I select season 1 and I click continue
+    And   If it is the extended submission period I select the first period on the season page
 
   Scenario: Enter a new paper return
     Given I did fish during the season
