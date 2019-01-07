@@ -155,6 +155,14 @@ Notes:
             </collectionProp>
           </ModuleController>
           <hashTree/>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="[2] Select Year" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-1862182830">RCR Frontend Tests</stringProp>
+              <stringProp name="1824333025">Select Year</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
           <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="[2] Did Not Fish" enabled="true">
             <collectionProp name="ModuleController.node_path">
               <stringProp name="764597751">Test Plan</stringProp>
@@ -210,6 +218,14 @@ Notes:
               <stringProp name="764597751">Test Plan</stringProp>
               <stringProp name="-1862182830">RCR Frontend Tests</stringProp>
               <stringProp name="-1836641177">Licence Authentication</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="[2] Select Year" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-1862182830">RCR Frontend Tests</stringProp>
+              <stringProp name="1824333025">Select Year</stringProp>
             </collectionProp>
           </ModuleController>
           <hashTree/>
@@ -287,7 +303,15 @@ Notes:
             </collectionProp>
           </ModuleController>
           <hashTree/>
-          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="[2] Did Fish" enabled="true">
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="[2] Select Year" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-1862182830">RCR Frontend Tests</stringProp>
+              <stringProp name="1824333025">Select Year</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="[3] Did Fish" enabled="true">
             <collectionProp name="ModuleController.node_path">
               <stringProp name="764597751">Test Plan</stringProp>
               <stringProp name="-1862182830">RCR Frontend Tests</stringProp>
@@ -295,7 +319,7 @@ Notes:
             </collectionProp>
           </ModuleController>
           <hashTree/>
-          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="[3] Add Activity" enabled="true">
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="[4] Add Activity" enabled="true">
             <collectionProp name="ModuleController.node_path">
               <stringProp name="764597751">Test Plan</stringProp>
               <stringProp name="-1862182830">RCR Frontend Tests</stringProp>
@@ -303,7 +327,7 @@ Notes:
             </collectionProp>
           </ModuleController>
           <hashTree/>
-          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="[4] Add Small Catch" enabled="true">
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="[5] Add Small Catch" enabled="true">
             <collectionProp name="ModuleController.node_path">
               <stringProp name="764597751">Test Plan</stringProp>
               <stringProp name="-1862182830">RCR Frontend Tests</stringProp>
@@ -311,7 +335,7 @@ Notes:
             </collectionProp>
           </ModuleController>
           <hashTree/>
-          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="[5] Add Large Catch" enabled="true">
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="[6] Add Large Catch" enabled="true">
             <collectionProp name="ModuleController.node_path">
               <stringProp name="764597751">Test Plan</stringProp>
               <stringProp name="-1862182830">RCR Frontend Tests</stringProp>
@@ -319,7 +343,7 @@ Notes:
             </collectionProp>
           </ModuleController>
           <hashTree/>
-          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="[4] Confirm Summary and Review Submission" enabled="true">
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="[7] Confirm Summary and Review Submission" enabled="true">
             <collectionProp name="ModuleController.node_path">
               <stringProp name="764597751">Test Plan</stringProp>
               <stringProp name="-1862182830">RCR Frontend Tests</stringProp>
@@ -327,7 +351,7 @@ Notes:
             </collectionProp>
           </ModuleController>
           <hashTree/>
-          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="[5] Submit Return and View Confirmation" enabled="true">
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="[8] Submit Return and View Confirmation" enabled="true">
             <collectionProp name="ModuleController.node_path">
               <stringProp name="764597751">Test Plan</stringProp>
               <stringProp name="-1862182830">RCR Frontend Tests</stringProp>
@@ -467,6 +491,67 @@ Notes:
               <stringProp name="script"></stringProp>
               <stringProp name="scriptLanguage">groovy</stringProp>
             </JSR223Assertion>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - Check for season selector" enabled="true">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename">LoginRedirectTest.groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script"></stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+      <TestFragmentController guiclass="TestFragmentControllerGui" testclass="TestFragmentController" testname="Select Year" enabled="true"/>
+      <hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Select Year Transaction" enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">false</boolProp>
+        </TransactionController>
+        <hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+            <stringProp name="IfController.condition">${__groovy(&quot;${SELECT_SEASON}&quot; == &quot;true&quot;)}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST /select-year" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="year" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.name">year</stringProp>
+                    <stringProp name="Argument.value">2018</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  </elementProp>
+                  <elementProp name="continue" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.name">continue</stringProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">/select-year</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
+              <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
+              <boolProp name="HTTPSampler.image_parser">true</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              <stringProp name="TestPlan.comments">Detected the start of a redirect chain</stringProp>
+            </HTTPSamplerProxy>
             <hashTree/>
           </hashTree>
         </hashTree>
