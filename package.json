@@ -10,7 +10,7 @@
     "lint": "./node_modules/eslint/bin/eslint.js **/*.js",
     "lint-fix": "npm run lint -- --fix",
     "docker-build": "docker build -t defra/rod-catch-returns-frontend-tests . && docker images",
-    "docker-run": "docker run -it --network host -v \"$(pwd)/logs:/app/logs/\" -e \"SERVICE_URL=http://localhost:3000/\" -e \"API_URL=http://localhost:9580/\" -e \"RCR_USER1_USERNAME=B7A718\" -e \"RCR_USER1_PASSWORD=WA4 8HT\" defra/rod-catch-returns-frontend-tests",
+    "docker-run": "docker run -it --network host -v \"$(pwd)/logs:/app/logs/\" -e \"SERVICE_URL=http://localhost:3000/\" -e \"API_URL=http://localhost:9580/\" -e \"RCR_USER1_USERNAME=B7A718\" -e \"RCR_USER1_PASSWORD=WA4 8HT\" -e \"RCR_ADMIN1_USERNAME=admin1@example.com\" -e \"RCR_ADMIN1_PASSWORD=admin\" defra/rod-catch-returns-frontend-tests",
     "docker-test": "npm run docker-build && npm run docker-run"
   },
   "repository": {
@@ -26,24 +26,24 @@
     "chai": "4.2.0",
     "defra-logging-facade": "git+https://github.com/DEFRA/defra-logging-facade.git",
     "fs-extra": "3.0.1",
-    "headless": "^1.2.0",
+    "headless": "1.2.0",
     "lodash": "4.17.11",
-    "moment": "^2.22.2",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.2",
-    "wdio-browserstack-service": "0.1.16",
+    "request": "2.88.0",
+    "request-promise": "4.2.2",
+    "wdio-browserstack-service": "0.1.18",
     "wdio-cucumber-framework": "2.2.8",
     "wdio-firefox-profile-service": "0.1.3",
     "wdio-junit-reporter": "0.4.4",
-    "wdio-selenium-standalone-service": "0.0.10",
+    "wdio-selenium-standalone-service": "0.0.12",
     "wdio-spec-reporter": "0.1.5",
-    "webdriverio": "4.14.0"
+    "webdriverio": "4.14.2"
   },
   "devDependencies": {
-    "eslint": "5.8.0",
+    "eslint": "5.12.0",
+    "standard": "12.0.1",
     "eslint-config-standard": "12.0.0",
     "eslint-plugin-import": "2.14.0",
-    "eslint-plugin-node": "8.0.0",
+    "eslint-plugin-node": "8.0.1",
     "eslint-plugin-promise": "4.0.1",
     "eslint-plugin-standard": "4.0.0"
   }

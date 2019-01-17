@@ -4,7 +4,6 @@ const path = require('path')
 const { logger } = require('defra-logging-facade')
 const fs = require('fs-extra')
 const userManager = require('../js/lib/user-manager')
-const moment = require('moment')
 
 // Selenium logging verbosity: silent | verbose | command | data | result | error
 const seleniumLogLevel = process.env.SELENIUM_LOG_LEVEL || 'error'
@@ -129,7 +128,7 @@ exports.config = {
     // Reset submission for all RCR users identified in the test configuration before each feature runs
     return new Promise(async (resolve) => {
       await userManager.initialise()
-      await userManager.deleteAllUserSubmissions(moment().year())
+      await userManager.deleteAllUserSubmissions()
       resolve()
     })
   },

@@ -51,7 +51,7 @@ class Page {
     // The workaround is to use the label instead
     let sel = selector.trim()
     if (!sel.endsWith('+ label')) {
-      sel += '+ label'
+      sel += ' + label'
     }
     browser.click(sel)
   }

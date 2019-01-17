@@ -4,7 +4,7 @@ Feature: Login to Rod Catch returns update and return to service, submit
     Given I am an external user
     And   I am on the licence entry page
     Then  I submit the licence and postcode for test user 1
-    And   If it is the extended submission period I select the first period on the season page
+    And   If it is the extended submission period I select the previous period on the season page
 
 
   Scenario: First login - Save

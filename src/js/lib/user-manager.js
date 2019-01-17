@@ -66,10 +66,10 @@ let self = module.exports = {
     return self.admins[adminNumber - 1]
   },
 
-  deleteAllUserSubmissions: async function (season) {
-    logger.debug(`Clearing all submission data for ${season}`)
+  deleteAllUserSubmissions: async function () {
+    const year = new Date().getFullYear()
     for (let user of self.users) {
-      await self.deleteSubmission(user, season)
+      await Promise.all([self.deleteSubmission(user, year), self.deleteSubmission(user, year - 1)])
     }
   },
   deleteSubmission: async function (user, season) {
