@@ -12,8 +12,8 @@ class AddLargeFishPage extends Page {
   }
 
   setDate (dayOfMonth, monthNumber) {
-    browser.$('#date-day').setValue(dayOfMonth)
-    browser.$('#date-month').setValue(monthNumber)
+    browser.$('#day').setValue(dayOfMonth)
+    browser.$('#month').setValue(monthNumber)
   }
 
   setRiver (riverName) {
@@ -56,6 +56,10 @@ class AddLargeFishPage extends Page {
 
   saveAndAddAnother () {
     this.clickNavigationLink('//*[@name="add"]')
+  }
+
+  getYear () {
+    return browser.$('#year').getValue()
   }
 }
 

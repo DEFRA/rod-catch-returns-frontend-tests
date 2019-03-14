@@ -21,7 +21,7 @@ Feature: Administrative users can manage paper based returns
 
     And  I am on the summary page and select the large catch link
     *    I caught a fish weighing 3.5kg
-    *    The catch date was 5 of January
+    *    I select a valid catch date
     *    The catch river is Ystrad
     *    The catch species is Salmon
     *    The catch method is Fly
@@ -34,7 +34,7 @@ Feature: Administrative users can manage paper based returns
     *    In February on the river Ystrad, I caught 8 by fly, 0 by spinner, 0 by bait and released 8
     And  I save the small catch and return to the summary
     And  I am on the summary page and select the small catch link
-    *    In December on the river Frome, I caught 30 by fly, 0 by spinner, 0 by bait and released 0
+    *    In March on the river Frome, I caught 30 by fly, 0 by spinner, 0 by bait and released 0
     And  I save the small catch and return to the summary
 
     And I expect the summary page to show the following activities

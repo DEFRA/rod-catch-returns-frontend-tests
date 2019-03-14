@@ -19,8 +19,8 @@ class AddSmallFishPage extends Page {
     }
   }
 
-  setMonth (monthName) {
-    browser.$('#month').selectByVisibleText(monthName)
+  setMonth (monthNumber) {
+    browser.$('#month').setValue(monthNumber)
   }
 
   setQuantity (quantityMethod, quantity) {

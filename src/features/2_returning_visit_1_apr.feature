@@ -15,7 +15,7 @@ Feature: Login to Rod Catch returns update and return to service, submit
 
     And  I am on the summary page and select the large catch link
     And  I caught a fish weighing 1 lbs 2 oz
-    And  The catch date was 1 of December
+    And  I select a valid catch date
     And  The catch river is Frome
     And  The catch species is Sea Trout
     And  The catch method is Fly
@@ -26,7 +26,7 @@ Feature: Login to Rod Catch returns update and return to service, submit
 
   Scenario: Return login - Submit
     When I am on the summary page and select the large catch link
-    And  The catch date was 25 of December
+    And  I select a valid catch date
     And  I caught a fish weighing 3 lbs 5 oz
     And  The catch species is Salmon
     And  The catch method is Fly
