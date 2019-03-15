@@ -10,7 +10,7 @@
     "lint": "./node_modules/eslint/bin/eslint.js **/*.js",
     "lint-fix": "npm run lint -- --fix",
     "docker-build": "docker build -t defra/rod-catch-returns-frontend-tests . && docker images",
-    "docker-run": "docker run -it --network host -v \"$(pwd)/logs:/app/logs/\" -e \"SERVICE_URL=http://localhost:3000/\" -e \"API_URL=http://localhost:9580/\" -e \"RCR_USER1_USERNAME=B7A718\" -e \"RCR_USER1_PASSWORD=WA4 8HT\" -e \"RCR_ADMIN1_USERNAME=admin1@example.com\" -e \"RCR_ADMIN1_PASSWORD=admin\" defra/rod-catch-returns-frontend-tests",
+    "docker-run": "docker run -it --network host -v \"$(pwd)/logs:/app/logs/\" --env-file .env defra/rod-catch-returns-frontend-tests",
     "docker-test": "npm run docker-build && npm run docker-run"
   },
   "repository": {
@@ -25,6 +25,7 @@
   "dependencies": {
     "chai": "4.2.0",
     "defra-logging-facade": "git+https://github.com/DEFRA/defra-logging-facade.git",
+    "dotenv": "^7.0.0",
     "fs-extra": "3.0.1",
     "headless": "1.2.0",
     "lodash": "4.17.11",

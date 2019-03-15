@@ -1,4 +1,5 @@
 'use strict'
+require('dotenv').config({ debug: process.env.DEBUG })
 const util = require('util')
 const path = require('path')
 const { logger } = require('defra-logging-facade')
