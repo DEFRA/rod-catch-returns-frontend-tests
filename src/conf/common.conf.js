@@ -20,15 +20,15 @@ fs.ensureDirSync(logDir)
    Drivers should be updated as necessary when new browser releases dictate it.
  */
 const seleiumDefaults = {
-  version: '3.14.0',
+  version: '3.141.59',
   drivers: {
     chrome: {
       // See https://chromedriver.storage.googleapis.com/index.html'
-      version: '2.43'
+      version: '2.46'
     },
     firefox: {
       // See https://github.com/mozilla/geckodriver/releases
-      version: '0.23.0'
+      version: '0.24.0'
     }
   }
 }
