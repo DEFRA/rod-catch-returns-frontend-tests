@@ -1,19 +1,17 @@
 'use strict'
 const { defineStep } = require('cucumber')
 const Season = require('../../pages/Season-Select.page')
-const { logger } = require('defra-logging-facade')
 const today = new Date()
 
 defineStep(/^If it is the extended submission period I select the (current|previous) period on the season page$/, function (periodName) {
+  browser.rcrSubmissionSeason = today.getFullYear()
+
   if (today.getMonth() < 3) {
     Season.checkOpen()
-
-    let season = today.getFullYear()
     if (periodName === 'previous') {
-      season--
+      browser.rcrSubmissionSeason--
     }
-    logger.debug('Year to select=', periodName)
-    Season.selectSeason(season)
+    Season.selectSeason(browser.rcrSubmissionSeason)
     Season.continue()
   }
 })

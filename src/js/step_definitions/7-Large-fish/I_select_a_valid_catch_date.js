@@ -22,6 +22,6 @@ function getValidDate (submissionYear) {
 }
 
 defineStep('I select a valid catch date', function () {
-  let catchDate = getValidDate(parseInt(LargeCatch.getYear()))
+  let catchDate = getValidDate(browser.rcrSubmissionSeason)
   LargeCatch.setDate(catchDate.format('D'), catchDate.format('M'))
 })

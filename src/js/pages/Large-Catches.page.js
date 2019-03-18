@@ -57,10 +57,6 @@ class AddLargeFishPage extends Page {
   saveAndAddAnother () {
     this.clickNavigationLink('//*[@name="add"]')
   }
-
-  getYear () {
-    return browser.$('#year').getValue()
-  }
 }
 
 module.exports = new AddLargeFishPage()
