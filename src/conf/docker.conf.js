@@ -1,6 +1,6 @@
 'use strict'
 const lodash = require('lodash')
-const commonConfig = require('./common.conf').config
+const commonConfig = require('../../logs/common.conf').config
 
 /*
   Configuration for running with local browsers inside the docker container built from this project's Dockerfile

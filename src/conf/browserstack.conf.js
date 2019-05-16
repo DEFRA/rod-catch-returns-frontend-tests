@@ -1,7 +1,7 @@
 'use strict'
 const os = require('os')
 const lodash = require('lodash')
-const commonConfig = require('./common.conf').config
+const commonConfig = require('../../logs/common.conf').config
 
 const browserstackUser = process.env.BROWSERSTACK_USERNAME
 const browserstackKey = process.env.BROWSERSTACK_ACCESS_KEY
