@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/DEFRA/rod-catch-returns-frontend-tests.git#readme",
   "dependencies": {
-    "chai": "4.2.0",
+    "chai": "^4.2.0",
     "defra-logging-facade": "git+https://github.com/DEFRA/defra-logging-facade.git",
     "dotenv": "7.0.0",
     "fs-extra": "7.0.1",

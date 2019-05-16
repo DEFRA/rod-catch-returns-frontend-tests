@@ -6,7 +6,7 @@ const SELECTOR_CONTINUE = '//*[@name="continue"]'
 class Page {
   /**
    * The expected URL for the page.  Must be overridden by subclass implementations
-   */
+*/
   get url () {
     throw new Error('Page implementation does not override method url()')
   }
@@ -55,6 +55,24 @@ class Page {
     }
     browser.click(sel)
   }
-}
 
+  /**
+   1. reverse quotes used on regex to  define
+   2. errorId and ererrorMessage used in the funcion
+   3. values fed into test via the feature table
+   *
+   */
+  checkErrorsOnPage (errorId, errorMessage) {
+    const errRiverName = browser.getText(`a[href="${errorId}"]`)
+    errRiverName.should.equal(errorMessage)
+  }
+
+  clickCancel () {
+    console.log('About to click cancel link')
+    const cancelBtn = browser.element(`#return-summary`)
+    waitForNav(function () {
+      cancelBtn.click()
+    })
+  }
+}
 module.exports = Page

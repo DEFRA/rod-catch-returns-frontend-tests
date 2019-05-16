@@ -120,6 +120,13 @@ exports.config = {
    * variables, such as `browser`. It is the perfect place to define custom commands.
    */
   before: function before (capabilities, specs) {
+    // Setup the Chai assertion framework
+    const chai = require('chai')
+
+    global.expect = chai.expect
+    global.assert = chai.assert
+    global.should = chai.should()
+
     browser.addCommand('getUser', async (number) => {
       return userManager.getUser(number)
     })
