@@ -37,7 +37,6 @@ Feature: Login to Rod Catch returns update, delete, first time to the service an
     And I am on the large catch page and I click cancel
 
 #  Scenario 3: Test Errors on Large Catch page - Error messages relate to the error id on page
-
     And  I am on the summary page and select the small catch link
     And  I save the small catch and return to the summary
     Then I expect the small catch page to show the following errors
@@ -47,6 +46,6 @@ Feature: Login to Rod Catch returns update, delete, first time to the service an
     | #fly     | You have not entered the number of fish caught |
     And I am on the small catch page and I click cancel
 
-  # Exit teh service
+  # Exit the service
     And  I am on the summary page and I save and exit the service
     And  I am on the draft saved page
