@@ -45,3 +45,4 @@ Feature: Administrative users can manage paper based returns
     And  I am on the summary page and I click review catch return
     And  I am on the review page and I click submit
     And  I am on the confirmation page
+    And  I send an API request to check contact status
