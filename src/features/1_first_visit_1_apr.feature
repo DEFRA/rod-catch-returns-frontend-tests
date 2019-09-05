@@ -43,7 +43,7 @@ Feature: Login to Rod Catch returns update, delete, first time to the service an
 
     And  I am on the summary page and I save and exit the service
     And  I am on the draft saved page
-    And  I send an API request to check contact status
+
 
 #  Scenario: First login - delete
 #    When I am on the delete river page and I click delete
