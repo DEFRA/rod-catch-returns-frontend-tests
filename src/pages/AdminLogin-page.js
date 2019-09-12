@@ -1,5 +1,9 @@
 'use strict'
+
 const Page = require('./page')
+
+const USER_ID = '#user'
+const PASSWORD_ID = '#password'
 
 class AdminLoginPage extends Page {
   get url () {
@@ -7,17 +11,17 @@ class AdminLoginPage extends Page {
   }
 
   setUsername (username) {
-    $('input#user').setValue(username)
+    this.enter(USER_ID, username)
   }
 
   setPassword (password) {
-    $('input#password').setValue(password)
+    this.enter(PASSWORD_ID, password)
   }
 
   submit (username, password) {
     this.setUsername(username)
     this.setPassword(password)
-    this.continue()
+    this.clickContinue()
   }
 }
 

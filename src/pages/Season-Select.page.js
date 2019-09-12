@@ -1,4 +1,5 @@
 'use strict'
+
 const Page = require('./page')
 
 class SelectSeasonPage extends Page {
@@ -6,8 +7,9 @@ class SelectSeasonPage extends Page {
     return '/select-year'
   }
 
-  selectSeason (year) {
-    Page.clickRadioButton(`input[value='${year}']`)
+  submit (year) {
+    this.click(`input[value='${year}']`)
+    this.clickContinue()
   }
 }
 

@@ -1,9 +1,10 @@
 'use strict'
-const { defineStep } = require('cucumber')
-const DeleteRiver = require('../../pages/Summary.page')
 
-defineStep('I am on the delete river page and I click delete', function () {
-  DeleteRiver.open()
-  DeleteRiver.checkOpen()
-  DeleteRiver.clickDeleteRiver()
+const { defineStep } = require('cucumber')
+
+const Summary = require('../../pages/Summary.page')
+
+defineStep('I am on the delete river page and I click delete', () => {
+  Summary.checkUrl()
+  Summary.clickDeleteRiver()
 })

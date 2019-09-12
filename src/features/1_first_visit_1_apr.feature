@@ -19,10 +19,10 @@ Feature: Login to Rod Catch returns update, delete, first time to the service an
     And  I confirm my activity details and continue
 
     And  I am on the summary page and select the large catch link
-    *    I caught a fish weighing 3.5kg
-    *    I select a valid catch date
     *    The catch river is Ystrad
+    *    I select a valid catch date
     *    The catch species is Salmon
+    *    I caught a fish weighing 3.5kg
     *    The catch method is Fly
     *    The catch was released
     And  I save the large catch and return to the summary

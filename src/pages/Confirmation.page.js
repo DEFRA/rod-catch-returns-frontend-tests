@@ -1,4 +1,5 @@
 'use strict'
+
 const Page = require('./page')
 
 class ConfirmationPage extends Page {

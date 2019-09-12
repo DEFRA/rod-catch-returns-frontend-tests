@@ -9,5 +9,3 @@ Feature: Login to Rod Catch returns update, delete, first time to the service an
   Scenario: First login - Save
     Given I didn't fish during the season
     Then  I am on the review page
-
-

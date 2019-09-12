@@ -1,17 +1,20 @@
 'use strict'
+
 const Page = require('./page')
 
-const SELECTOR_FISHED_YES = '#dyf-1'
-const SELECTOR_FISHED_NO = '#dyf-2'
+const DID_FISH_ID = '#dyf-1'
+const DIDNT_FISH_ID = '#dyf-2'
 
-class SelectDYFPage extends Page {
+class DidYouFishPage extends Page {
   get url () {
     return '/did-you-fish'
   }
 
-  setFished (fished) {
-    Page.clickRadioButton(fished ? SELECTOR_FISHED_YES : SELECTOR_FISHED_NO)
+  submit (answer) {
+    const id = answer === 'did' ? DID_FISH_ID : DIDNT_FISH_ID
+    this.click(id)
+    this.clickContinue()
   }
 }
 
-module.exports = new SelectDYFPage()
+module.exports = new DidYouFishPage()

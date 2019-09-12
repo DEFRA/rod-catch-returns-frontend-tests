@@ -1,4 +1,10 @@
+'use strict'
+
 const Page = require('./page')
+
+const RIVER_ID = '#river'
+const DAYS_FISHED_JAN_JUN = '#daysFishedWithMandatoryRelease'
+const DAYS_FISHED_JUN_DEC = '#daysFishedOther'
 
 class AddActivitiesPage extends Page {
   get url () {
@@ -6,15 +12,15 @@ class AddActivitiesPage extends Page {
   }
 
   selectRiver (riverName) {
-    $('#river').selectByVisibleText(riverName)
+    this.select(RIVER_ID, riverName)
   }
 
   setDaysFishedWithMandatoryRelease (days) {
-    $('#daysFishedWithMandatoryRelease').setValue(days)
+    this.enter(DAYS_FISHED_JAN_JUN, days)
   }
 
   setDaysFishedOther (days) {
-    $('#daysFishedOther').setValue(days)
+    this.enter(DAYS_FISHED_JUN_DEC, days)
   }
 }
 

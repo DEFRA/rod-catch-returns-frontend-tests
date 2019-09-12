@@ -1,4 +1,5 @@
 'use strict'
+
 const Page = require('./page')
 
 class DeletePage extends Page {
@@ -9,11 +10,6 @@ class DeletePage extends Page {
 
   get url () {
     return this.href
-  }
-
-  clickCancel () {
-    const clickCancel = $('#return-summary')
-    clickCancel.click()
   }
 }
 

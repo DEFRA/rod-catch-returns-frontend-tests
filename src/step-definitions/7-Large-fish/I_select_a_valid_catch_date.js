@@ -1,27 +1,27 @@
 'use strict'
+
 const { defineStep } = require('cucumber')
 const moment = require('moment')
+
 const LargeCatch = require('../../pages/Large-Catches.page')
 
-function getLatestValidDateForSubmissionYear (submissionYear) {
-  // default to today
+const getLatestValidDateForSubmissionYear = submissionYear => {
   let latestDate = moment()
-  // if the submission is for a previous year, the latest valid date will be the end of that year
   if (submissionYear < latestDate.year()) {
     latestDate = moment([submissionYear]).endOf('year')
   }
   return latestDate
 }
 
-function getValidDate (submissionYear) {
-  let startOfYear = moment([submissionYear])
-  let latestValid = getLatestValidDateForSubmissionYear(submissionYear)
-  let daysDiff = latestValid.diff(startOfYear, 'days')
-  let randomDays = Math.floor(Math.random() * daysDiff)
+const getValidDate = submissionYear => {
+  const startOfYear = moment([submissionYear])
+  const latestValid = getLatestValidDateForSubmissionYear(submissionYear)
+  const daysDiff = latestValid.diff(startOfYear, 'days')
+  const randomDays = Math.floor(Math.random() * daysDiff)
   return startOfYear.add(randomDays, 'days')
 }
 
-defineStep('I select a valid catch date', function () {
-  let catchDate = getValidDate(browser.rcrSubmissionSeason)
+defineStep('I select a valid catch date', () => {
+  const catchDate = getValidDate(browser.rcrSubmissionSeason)
   LargeCatch.setDate(catchDate.format('D'), catchDate.format('M'))
 })

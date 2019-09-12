@@ -1,5 +1,13 @@
 'use strict'
+
 const Page = require('./page')
+
+const RIVER_ID = '#river'
+const MONTH_ID = '#month'
+const FLY_ID = '#fly'
+const SPINNER_ID = '#spinner'
+const BAIT_ID = '#bait'
+const RELEASED_ID = '#released'
 
 class AddSmallFishPage extends Page {
   get url () {
@@ -7,33 +15,35 @@ class AddSmallFishPage extends Page {
   }
 
   setRiver (riverName) {
-    if ($('#river').isDisplayed()) {
-      const riverSelector = $('#river')
-      riverSelector.selectByVisibleText(riverName)
+    if ($(RIVER_ID).isDisplayed()) {
+      this.select(RIVER_ID, riverName)
     } else {
-      // No river chooser visible, ensure that the river has been preselected and is in the title (this happens with only a single activity defined)
-      const pageHeading = $('h1')
-      if (!pageHeading.getText().includes(`river ${riverName}`)) {
-        throw new Error(`Expected ${riverName} to be preselected but it wasn't!`)
-      }
+      this.hasText(`river ${riverName}`)
     }
   }
 
   setMonth (monthNumber) {
-    $('#month').setValue(monthNumber)
+    this.enter(MONTH_ID, monthNumber)
   }
 
-  setQuantity (quantityMethod, quantity) {
-    const selector = '#' + quantityMethod.toLowerCase()
-    $(selector).setValue(quantity)
+  setFly (quantity) {
+    this.enter(FLY_ID, quantity)
+  }
+
+  setSpinner (quantity) {
+    this.enter(SPINNER_ID, quantity)
+  }
+
+  setBait (quantity) {
+    this.enter(BAIT_ID, quantity)
   }
 
   setReleased (numberReleased) {
-    $('#released').setValue(numberReleased)
+    this.enter(RELEASED_ID, numberReleased)
   }
 
   saveAndAddAnother () {
-    this.clickNavigationLink('//*[@name="add"]')
+    this.clickAddAnother()
   }
 }
 

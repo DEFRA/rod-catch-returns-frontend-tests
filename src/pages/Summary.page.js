@@ -1,8 +1,18 @@
 'use strict'
+
+const assert = require('assert')
+
 const Page = require('./page')
-const { logger } = require('defra-logging-facade')
 const DeletePage = require('./Delete.page')
-const { expect } = require('chai')
+
+const ADD_RIVER_ID = '#activities-add'
+const ADD_SMALL_CATCH_ID = '#small-catches-add'
+const ADD_LARGE_CATCH_ID = '#catches-add'
+const SAVE_ID = '#save'
+const RIVER_TABLE_ID = '#river'
+const SMALL_CATCH_TABLE_ID = '#small'
+const LARGE_CATCH_TABLE_ID = '#large'
+const LINK_SELECTOR = 'tr:first-child td:last-child a:last-child'
 
 class SummaryPage extends Page {
   get url () {
@@ -10,60 +20,53 @@ class SummaryPage extends Page {
   }
 
   clickAddRiver () {
-    logger.debug('About to click Add River Link')
-    this.clickNavigationLink('#activities-add')
+    this.clickLink(ADD_RIVER_ID)
   }
 
   clickAddSmallCatch () {
-    logger.debug('Add a small catch of under 1 lb link')
-    this.clickNavigationLink('#small-catches-add')
+    this.clickLink(ADD_SMALL_CATCH_ID)
   }
 
   clickAddLargeCatch () {
-    logger.debug('About to click Add a salmon or large sea trout link')
-    this.clickNavigationLink('#catches-add')
-  }
-
-  clickDeleteRiver () {
-    logger.debug('About to click Delete River Link')
-    const clickDeleteRiverLink = $('table#river tr:first-child td:nth-child(4) span a:nth-child(2)')
-    const deleteRiverPage = new DeletePage(clickDeleteRiverLink.getAttribute('href'))
-    clickDeleteRiverLink.click()
-    deleteRiverPage.continue()
-  }
-
-  clickDeleteSmallCatch () {
-    logger.debug('Delete small catch')
-    const clickDeleteSmallCatch = $('table#small tr:first-child td:nth-child(7) span a:nth-child(2)')
-    const deleteSmallPage = new DeletePage(clickDeleteSmallCatch.getAttribute('href'))
-    clickDeleteSmallCatch.click()
-    deleteSmallPage.continue()
-  }
-
-  clickDeleteLargeCatch () {
-    logger.debug('About to click Add a salmon or large sea trout link')
-    const clickDeleteLargeCatch = $('table#large tr:first-child td:nth-child(7) span a:nth-child(2)')
-    const deleteLargePage = new DeletePage(clickDeleteLargeCatch.getAttribute('href'))
-    clickDeleteLargeCatch.click()
-    deleteLargePage.continue()
+    this.clickLink(ADD_LARGE_CATCH_ID)
   }
 
   clickSaveAsDraft () {
-    logger.debug('About to click Save as draft')
-    this.clickNavigationLink('#save')
+    this.clickLink(SAVE_ID)
+  }
+
+  delete (table) {
+    const selector = `${table} ${LINK_SELECTOR}`
+    const link = $(selector)
+    const deletePage = new DeletePage(link.getAttribute('href'))
+    this.clickLink(selector)
+    deletePage.clickContinue()
+  }
+
+  clickDeleteRiver () {
+    this.delete(RIVER_TABLE_ID)
+  }
+
+  clickDeleteSmallCatch () {
+    this.delete(SMALL_CATCH_TABLE_ID)
+  }
+
+  clickDeleteLargeCatch () {
+    this.delete(LARGE_CATCH_TABLE_ID)
   }
 
   checkActivityTableLength (expectedLength) {
-    const activityTableBodyRows = $$('#river tbody tr')
-    expect(activityTableBodyRows.length).to.equal(expectedLength)
+    const activityTableBodyRows = $$('#river tbody tr').length
+    assert.strictEqual(activityTableBodyRows, expectedLength)
   }
 
   checkActivityTableContains (riverName, daysFishedWithMandatoryRelease, daysFishedOther) {
     const activityTableBody = $('#river tbody')
     const riverNameCell = activityTableBody.$(`td=${riverName}`)
     const rowForRiver = riverNameCell.$('..')
-    expect(rowForRiver.$('td:nth-child(2)').getText()).to.equal(daysFishedWithMandatoryRelease)
-    expect(rowForRiver.$('td:nth-child(3)').getText()).to.equal(daysFishedOther)
+
+    assert.strictEqual(rowForRiver.$('td:nth-child(2)').getText(), daysFishedWithMandatoryRelease)
+    assert.strictEqual(rowForRiver.$('td:nth-child(3)').getText(), daysFishedOther)
   }
 }
 

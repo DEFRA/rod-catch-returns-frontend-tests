@@ -1,4 +1,5 @@
 'use strict'
+
 const Page = require('./page')
 
 class SavePage extends Page {
@@ -7,9 +8,7 @@ class SavePage extends Page {
   }
 
   checkMessage () {
-    if (!$('main h1').getText().includes('catch return has been saved')) {
-      throw new Error('Catch return was not successfully saved.')
-    }
+    this.hasElement('h1', 'Your catch return has been saved')
   }
 }
 

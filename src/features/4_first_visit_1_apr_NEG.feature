@@ -11,7 +11,7 @@ Feature: Login to Rod Catch returns update, delete, first time to the service an
     Given I did fish during the season
 #  Scenario 1: Test Errors on Rivers page -  Error messages relate to the error id on page
     And  I am on the summary page and select the add river link
-    And  I confirm my activity details and continue
+    And  I confirm my activity details and continue; url should not change
     Then I expect the activities page to show the following errors
       | ErrorId              | ErrorMessage                                      |
       | #river               | You have not selected a river                     |
@@ -25,7 +25,7 @@ Feature: Login to Rod Catch returns update, delete, first time to the service an
 
 #  Scenario 2: Test Errors on Large Catch page -  Error messages relate to the error id on page
     And  I am on the summary page and select the large catch link
-    And  I save the large catch and return to the summary
+    And  I save the large catch and return to the summary; url should not change
     Then I expect the large catch page to show the following errors
       | ErrorId    | ErrorMessage                                          |
       | #river     | You have not selected a river                         |
@@ -38,7 +38,7 @@ Feature: Login to Rod Catch returns update, delete, first time to the service an
 
 #  Scenario 3: Test Errors on Large Catch page - Error messages relate to the error id on page
     And  I am on the summary page and select the small catch link
-    And  I save the small catch and return to the summary
+    And  I save the small catch and return to the summary; url should not change
     Then I expect the small catch page to show the following errors
     | ErrorId  | ErrorMessage                                   |
     | #river   | You have not selected a river                  |

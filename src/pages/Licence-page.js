@@ -1,38 +1,19 @@
 'use strict'
+
 const Page = require('./page')
+
+const LICENCE_ID = '#licence'
+const POSTCODE_ID = '#postcode'
 
 class LicenceEntryPage extends Page {
   get url () {
-    let ref = '/licence-auth'
-    // TODO: This is a temporary workaround - ideally the frontend would serve the licence page for both external and admin journeys using /licence
-    if (browser.options.baseUrl === 'http://localhost:4000') {
-      ref = '/licence'
-    }
-    return ref
-  }
-
-  enterLicence (licence) {
-    const userInput = $('#licence')
-    if (licence) {
-      userInput.setValue(licence)
-    } else {
-      userInput.clearElement()
-    }
-  }
-
-  enterPostcode (postcode) {
-    const passInput = $('#postcode')
-    if (postcode) {
-      passInput.setValue(postcode)
-    } else {
-      passInput.clearElement()
-    }
+    return browser.options.baseUrl === 'http://localhost:4000' ? '/licence' : '/licence-auth'
   }
 
   submit (licence, postcode) {
-    this.enterLicence(licence)
-    this.enterPostcode(postcode)
-    this.continue()
+    licence ? this.enter(LICENCE_ID, licence) : this.clear(LICENCE_ID)
+    postcode ? this.enter(POSTCODE_ID, postcode) : this.clear(POSTCODE_ID)
+    this.clickContinue()
   }
 }
 
