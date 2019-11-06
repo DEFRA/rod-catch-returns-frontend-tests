@@ -98,7 +98,7 @@ let self = module.exports = {
       if (e.statusCode === 404) {
         return null
       }
-      logger.error(`Error finding submissions contact id ${user.contactId} with username=${user.username} and password=${user.password}`)
+      logger.error(`Error finding submissions contact id ${user.contactId} with username=${user.username} and password=${user.password}`, e)
     }
   },
 
@@ -108,7 +108,7 @@ let self = module.exports = {
       let result = await rp(requestObject)
       return result.contact.id
     } catch (e) {
-      logger.error(`Error fetching contact detail for with username=${user.username} and password=${user.password}`)
+      logger.error(`Error fetching contact detail for with username=${user.username} and password=${user.password}`, e)
     }
   }
 }
