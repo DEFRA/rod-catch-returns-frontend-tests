@@ -24,7 +24,7 @@ const seleiumDefaults = {
   drivers: {
     chrome: {
       // See https://chromedriver.storage.googleapis.com/index.html'
-      version: '2.46'
+      version: '78.0.3904.70'
     },
     firefox: {
       // See https://github.com/mozilla/geckodriver/releases

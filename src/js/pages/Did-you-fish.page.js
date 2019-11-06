@@ -1,7 +1,7 @@
 'use strict'
 const Page = require('./page')
 
-const SELECTOR_FISHED_YES = '#dyf-1'
+const SELECTOR_FISHED_YES = '#dyf'
 const SELECTOR_FISHED_NO = '#dyf-2'
 
 class SelectDYFPage extends Page {

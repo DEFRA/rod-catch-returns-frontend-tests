@@ -1,9 +1,9 @@
 'use strict'
 const Page = require('./page')
 
-const RADIO_RELEASED_YES_ID = '#released-1'
+const RADIO_RELEASED_YES_ID = '#released'
 const RADIO_RELEASED_NO_ID = '#released-2'
-const RADIO_IMPERIAL_ID = '#system-1'
+const RADIO_IMPERIAL_ID = '#system'
 const RADIO_METRIC_ID = '#system-2'
 
 class AddLargeFishPage extends Page {
