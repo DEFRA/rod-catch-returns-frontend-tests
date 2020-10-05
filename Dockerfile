@@ -5,7 +5,7 @@ ENV TEST_CONFIG ./src/conf/docker.conf.js
 RUN set -ex; \
 	apt-get update; \
 	apt-get upgrade -y; \
-	apt-get install -y --no-install-recommends wget curl gnupg git default-jdk g++ build-essential
+	apt-get install -y --no-install-recommends wget curl gnupg git default-jdk
 
 # Install google-chrome repo
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
