@@ -17,7 +17,7 @@ const dockerConfig = {
     {
       browserName: 'chrome',
       chromeOptions: {
-        args: ['--no-sandbox']
+        args: ['--headless', '--no-sandbox']
       }
     },
     {

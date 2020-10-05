@@ -14,7 +14,7 @@ const localConfig = {
     {
       browserName: 'chrome',
       chromeOptions: {
-        args: ['--no-sandbox']
+        args: ['--headless', '--no-sandbox']
       }
     },
     {
