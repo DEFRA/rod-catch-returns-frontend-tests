@@ -47,5 +47,4 @@ RUN npm install
 COPY ./src /app/src
 COPY ./*.js /app/
 
-ENTRYPOINT ["node_modules/.bin/wdio"]
-CMD [ "" ]
+CMD ["node_modules/.bin/wdio"]
