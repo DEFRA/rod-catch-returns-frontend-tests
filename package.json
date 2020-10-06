@@ -27,7 +27,6 @@
     "defra-logging-facade": "git+https://github.com/DEFRA/defra-logging-facade.git",
     "dotenv": "7.0.0",
     "fs-extra": "7.0.1",
-    "headless": "1.2.0",
     "lodash": "4.17.11",
     "moment": "2.24.0",
     "request": "2.88.0",

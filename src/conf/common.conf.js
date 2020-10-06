@@ -16,7 +16,7 @@ fs.ensureDirSync(logDir)
 /*
    Selenium standalone options.
 
-   Allow's for the selenium server version and browser driver version to be defined when running standalone.
+   Allows for the selenium server version and browser driver version to be defined when running standalone.
    Drivers should be updated as necessary when new browser releases dictate it.
  */
 const seleiumDefaults = {
