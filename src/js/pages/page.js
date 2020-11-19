@@ -42,7 +42,7 @@ class Page {
 
   clickNavigationLink (selector) {
     waitForNav(function () {
-      browser.click(selector)
+      $(selector).click()
     })
   }
 
@@ -53,7 +53,7 @@ class Page {
     if (!sel.endsWith('+ label')) {
       sel += ' + label'
     }
-    browser.click(sel)
+    $(sel).click()
   }
 }
 

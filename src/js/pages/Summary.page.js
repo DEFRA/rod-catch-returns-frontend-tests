@@ -26,7 +26,7 @@ class SummaryPage extends Page {
 
   clickDeleteRiver () {
     logger.debug('About to click Delete River Link')
-    const clickDeleteRiverLink = browser.element('table#river tr:first-child td:nth-child(4) span a:nth-child(2)')
+    const clickDeleteRiverLink = $('table#river tr:first-child td:nth-child(4) span a:nth-child(1)')
     let deleteRiverPage = new DeletePage(clickDeleteRiverLink.getAttribute('href'))
     clickDeleteRiverLink.click()
     deleteRiverPage.continue()
@@ -60,7 +60,7 @@ class SummaryPage extends Page {
 
   checkActivityTableContains (riverName, daysFishedWithMandatoryRelease, daysFishedOther) {
     const activityTableBody = browser.$('#river tbody')
-    const riverNameCell = activityTableBody.$(`td=${riverName}`)
+    const riverNameCell = activityTableBody.$(`th=${riverName}`)
     const rowForRiver = riverNameCell.$('..')
     expect(rowForRiver.$('td:nth-child(2)').getText()).to.equal(daysFishedWithMandatoryRelease)
     expect(rowForRiver.$('td:nth-child(3)').getText()).to.equal(daysFishedOther)

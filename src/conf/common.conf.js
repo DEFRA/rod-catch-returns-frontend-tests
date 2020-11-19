@@ -137,7 +137,7 @@ exports.config = {
   // Cucumber specific hooks
   beforeFeature: function (feature) {
     logger.info('**********************************************************************************')
-    logger.info(`Test session id:     ${browser.session().sessionId}`)
+    logger.info(`Test session id:     ${browser}`)
     logger.info(`Running feature:     ${feature.name}`)
   },
 

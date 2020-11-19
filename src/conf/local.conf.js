@@ -9,20 +9,15 @@ const localConfig = {
    * ============
    * Maximum instances to run in parallel.  Can be overridden on a per-browser basis by adding maxInstances option under each capability.
    */
+  runner: 'local',
+  screenshotOnReject: false,
+  waitforTimeout: 1000,
   maxInstances: 1,
   capabilities: [
     {
-      browserName: 'chrome',
-      chromeOptions: {
-        args: ['--headless', '--no-sandbox']
-      }
-    },
-    {
+      maxInstances: 1,
       browserName: 'firefox',
-      'moz:firefoxOptions': {
-        // flag to activate Firefox headless mode (see https://github.com/mozilla/geckodriver/blob/master/README.md#firefox-capabilities for more details about moz:firefoxOptions)
-        args: ['--headless']
-      }
+      acceptInsecureCerts: true
     }
   ],
   /*
@@ -34,7 +29,7 @@ const localConfig = {
    */
   baseExternalUrl: process.env.SERVICE_URL || 'http://localhost:3000',
   baseAdminUrl: process.env.ADMIN_SERVICE_URL || 'http://localhost:4000',
-  baseUrl: this.baseExternalUrl,
+  baseUrl: process.env.SERVICE_URL || 'http://localhost:3000',
   /*
    * Test runner services
    * Services take over a specific job you don't want to take care of. They enhance

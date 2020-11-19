@@ -6,15 +6,15 @@ class AddActivitiesPage extends Page {
   }
 
   selectRiver (riverName) {
-    browser.$('#river').selectByVisibleText(riverName)
+    $('#river').selectByVisibleText(riverName)
   }
 
   setDaysFishedWithMandatoryRelease (days) {
-    browser.$('#daysFishedWithMandatoryRelease').setValue(days)
+    $('#daysFishedWithMandatoryRelease').setValue(days)
   }
 
   setDaysFishedOther (days) {
-    browser.$('#daysFishedOther').setValue(days)
+    $('#daysFishedOther').setValue(days)
   }
 }
 
