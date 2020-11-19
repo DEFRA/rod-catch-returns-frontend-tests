@@ -6,7 +6,7 @@ const { logger } = require('defra-logging-facade')
 const fs = require('fs-extra')
 const userManager = require('../js/lib/user-manager')
 
-// Selenium logging verbosity: silent | verbose | command | data | result | error
+// Level of logging verbosity: trace | debug | info | warn | error | silent
 const seleniumLogLevel = process.env.SELENIUM_LOG_LEVEL || 'error'
 
 // Ensure logs folder exists
@@ -55,7 +55,7 @@ exports.config = {
    * By default WebdriverIO commands are executed in a synchronous way using the wdio-sync package.
    */
   sync: true,
-  // Selenium logging verbosity: silent | verbose | command | data | result | error
+  // Level of logging verbosity: trace | debug | info | warn | error | silent
   logLevel: seleniumLogLevel,
   // Wdio debugging (use node inspector)
   debug: true,
@@ -75,12 +75,23 @@ exports.config = {
   // Framework to run specs with.
   framework: 'cucumber',
   // Test reporter for stdout.
-  reporters: ['spec', 'junit'],
-  reporterOptions: {
-    junit: {
-      outputDir: './logs/junit'
-    }
-  },
+  reporters: [
+    'spec',
+    [
+      'junit',
+      {
+        outputDir: './logs/junit',
+        errorOptions: {
+          error: 'message',
+          failure: 'message',
+          stacktrace: 'stack'
+        },
+        outputFileFormat: function (options) {
+          return `wdio.${options.capabilities.browserName.toLowerCase()}-${options.cid}.xml`
+        }
+      }
+    ]
+  ],
 
   // If you are using Cucumber you need to specify the location of your step definitions.
   cucumberOpts: {
@@ -91,7 +102,7 @@ exports.config = {
     failFast: true, // <boolean> abort the run on first failure
     format: ['pretty'], // <string[]> (type[:path]) specify the output format, optionally supply PATH to redirect formatter output (repeatable)
     colors: true, // <boolean> disable colors in formatter output
-    snippets: false, // <boolean> hide step definition snippets for pending steps
+    snippets: true, // <boolean> hide step definition snippets for pending steps
     source: true, // <boolean> hide source uris
     profile: [], // <string[]> (name) specify the profile to use
     strict: true, // <boolean> fail if there are any undefined or pending steps
@@ -100,19 +111,6 @@ exports.config = {
     timeout: 150000, // <number> timeout for step definitions
     ignoreUndefinedDefinitions: false, // <boolean> Enable this config to treat undefined definitions as warnings.
     failAmbiguousDefinitions: true
-  },
-
-  /*
-   * =====
-   * Hooks
-   * =====
-   * See http://webdriver.io/guide/testrunner/configurationfile.html for reference
-   */
-  // Gets executed once before all workers get launched.
-  onPrepare: function (config, capabilities) {
-    const prettyConfig = util.inspect(config, { depth: null, colors: true })
-    const prettyCapabilities = util.inspect(capabilities, { depth: null, colors: true })
-    logger.info(`Running tests with configuration: \nCapabilities: ${prettyCapabilities}}\n\nConfiguration:${prettyConfig}`)
   },
 
   /*
@@ -132,28 +130,6 @@ exports.config = {
       await userManager.deleteAllUserSubmissions()
       resolve()
     })
-  },
-
-  // Cucumber specific hooks
-  beforeFeature: function (feature) {
-    logger.info('**********************************************************************************')
-    logger.info(`Test session id:     ${browser}`)
-    logger.info(`Running feature:     ${feature.name}`)
-  },
-
-  beforeScenario: function (scenario) {
-    logger.info('**********************************************************************************')
-    logger.info(`Running scenario:    ${scenario.name}`)
-  },
-
-  beforeStep: function (step) {
-    logger.debug('**********************************************************************************')
-    logger.debug(`Running step:       ${step.text}`)
-  },
-
-  // Runs before a WebdriverIO command gets executed
-  beforeCommand: function (commandName, args) {
-    logger.debug(`Running command ${commandName} with args ${args}`)
   },
   seleniumLogs: './logs/selenium',
   seleniumArgs: seleiumDefaults,

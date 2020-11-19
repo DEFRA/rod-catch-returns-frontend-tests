@@ -54,12 +54,12 @@ class SummaryPage extends Page {
   }
 
   checkActivityTableLength (expectedLength) {
-    const activityTableBodyRows = browser.$$('#river tbody tr')
+    const activityTableBodyRows = $$('#river tbody tr')
     expect(activityTableBodyRows.length).to.equal(expectedLength)
   }
 
   checkActivityTableContains (riverName, daysFishedWithMandatoryRelease, daysFishedOther) {
-    const activityTableBody = browser.$('#river tbody')
+    const activityTableBody = $('#river tbody')
     const riverNameCell = activityTableBody.$(`th=${riverName}`)
     const rowForRiver = riverNameCell.$('..')
     expect(rowForRiver.$('td:nth-child(2)').getText()).to.equal(daysFishedWithMandatoryRelease)

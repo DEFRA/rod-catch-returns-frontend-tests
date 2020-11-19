@@ -7,7 +7,7 @@ class SavePage extends Page {
   }
 
   checkMessage () {
-    if (!browser.$('main h1').getText().includes('catch return has been saved')) {
+    if (!$('main h1').getText().includes('catch return has been saved')) {
       throw new Error('Catch return was not successfully saved.')
     }
   }

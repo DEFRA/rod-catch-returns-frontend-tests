@@ -12,8 +12,8 @@ class AddLargeFishPage extends Page {
   }
 
   setDate (dayOfMonth, monthNumber) {
-    browser.$('#day').setValue(dayOfMonth)
-    browser.$('#month').setValue(monthNumber)
+    $('#day').setValue(dayOfMonth)
+    $('#month').setValue(monthNumber)
   }
 
   setRiver (riverName) {
@@ -30,7 +30,7 @@ class AddLargeFishPage extends Page {
   }
 
   setSpecies (speciesName) {
-    let speciesLabel = browser.$(`label=${speciesName}`)
+    let speciesLabel = $(`label=${speciesName}`)
     speciesLabel.click()
   }
 
@@ -39,19 +39,19 @@ class AddLargeFishPage extends Page {
   }
 
   setMethod (methodName) {
-    let methodLabel = browser.$(`label=${methodName}`)
+    let methodLabel = $(`label=${methodName}`)
     methodLabel.click()
   }
 
   setMetricMass (kg) {
     Page.clickRadioButton(RADIO_METRIC_ID)
-    browser.$('#kilograms').setValue(kg)
+    $('#kilograms').setValue(kg)
   }
 
   setImperialMass (lbs, oz) {
     Page.clickRadioButton(RADIO_IMPERIAL_ID)
-    browser.$('#pounds').setValue(lbs)
-    browser.$('#ounces').setValue(oz)
+    $('#pounds').setValue(lbs)
+    $('#ounces').setValue(oz)
   }
 
   saveAndAddAnother () {
