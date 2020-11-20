@@ -9,18 +9,15 @@ const localConfig = {
    * ============
    * Maximum instances to run in parallel.  Can be overridden on a per-browser basis by adding maxInstances option under each capability.
    */
-  runner: 'local',
   screenshotOnReject: false,
   waitforTimeout: 1000,
   maxInstances: 1,
   capabilities: [
     {
-      maxInstances: 1,
       browserName: 'chrome',
       acceptInsecureCerts: true
     },
     {
-      maxInstances: 1,
       browserName: 'firefox',
       acceptInsecureCerts: true
     }
@@ -41,6 +38,6 @@ const localConfig = {
    * your test setup with almost no effort. Unlike plugins, they don't add new
    * commands. Instead, they hook themselves up into the test process.
    */
-  services: ['selenium-standalone']
+  
 }
 exports.config = lodash.defaultsDeep(localConfig, commonConfig)

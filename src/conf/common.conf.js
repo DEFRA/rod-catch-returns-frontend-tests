@@ -1,8 +1,6 @@
 'use strict'
 require('dotenv').config({ debug: process.env.DEBUG })
-const util = require('util')
 const path = require('path')
-const { logger } = require('defra-logging-facade')
 const fs = require('fs-extra')
 const userManager = require('../js/lib/user-manager')
 
@@ -19,21 +17,13 @@ fs.ensureDirSync(logDir)
    Allows for the selenium server version and browser driver version to be defined when running standalone.
    Drivers should be updated as necessary when new browser releases dictate it.
  */
-const seleiumDefaults = {
-  version: '3.141.59',
-  drivers: {
-    chrome: {
-      // See https://chromedriver.storage.googleapis.com/index.html'
-      version: '78.0.3904.70'
-    },
-    firefox: {
-      // See https://github.com/mozilla/geckodriver/releases
-      version: '0.24.0'
-    }
-  }
+const drivers = {
+  chrome: { version: '86.0.4240.22' }, // https://chromedriver.chromium.org/
+  firefox: { version: '0.27.0' } // https://github.com/mozilla/geckodriver/releases
 }
 
 exports.config = {
+  runner: 'local',
   /*
    * ==================
    * Specify Test Files
@@ -125,13 +115,20 @@ exports.config = {
       return userManager.getAdmin(number)
     })
     // Reset submission for all RCR users identified in the test configuration before each feature runs
-    return new Promise(async (resolve) => {
-      await userManager.initialise()
-      await userManager.deleteAllUserSubmissions()
-      resolve()
+    return new Promise((resolve) => {
+        return userManager.initialise()
+      .then(() => {
+        return userManager.deleteAllUserSubmissions()
+      }).then(() => {
+          resolve();
+      })
     })
   },
-  seleniumLogs: './logs/selenium',
-  seleniumArgs: seleiumDefaults,
-  seleniumInstallArgs: seleiumDefaults
+  services: [
+    ['selenium-standalone', {
+        logPath: './logs/selenium',
+        installArgs: { drivers },
+        args: { drivers },
+    }]
+  ],
 }

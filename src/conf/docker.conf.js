@@ -16,7 +16,7 @@ const dockerConfig = {
   capabilities: [
     {
       browserName: 'chrome',
-      chromeOptions: {
+      'goog:chromeOptions': {
         args: ['--headless', '--no-sandbox']
       }
     },
@@ -38,7 +38,6 @@ const dockerConfig = {
    */
   baseExternalUrl: process.env.SERVICE_URL || 'http://localhost:3000',
   baseAdminUrl: process.env.ADMIN_SERVICE_URL || 'http://localhost:4000',
-  baseUrl: this.baseExternalUrl,
-  services: ['selenium-standalone']
+  baseUrl: process.env.SERVICE_URL || 'http://localhost:3000',
 }
 exports.config = lodash.defaultsDeep(dockerConfig, commonConfig)

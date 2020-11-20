@@ -12,7 +12,7 @@ class AddSmallFishPage extends Page {
       riverSelector.selectByVisibleText(riverName)
     } else {
       // No river chooser visible, ensure that the river has been preselected and is in the title (this happens with only a single activity defined)
-      let pageHeading = $('h1')
+      const pageHeading = $('h1')
       if (!pageHeading.getText().includes(`river ${riverName}`)) {
         throw new Error(`Expected ${riverName} to be preselected but it wasn't!`)
       }
@@ -24,7 +24,7 @@ class AddSmallFishPage extends Page {
   }
 
   setQuantity (quantityMethod, quantity) {
-    let selector = '#' + quantityMethod.toLowerCase()
+    const selector = '#' + quantityMethod.toLowerCase()
     $(selector).setValue(quantity)
   }
 

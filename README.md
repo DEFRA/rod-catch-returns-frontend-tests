@@ -3,7 +3,7 @@
 Acceptance tests for the Rod Catch Returns (RCR) frontend service.
 
 ## Pre-requisites
-* [Node 8](https://nodejs.org/en/)
+* Node version 14.x or above.
 
 ## Installation
 
@@ -17,18 +17,43 @@ To install project dependencies, open a console inside the root folder of git re
 
 ```bash
 npm install
-
 ```
+
+Create a .env file with the following variables (values can be obtained from Jenkins). For testing add an additional variable called SELENIUM_LOG_LEVEL=info this will provide more helpful logd when running the tests.
+```bash
+SERVICE_URL=
+ADMIN_SERVICE_URL=
+API_URL=
+RCR_ADMIN1_USERNAME=
+RCR_ADMIN1_PASSWORD=
+RCR_USER1_USERNAME=
+RCR_USER1_PASSWORD=
+RCR_USER2_USERNAME=
+RCR_USER2_PASSWORD=
+no_proxy=
+```
+
 ## Execution
 
-###Standalone
+### Standalone
 Open a terminal and ensure you are at the root of the project. Then simply run
 
 ```bash
 npm test
 ```
 
-####Browserstack
+### Docker
+Open a terminal and ensure you are at the root of the project. Then run the following commands
+
+```bash
+docker-build
+```
+
+```bash
+docker-run
+```
+
+### Browserstack
 To run on browserstack additional configuration files are required:
 
 **/browserstacklocal.json**

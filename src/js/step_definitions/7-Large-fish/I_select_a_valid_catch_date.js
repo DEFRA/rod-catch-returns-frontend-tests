@@ -14,14 +14,14 @@ function getLatestValidDateForSubmissionYear (submissionYear) {
 }
 
 function getValidDate (submissionYear) {
-  let startOfYear = moment([submissionYear])
-  let latestValid = getLatestValidDateForSubmissionYear(submissionYear)
-  let daysDiff = latestValid.diff(startOfYear, 'days')
-  let randomDays = Math.floor(Math.random() * daysDiff)
+  const startOfYear = moment([submissionYear])
+  const latestValid = getLatestValidDateForSubmissionYear(submissionYear)
+  const daysDiff = latestValid.diff(startOfYear, 'days')
+  const randomDays = Math.floor(Math.random() * daysDiff)
   return startOfYear.add(randomDays, 'days')
 }
 
 defineStep('I select a valid catch date', function () {
-  let catchDate = getValidDate(browser.rcrSubmissionSeason)
+  const catchDate = getValidDate(browser.rcrSubmissionSeason)
   LargeCatch.setDate(catchDate.format('D'), catchDate.format('M'))
 })

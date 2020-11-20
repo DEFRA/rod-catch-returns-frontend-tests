@@ -12,7 +12,7 @@ class DeletePage extends Page {
   }
 
   clickCancel () {
-    const clickCancel = browser.element(`#return-summary`)
+    const clickCancel = browser.element('#return-summary')
     clickCancel.click()
   }
 }
