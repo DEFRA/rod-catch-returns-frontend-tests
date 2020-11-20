@@ -31,13 +31,13 @@ const localConfig = {
    */
   baseExternalUrl: process.env.SERVICE_URL || 'http://localhost:3000',
   baseAdminUrl: process.env.ADMIN_SERVICE_URL || 'http://localhost:4000',
-  baseUrl: process.env.SERVICE_URL || 'http://localhost:3000',
+  baseUrl: process.env.SERVICE_URL || 'http://localhost:3000'
   /*
    * Test runner services
    * Services take over a specific job you don't want to take care of. They enhance
    * your test setup with almost no effort. Unlike plugins, they don't add new
    * commands. Instead, they hook themselves up into the test process.
    */
-  
+
 }
 exports.config = lodash.defaultsDeep(localConfig, commonConfig)

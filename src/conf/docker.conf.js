@@ -38,6 +38,6 @@ const dockerConfig = {
    */
   baseExternalUrl: process.env.SERVICE_URL || 'http://localhost:3000',
   baseAdminUrl: process.env.ADMIN_SERVICE_URL || 'http://localhost:4000',
-  baseUrl: process.env.SERVICE_URL || 'http://localhost:3000',
+  baseUrl: process.env.SERVICE_URL || 'http://localhost:3000'
 }
 exports.config = lodash.defaultsDeep(dockerConfig, commonConfig)

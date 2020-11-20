@@ -116,19 +116,19 @@ exports.config = {
     })
     // Reset submission for all RCR users identified in the test configuration before each feature runs
     return new Promise((resolve) => {
-        return userManager.initialise()
-      .then(() => {
-        return userManager.deleteAllUserSubmissions()
-      }).then(() => {
-          resolve();
-      })
+      return userManager.initialise()
+        .then(() => {
+          return userManager.deleteAllUserSubmissions()
+        }).then(() => {
+          resolve()
+        })
     })
   },
   services: [
     ['selenium-standalone', {
-        logPath: './logs/selenium',
-        installArgs: { drivers },
-        args: { drivers },
+      logPath: './logs/selenium',
+      installArgs: { drivers },
+      args: { drivers }
     }]
-  ],
+  ]
 }
