@@ -19,7 +19,7 @@ To install project dependencies, open a console inside the root folder of git re
 npm install
 ```
 
-Create a .env file with the following variables (values can be obtained from Jenkins). For testing add an additional variable called SELENIUM_LOG_LEVEL=info this will provide more helpful logd when running the tests.
+Create a .env file with the following variables (values can be obtained from Jenkins). Add SELENIUM_LOG_LEVEL=info to provide more helpful logging when running the tests.
 ```bash
 SERVICE_URL=
 ADMIN_SERVICE_URL=
