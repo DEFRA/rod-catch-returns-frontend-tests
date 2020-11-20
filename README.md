@@ -46,11 +46,11 @@ npm test
 Open a terminal and ensure you are at the root of the project. Then run the following commands
 
 ```bash
-docker-build
+npm run docker-build
 ```
 
 ```bash
-docker-run
+npm run docker-run
 ```
 
 ### Browserstack

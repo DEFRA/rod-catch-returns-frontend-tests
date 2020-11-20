@@ -10,7 +10,7 @@ const localConfig = {
    * Maximum instances to run in parallel.  Can be overridden on a per-browser basis by adding maxInstances option under each capability.
    */
   screenshotOnReject: false,
-  waitforTimeout: 1000,
+  waitforTimeout: 2000,
   maxInstances: 1,
   capabilities: [
     {
