@@ -40,7 +40,7 @@ const requestData = {
   timeout: 60000, // ms 60 seconds
   qs: {},
   headers: {
-    'Authorization': `Basic ${auth}`
+    Authorization: `Basic ${auth}`
   }
 }
 
@@ -74,7 +74,7 @@ request.get(requestData, function (err, httpResponse, body) {
           timeout: 60000, // ms 60 seconds
           qs: {},
           headers: {
-            'Authorization': `Basic ${auth}`
+            Authorization: `Basic ${auth}`
           }
         }
 

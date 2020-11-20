@@ -5,7 +5,7 @@ util.inspect.defaultOptions = { depth: null, colors: true }
 
 module.exports = function (action) {
   // Page Id element is embedded on each page by the frontend layout.html
-  const oldPageId = browser.isExisting('#pgid') ? browser.getHTML('#pgid') : 'NO_OLD_PAGE_ID_FOUND'
+  const oldPageId = $('#pgid') ? $('#pgid').getHTML() : 'NO_OLD_PAGE_ID_FOUND'
   const oldPageUrl = browser.getUrl()
   let currentPageId = null
 
@@ -14,7 +14,7 @@ module.exports = function (action) {
     action()
     browser.waitUntil(function () {
       try {
-        currentPageId = browser.getHTML('#pgid')
+        currentPageId = $('#pgid').getHTML()
       } catch (e) {
         currentPageId = null
       }

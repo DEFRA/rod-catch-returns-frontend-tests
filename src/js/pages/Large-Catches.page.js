@@ -12,17 +12,17 @@ class AddLargeFishPage extends Page {
   }
 
   setDate (dayOfMonth, monthNumber) {
-    browser.$('#day').setValue(dayOfMonth)
-    browser.$('#month').setValue(monthNumber)
+    $('#day').setValue(dayOfMonth)
+    $('#month').setValue(monthNumber)
   }
 
   setRiver (riverName) {
-    if (browser.isVisible('#river')) {
-      const riverSelector = browser.$('#river')
+    if ($('#river').isDisplayed()) {
+      const riverSelector = $('#river')
       riverSelector.selectByVisibleText(riverName)
     } else {
       // No river chooser visible, ensure that the river has been preselected and is in the title (this happens with only a single activity defined)
-      let pageHeading = browser.$('h1')
+      const pageHeading = $('h1')
       if (!pageHeading.getText().includes(`river ${riverName}`)) {
         throw new Error(`Expected ${riverName} to be preselected but it wasn't!`)
       }
@@ -30,7 +30,7 @@ class AddLargeFishPage extends Page {
   }
 
   setSpecies (speciesName) {
-    let speciesLabel = browser.$(`label=${speciesName}`)
+    const speciesLabel = $(`label=${speciesName}`)
     speciesLabel.click()
   }
 
@@ -39,19 +39,19 @@ class AddLargeFishPage extends Page {
   }
 
   setMethod (methodName) {
-    let methodLabel = browser.$(`label=${methodName}`)
+    const methodLabel = $(`label=${methodName}`)
     methodLabel.click()
   }
 
   setMetricMass (kg) {
     Page.clickRadioButton(RADIO_METRIC_ID)
-    browser.$('#kilograms').setValue(kg)
+    $('#kilograms').setValue(kg)
   }
 
   setImperialMass (lbs, oz) {
     Page.clickRadioButton(RADIO_IMPERIAL_ID)
-    browser.$('#pounds').setValue(lbs)
-    browser.$('#ounces').setValue(oz)
+    $('#pounds').setValue(lbs)
+    $('#ounces').setValue(oz)
   }
 
   saveAndAddAnother () {

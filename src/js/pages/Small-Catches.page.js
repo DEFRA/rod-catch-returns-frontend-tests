@@ -7,12 +7,12 @@ class AddSmallFishPage extends Page {
   }
 
   setRiver (riverName) {
-    if (browser.isVisible('#river')) {
-      const riverSelector = browser.$('#river')
+    if ($('#river').isDisplayed()) {
+      const riverSelector = $('#river')
       riverSelector.selectByVisibleText(riverName)
     } else {
       // No river chooser visible, ensure that the river has been preselected and is in the title (this happens with only a single activity defined)
-      let pageHeading = browser.$('h1')
+      const pageHeading = $('h1')
       if (!pageHeading.getText().includes(`river ${riverName}`)) {
         throw new Error(`Expected ${riverName} to be preselected but it wasn't!`)
       }
@@ -20,16 +20,16 @@ class AddSmallFishPage extends Page {
   }
 
   setMonth (monthNumber) {
-    browser.$('#month').setValue(monthNumber)
+    $('#month').setValue(monthNumber)
   }
 
   setQuantity (quantityMethod, quantity) {
-    let selector = '#' + quantityMethod.toLowerCase()
-    browser.$(selector).setValue(quantity)
+    const selector = '#' + quantityMethod.toLowerCase()
+    $(selector).setValue(quantity)
   }
 
   setReleased (numberReleased) {
-    browser.$('#released').setValue(numberReleased)
+    $('#released').setValue(numberReleased)
   }
 
   saveAndAddAnother () {

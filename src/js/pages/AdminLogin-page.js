@@ -7,11 +7,11 @@ class AdminLoginPage extends Page {
   }
 
   setUsername (username) {
-    browser.element('input#user').setValue(username)
+    $('input#user').setValue(username)
   }
 
   setPassword (password) {
-    browser.element('input#password').setValue(password)
+    $('input#password').setValue(password)
   }
 
   submit (username, password) {

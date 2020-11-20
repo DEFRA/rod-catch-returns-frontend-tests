@@ -14,16 +14,16 @@ const setupCapabilities = function (capabilitiesArray) {
   let buildTimestamp = new Date().toISOString()
   buildTimestamp = buildTimestamp.substring(0, buildTimestamp.length - 8)
   return capabilitiesArray.map(cap => lodash.defaultsDeep(cap, {
-    'build': `${process.env.USER}@${os.hostname()} ${buildTimestamp}`.replace(/[^A-Za-z0-9 :._@]/g, '_'),
-    'maxInstances': 1,
-    'project': 'Rod Catch Returns',
+    build: `${process.env.USER}@${os.hostname()} ${buildTimestamp}`.replace(/[^A-Za-z0-9 :._@]/g, '_'),
+    maxInstances: 1,
+    project: 'Rod Catch Returns',
     'browserstack.local': true,
     'browserstack.debug': true,
     'browserstack.video': true,
     'browserstack.timezone': 'London',
     'browserstack.javascriptEnabled': true,
-    'pageLoadStrategy': 'normal',
-    'acceptSslCerts': true
+    pageLoadStrategy: 'normal',
+    acceptSslCerts: true
   }))
 }
 
@@ -73,31 +73,31 @@ const browserStackConfig = {
 
     // iPhone 8 Plus
     {
-      'browserName': 'iPhone 8 Plus Real Device',
-      'os_version': '11.0',
-      'device': 'iPhone 8 Plus',
-      'real_mobile': 'true'
+      browserName: 'iPhone 8 Plus Real Device',
+      os_version: '11.0',
+      device: 'iPhone 8 Plus',
+      real_mobile: 'true'
     },
     // Android
     {
-      'browserName': 'Samsung Galaxy S8 Real Device',
-      'os_version': '7.0',
-      'device': 'Samsung Galaxy S8',
-      'real_mobile': 'true'
+      browserName: 'Samsung Galaxy S8 Real Device',
+      os_version: '7.0',
+      device: 'Samsung Galaxy S8',
+      real_mobile: 'true'
     },
     // Edge 17
     {
-      'os': 'Windows',
-      'os_version': '10',
-      'browserName': 'Edge',
-      'browser_version': '17.0'
+      os: 'Windows',
+      os_version: '10',
+      browserName: 'Edge',
+      browser_version: '17.0'
     },
     // Win 7 / IE11
     {
-      'os': 'Windows',
-      'os_version': '7',
-      'browserName': 'IE',
-      'browser_version': '11.0'
+      os: 'Windows',
+      os_version: '7',
+      browserName: 'IE',
+      browser_version: '11.0'
     },
     // // MacOSX "Mojave" Safari 12 - DISABLED due to automation issues
     // {
@@ -108,24 +108,24 @@ const browserStackConfig = {
     // },
     // MacOSX "High Sierra" Safari 11
     {
-      'os': 'OS X',
-      'os_version': 'High Sierra',
-      'browserName': 'Safari',
-      'browser_version': '11.1'
+      os: 'OS X',
+      os_version: 'High Sierra',
+      browserName: 'Safari',
+      browser_version: '11.1'
     },
     // Windows 10 Firefox
     {
-      'os': 'Windows',
-      'os_version': '10',
-      'browserName': 'Firefox',
-      'browser_version': '63.0'
+      os: 'Windows',
+      os_version: '10',
+      browserName: 'Firefox',
+      browser_version: '63.0'
     },
     // Windows 10 Chrome
     {
-      'os': 'Windows',
-      'os_version': '10',
-      'browserName': 'Chrome',
-      'browser_version': '70.0'
+      os: 'Windows',
+      os_version: '10',
+      browserName: 'Chrome',
+      browser_version: '70.0'
     }
   ]),
 
@@ -137,7 +137,7 @@ const browserStackConfig = {
   // with "/", then the base url gets prepended.
   baseExternalUrl: process.env.SERVICE_URL || 'http://localhost:3000',
   baseAdminUrl: process.env.ADMIN_SERVICE_URL || 'http://localhost:4000',
-  baseUrl: this.baseExternalUrl,
+  baseUrl: process.env.SERVICE_URL || 'http://localhost:3000',
 
   // Test runner services
   services: ['browserstack'],

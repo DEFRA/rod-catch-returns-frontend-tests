@@ -11,7 +11,7 @@ function defaultRequestOptions (user, path, method = 'GET', qs = {}) {
   if (path.startsWith('/')) {
     path = path.substring(1)
   }
-  let uri = path.startsWith('http') ? path : API_URL + path
+  const uri = path.startsWith('http') ? path : API_URL + path
   return {
     method: method,
     uri: uri,
@@ -26,12 +26,12 @@ async function readUsersFromEnvironment (userCallback, userType = 'USER') {
   let found = true
 
   while (found && ++i) {
-    let username = process.env[`RCR_${userType}${i}_USERNAME`]
-    let password = process.env[`RCR_${userType}${i}_PASSWORD`]
+    const username = process.env[`RCR_${userType}${i}_USERNAME`]
+    const password = process.env[`RCR_${userType}${i}_PASSWORD`]
     found = !!username && !!password
 
     if (found) {
-      let user = {
+      const user = {
         username: username.trim(),
         password: password.trim(),
         contactId: null
@@ -41,7 +41,7 @@ async function readUsersFromEnvironment (userCallback, userType = 'USER') {
   }
 }
 
-let self = module.exports = {
+const self = module.exports = {
   users: [],
   admins: [],
   initialise: async function () {
@@ -68,13 +68,13 @@ let self = module.exports = {
 
   deleteAllUserSubmissions: async function () {
     const year = new Date().getFullYear()
-    for (let user of self.users) {
+    for (const user of self.users) {
       await Promise.all([self.deleteSubmission(user, year), self.deleteSubmission(user, year - 1)])
     }
   },
   deleteSubmission: async function (user, season) {
     logger.debug(`Clearing existing ${season} submission data for ${user.username}`)
-    let sub = await self.getSubmission(user, season)
+    const sub = await self.getSubmission(user, season)
     if (sub && sub._links.self.href) {
       const requestObject = defaultRequestOptions(user, sub._links.self.href, 'DELETE')
       try {
@@ -89,8 +89,8 @@ let self = module.exports = {
 
   getSubmission: async function (user, season) {
     const requestObject = defaultRequestOptions(user, '/api/submissions/search/getByContactIdAndSeason', 'GET', {
-      'contact_id': user.contactId,
-      'season': season
+      contact_id: user.contactId,
+      season: season
     })
     try {
       return await rp(requestObject)
@@ -105,7 +105,7 @@ let self = module.exports = {
   getContactId: async function (user) {
     const requestObject = defaultRequestOptions(user, `/api/licence/${user.username}?verification=${user.password}`)
     try {
-      let result = await rp(requestObject)
+      const result = await rp(requestObject)
       return result.contact.id
     } catch (e) {
       logger.error(`Error fetching contact detail for with username=${user.username} and password=${user.password}`, e)
