@@ -18,8 +18,8 @@ fs.ensureDirSync(logDir)
    Drivers should be updated as necessary when new browser releases dictate it.
  */
 const drivers = {
-  chrome: { version: '86.0.4240.22' }, // https://chromedriver.chromium.org/
-  firefox: { version: '0.27.0' } // https://github.com/mozilla/geckodriver/releases
+  chrome: true, // https://chromedriver.chromium.org/
+  firefox: '0.28.0' // https://github.com/mozilla/geckodriver/releases
 }
 
 exports.config = {
