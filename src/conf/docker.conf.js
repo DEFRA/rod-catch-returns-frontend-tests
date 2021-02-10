@@ -19,7 +19,7 @@ const dockerConfig = {
       'goog:chromeOptions': {
         args: ['--headless', '--no-sandbox']
       }
-    },
+   },
     {
       browserName: 'firefox',
       'moz:firefoxOptions': {

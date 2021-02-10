@@ -52,3 +52,5 @@ COPY ./src /app/src
 COPY ./*.js /app/
 
 CMD ["node_modules/.bin/wdio", "src/conf/docker.conf.js"]
+
+
