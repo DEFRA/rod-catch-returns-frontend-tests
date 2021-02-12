@@ -8,6 +8,7 @@
   "globals": {
     "browser": "readonly",
     "$": "readonly",
-    "$$": "readonly"
+    "$$": "readonly",
+    "expect": "readonly"
   }
 }
