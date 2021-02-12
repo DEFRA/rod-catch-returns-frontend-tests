@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script {
                     ansiColor('xterm') {
-                        docker.build("defra/rod-catch-returns-frontend-tests", "--build-arg --no-cache --build-arg http_proxy=${env.http_proxy} --build-arg https_proxy=${env.https_proxy} .")
+                        docker.build("defra/rod-catch-returns-frontend-tests", "--no-cache --build-arg http_proxy=${env.http_proxy} --build-arg https_proxy=${env.https_proxy} .")
                     }
                 }
             }
