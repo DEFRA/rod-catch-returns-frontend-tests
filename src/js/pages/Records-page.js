@@ -6,10 +6,10 @@ class RecordsPage extends Page {
     return '/records'
   }
 
-clickRecords() {
-  const link = $('=Records')
-  link.click()
+  clickRecords () {
+    const link = $('=Records')
+    link.click()
+  }
 }
- }
 
 module.exports = new RecordsPage()

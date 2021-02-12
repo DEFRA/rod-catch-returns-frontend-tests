@@ -6,10 +6,10 @@ class SignOutPage extends Page {
     return '/logout'
   }
 
-ClickSignOut() {
-  const link = $('=Sign out')
-  link.click()
+  ClickSignOut () {
+    const link = $('=Sign out')
+    link.click()
+  }
 }
- }
 
 module.exports = new SignOutPage()
