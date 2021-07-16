@@ -6,7 +6,7 @@ class AddActivitiesPage extends Page {
   }
 
   selectRiver (riverName) {
-    $('#river').selectByVisibleText(riverName)
+    $('#river').setValue(riverName)
   }
 
   setDaysFishedWithMandatoryRelease (days) {
