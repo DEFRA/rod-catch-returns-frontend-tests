@@ -1,5 +1,5 @@
 'use strict'
-const { defineStep } = require('cucumber')
+const { defineStep } = require("@cucumber/cucumber")
 const LargeCatch = require('../../pages/Large-Catches.page')
 
 defineStep(/^I caught a fish weighing (\d+(?:\.\d+)?)\s*kg$/, function (kg) {

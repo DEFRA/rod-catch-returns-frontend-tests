@@ -1,5 +1,5 @@
 'use strict'
-const { defineStep } = require('cucumber')
+const { defineStep } = require("@cucumber/cucumber")
 const moment = require('moment')
 const LargeCatch = require('../../pages/Large-Catches.page')
 

@@ -1,5 +1,5 @@
 'use strict'
-const { defineStep } = require('cucumber')
+const { defineStep } = require("@cucumber/cucumber")
 const Season = require('../../pages/Season-Select.page')
 const today = new Date()
 
