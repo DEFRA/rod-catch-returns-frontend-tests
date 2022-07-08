@@ -19,7 +19,7 @@ fs.ensureDirSync(logDir)
  */
 const drivers = {
   chrome: true, // https://chromedriver.chromium.org/
-  firefox: '0.28.0' // https://github.com/mozilla/geckodriver/releases
+  firefox: '0.31.0' // https://github.com/mozilla/geckodriver/releases
 }
 
 exports.config = {
