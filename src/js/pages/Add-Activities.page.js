@@ -6,18 +6,21 @@ class AddActivitiesPage extends Page {
   }
 
   selectRiver (riverName) {
-    // $('#river').setValue(riverName)
-    $('#river').value = riverName
+    console.log(`setting #river value to ${riverName}`)
+    $('#river').setValue(riverName)
+    console.log(`set #river value to ${riverName}`)
   }
 
   setDaysFishedWithMandatoryRelease (days) {
-    // $('#daysFishedWithMandatoryRelease').setValue(days)
-    $('#daysFishedWithMandatoryRelease').setAttribute('value', days)
+    console.log(`setting #daysFishedWithMandatoryRelease value to ${days}`)
+    $('#daysFishedWithMandatoryRelease').setValue(days)
+    console.log(`set #daysFishedWithMandatoryRelease value to ${days}`)
   }
 
   setDaysFishedOther (days) {
-    // $('#daysFishedOther').setValue(days)
-    $('#daysFishedOther').setAttribute('value', days)
+    console.log(`setting #daysFishedOther value to ${days}`)
+    $('#daysFishedOther').setValue(days)
+    console.log(`set #daysFishedOther value to ${days}`)
   }
 }
 
