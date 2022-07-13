@@ -8,7 +8,8 @@ class AddActivitiesPage extends Page {
   selectRiver (riverName) {
     console.log(`setting #river value to ${riverName}`)
     console.log('is river entry field enabled?', $('#river').isEnabled())
-    $('#river').setValue(riverName)
+    // $('#river').setValue(riverName)
+    document.getElementById('river').value = riverName
     console.log(`set #river value to ${riverName}`)
   }
 
