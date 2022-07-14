@@ -11,22 +11,22 @@ class Page {
     throw new Error('Page implementation does not override method url()')
   }
 
-  open () {
+  async open () {
     logger.debug(`Opening url ${this.url}`)
-    browser.url(this.url)
+    await browser.url(this.url)
   }
 
   isOpen () {
     return browser.getUrl().includes(this.url)
   }
 
-  checkOpen () {
-    if (!this.isOpen()) {
+  async checkOpen () {
+    if (!(await this.isOpen())) {
       logger.debug(`Page.checkOpen - async waiting for browser URL ${browser.getUrl()} to match ${this.url}`)
       const fn = this.isOpen.bind(this)
       const url = this.url
       try {
-        browser.waitUntil(fn, browser.options.waitforTimeout, `Expected URL '${browser.getUrl()}' to contain '${url}'`, 1000)
+        await browser.waitUntil(fn, browser.options.waitforTimeout, `Expected URL '${browser.getUrl()}' to contain '${url}'`, 1000)
       } catch (e) {
         logger.error('Error checking if page is open ', e)
         throw e
@@ -35,25 +35,29 @@ class Page {
     }
   }
 
-  continue () {
-    this.checkOpen()
-    this.clickNavigationLink(SELECTOR_CONTINUE)
+  async continue () {
+    await this.checkOpen()
+    await this.clickNavigationLink(SELECTOR_CONTINUE)
   }
 
-  clickNavigationLink (selector) {
-    waitForNav(function () {
-      $(selector).click()
-    })
+  async clickNavigationLink (selector) {
+    const navLink = await $(selector)
+    await navLink.click()
+    // waitForNav(function () {
+    //   $(selector).click()
+    // })
   }
 
-  static clickRadioButton (selector) {
+  static async clickRadioButton (selector) {
     // GOV.UK Radio Buttons cannot be clicked via the input field in some browsers (IE/Safari)
     // The workaround is to use the label instead
     let sel = selector.trim()
     if (!sel.endsWith('+ label')) {
       sel += ' + label'
     }
-    $(sel).click()
+    // $(sel).click()
+    const radioButton = await $(sel)
+    await radioButton.click()
   }
 }
 

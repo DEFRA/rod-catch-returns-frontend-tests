@@ -5,23 +5,25 @@ class AddActivitiesPage extends Page {
     return '/activities/add'
   }
 
-  selectRiver (riverName) {
+  async selectRiver (riverName) {
     console.log(`setting #river value to ${riverName}`)
-    console.log('is river entry field enabled?', $('#river').isEnabled())
-    // $('#river').setValue(riverName)
-    document.getElementById('river').value = riverName
+    console.log('is river entry field enabled?', await $('#river').isEnabled())
+    const river = await $('#river')
+    await river.setValue(riverName)
     console.log(`set #river value to ${riverName}`)
   }
 
-  setDaysFishedWithMandatoryRelease (days) {
+  async setDaysFishedWithMandatoryRelease (days) {
     console.log(`setting #daysFishedWithMandatoryRelease value to ${days}`)
-    $('#daysFishedWithMandatoryRelease').setValue(days)
+    const dfwmr = await $('#daysFishedWithMandatoryRelease')
+    await dfwmr.setValue(days)
     console.log(`set #daysFishedWithMandatoryRelease value to ${days}`)
   }
 
-  setDaysFishedOther (days) {
+  async setDaysFishedOther (days) {
     console.log(`setting #daysFishedOther value to ${days}`)
-    $('#daysFishedOther').setValue(days)
+    const dfo = await $('#daysFishedOther')
+    await dfo.setValue(days)
     console.log(`set #daysFishedOther value to ${days}`)
   }
 }
