@@ -18,16 +18,16 @@ class Page {
   }
 
   isOpen () {
-    return browser.getUrl().includes(this.url)
+    return browser.baseUrl.includes(this.url)
   }
 
   async checkOpen () {
     if (!(await this.isOpen())) {
-      logger.debug(`Page.checkOpen - async waiting for browser URL ${browser.getUrl()} to match ${this.url}`)
+      logger.debug(`Page.checkOpen - async waiting for browser URL ${browser.baseUrl} to match ${this.url}`)
       const fn = this.isOpen.bind(this)
       const url = this.url
       try {
-        await browser.waitUntil(fn, browser.options.waitforTimeout, `Expected URL '${browser.getUrl()}' to contain '${url}'`, 1000)
+        await browser.waitUntil(fn, browser.options.waitforTimeout, `Expected URL '${browser.baseUrl}' to contain '${url}'`, 1000)
       } catch (e) {
         logger.error('Error checking if page is open ', e)
         throw e
