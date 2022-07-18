@@ -13,6 +13,7 @@ class Page {
 
   async open () {
     logger.debug(`Opening url ${this.url}`)
+    console.log('browser', browser)
     await browser.url(this.url)
   }
 
