@@ -18,6 +18,8 @@ class Page {
   }
 
   isOpen () {
+    console.log('browser', browser)
+    console.log('browser.baseUrl', browser.baseUrl)
     return browser.baseUrl.includes(this.url)
   }
 
