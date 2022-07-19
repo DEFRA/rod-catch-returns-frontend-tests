@@ -1,4 +1,4 @@
-const Page = require('./page')
+const Page = require('./asyncPage.js')
 
 class AddActivitiesPage extends Page {
   get url () {
