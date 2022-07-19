@@ -24,6 +24,12 @@ class Page {
     return this._opened
   }
 
+  async checkOpen () {
+    if (!this._opened && this._openPagePromise) {
+      await this._openPagePromise
+    }
+  }
+
   async continue () {
     await this._openPagePromise
     await this.clickNavigationLink(SELECTOR_CONTINUE)
