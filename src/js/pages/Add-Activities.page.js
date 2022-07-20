@@ -9,6 +9,7 @@ class AddActivitiesPage extends Page {
     console.log(`setting #river value to ${riverName}`)
     console.log('is river entry field enabled?', await $('#river').isEnabled())
     const river = await $('#river')
+    await river.click()
     await river.setValue(riverName)
     console.log(`set #river value to ${riverName}`)
   }
