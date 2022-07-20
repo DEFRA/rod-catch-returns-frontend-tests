@@ -1,5 +1,5 @@
 'use strict'
-const Page = require('./page')
+const Page = require('./asyncPage.js')
 
 const SELECTOR_FISHED_YES = '#dyf'
 const SELECTOR_FISHED_NO = '#dyf-2'
@@ -9,8 +9,8 @@ class SelectDYFPage extends Page {
     return '/did-you-fish'
   }
 
-  setFished (fished) {
-    Page.clickRadioButton(fished ? SELECTOR_FISHED_YES : SELECTOR_FISHED_NO)
+  async setFished (fished) {
+    await Page.clickRadioButton(fished ? SELECTOR_FISHED_YES : SELECTOR_FISHED_NO)
   }
 }
 
