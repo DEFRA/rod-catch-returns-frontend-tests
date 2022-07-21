@@ -7,6 +7,8 @@ class AddActivitiesPage extends Page {
 
   async selectDrink (drinkName) {
     const drink = await $('#drink')
+    console.log('readonly', await drink.getAttribute('readonly'))
+    console.log('enabled?', await drink.isEnabled())
     await drink.setValue(drinkName)
   }
 
