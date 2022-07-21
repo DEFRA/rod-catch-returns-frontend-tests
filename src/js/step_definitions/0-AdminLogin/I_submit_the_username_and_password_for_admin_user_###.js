@@ -1,5 +1,5 @@
 'use strict'
-const { defineStep } = require('cucumber')
+const { defineStep } = require("@cucumber/cucumber")
 const AdminLoginPage = require('../../pages/AdminLogin-page')
 const { logger } = require('defra-logging-facade')
 

@@ -1,5 +1,5 @@
 'use strict'
-const { defineStep } = require('cucumber')
+const { defineStep } = require("@cucumber/cucumber")
 const Summary = require('../../pages/Summary.page')
 
 defineStep('I am on the summary page and select the add river link', function () {

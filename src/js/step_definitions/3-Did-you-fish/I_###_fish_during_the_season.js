@@ -1,5 +1,5 @@
 'use strict'
-const { defineStep } = require('cucumber')
+const { defineStep } = require("@cucumber/cucumber")
 const DYF = require('../../pages/Did-you-fish.page')
 
 defineStep(/^I (did|didn't) fish during the season$/, function (didThey) {
