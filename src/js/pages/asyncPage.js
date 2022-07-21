@@ -38,9 +38,6 @@ class Page {
   async clickNavigationLink (selector) {
     const navLink = await $(selector)
     await navLink.click()
-    // waitForNav(function () {
-    //   $(selector).click()
-    // })
   }
 
   static async clickRadioButton (selector) {
@@ -50,7 +47,6 @@ class Page {
     if (!sel.endsWith('+ label')) {
       sel += ' + label'
     }
-    // $(sel).click()
     const radioButton = await $(sel)
     await radioButton.click()
   }

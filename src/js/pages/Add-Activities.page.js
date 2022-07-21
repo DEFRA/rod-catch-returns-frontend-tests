@@ -11,17 +11,13 @@ class AddActivitiesPage extends Page {
   }
 
   async setDaysFishedWithMandatoryRelease (days) {
-    console.log(`setting #daysFishedWithMandatoryRelease value to ${days}`)
     const dfwmr = await $('#daysFishedWithMandatoryRelease')
     await dfwmr.setValue(days)
-    console.log(`set #daysFishedWithMandatoryRelease value to ${days}`)
   }
 
   async setDaysFishedOther (days) {
-    console.log(`setting #daysFishedOther value to ${days}`)
     const dfo = await $('#daysFishedOther')
     await dfo.setValue(days)
-    console.log(`set #daysFishedOther value to ${days}`)
   }
 }
 
