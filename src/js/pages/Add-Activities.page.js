@@ -5,17 +5,10 @@ class AddActivitiesPage extends Page {
     return '/activities/add'
   }
 
-  async selectDrink (drinkName) {
-    const drink = await $('#drink')
-    console.log('readonly', await drink.getAttribute('readonly'))
-    console.log('enabled?', await drink.isEnabled())
-    await drink.setValue(drinkName)
-  }
-
   async selectRiver (riverName) {
     const river = await $('#river')
-    console.log('clearing river entry field')
-    await river.clearValue()
+    // console.log('clearing river entry field')
+    // await river.clearValue()
     console.log(`adding ${riverName} as value`)
     await river.addValue(riverName)
     console.log('set river entry to ', await river.getValue())
