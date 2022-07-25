@@ -1,20 +1,23 @@
-const Page = require('./page')
+const Page = require('./asyncPage.js')
 
 class AddActivitiesPage extends Page {
   get url () {
     return '/activities/add'
   }
 
-  selectRiver (riverName) {
-    $('#river').setValue(riverName)
+  async selectRiver (riverName) {
+    const river = await $('#river')
+    await river.addValue(riverName)
   }
 
-  setDaysFishedWithMandatoryRelease (days) {
-    $('#daysFishedWithMandatoryRelease').setValue(days)
+  async setDaysFishedWithMandatoryRelease (days) {
+    const dfwmr = await $('#daysFishedWithMandatoryRelease')
+    await dfwmr.setValue(days)
   }
 
-  setDaysFishedOther (days) {
-    $('#daysFishedOther').setValue(days)
+  async setDaysFishedOther (days) {
+    const dfo = await $('#daysFishedOther')
+    await dfo.setValue(days)
   }
 }
 
