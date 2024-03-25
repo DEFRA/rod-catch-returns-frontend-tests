@@ -1,10 +1,10 @@
 'use strict'
-const { defineStep } = require("@cucumber/cucumber")
+const { Given } = require('@cucumber/cucumber')
 const AdminLoginPage = require('../../pages/AdminLogin-page')
 const LicencePage = require('../../pages/Licence-page')
 const { logger } = require('defra-logging-facade')
 
-defineStep(/I am an (external|administrative) user/, function (userType) {
+Given(/I am an (external|administrative) user/, function (userType) {
   if (userType === 'administrative') {
     browser.options.baseUrl = browser.config.baseAdminUrl
     AdminLoginPage.open()

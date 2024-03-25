@@ -1,5 +1,5 @@
 'use strict'
-const { defineStep } = require("@cucumber/cucumber")
+const { Given } = require('@cucumber/cucumber')
 const moment = require('moment')
 const LargeCatch = require('../../pages/Large-Catches.page')
 
@@ -21,7 +21,7 @@ function getValidDate (submissionYear) {
   return startOfYear.add(randomDays, 'days')
 }
 
-defineStep('I select a valid catch date', function () {
+Given('I select a valid catch date', function () {
   const catchDate = getValidDate(browser.rcrSubmissionSeason)
   LargeCatch.setDate(catchDate.format('D'), catchDate.format('M'))
 })
