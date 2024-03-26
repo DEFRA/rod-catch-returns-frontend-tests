@@ -14,9 +14,16 @@ RUN set -ex; \
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
 RUN /bin/sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 
-# Install browsers
+# Install Chrome
 RUN	apt-get update; \
-    apt-get install -y firefox google-chrome-stable
+    apt-get install -y google-chrome-stable
+
+# Install Firefox using apt-get and configure to avoid incompatible Snap version
+RUN apt-get update; \
+    apt-get install -y software-properties-common
+RUN add-apt-repository ppa:mozillateam/ppa
+RUN printf 'Package: firefox\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1500\n' | tee /etc/apt/preferences.d/mozilla-firefox
+RUN apt-get install -y firefox
 
 # Cleanup after install
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
