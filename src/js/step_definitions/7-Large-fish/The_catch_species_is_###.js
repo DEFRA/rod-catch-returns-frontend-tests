@@ -1,7 +1,7 @@
 'use strict'
-const { defineStep } = require("@cucumber/cucumber")
+const { Given } = require('@cucumber/cucumber')
 const LargeCatch = require('../../pages/Large-Catches.page')
 
-defineStep(/^The catch species is (.+)$/, function (speciesName) {
+Given(/^The catch species is (.+)$/, function (speciesName) {
   LargeCatch.setSpecies(speciesName)
 })

@@ -1,8 +1,8 @@
 'use strict'
-const { defineStep } = require("@cucumber/cucumber")
+const { Given } = require('@cucumber/cucumber')
 const Summary = require('../../pages/Summary.page')
 
-defineStep('I expect the summary page to show the following activities', function (activityTable) {
+Given('I expect the summary page to show the following activities', function (activityTable) {
   const rows = activityTable.hashes()
   Summary.checkActivityTableLength(rows.length)
   for (const row of rows) {
