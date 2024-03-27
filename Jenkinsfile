@@ -11,7 +11,8 @@ pipeline {
             steps {
                 script {
                     ansiColor('xterm') {
-                        def buildArgs = "--build-arg http_proxy=${env.http_proxy} --build-arg https_proxy=${env.https_proxy} ."
+                        // def buildArgs = "--build-arg http_proxy=${env.http_proxy} --build-arg https_proxy=${env.https_proxy} ."
+                        def buildArgs = "."
                         if (params.REBUILD_IMAGE) {
                             buildArgs = '--no-cache ' + buildArgs
                         }
