@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:bionic
 ENV TEST_CONFIG ./src/conf/docker.conf.js
 
 ENV DEBIAN_FRONTEND="noninteractive"
