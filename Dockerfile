@@ -5,8 +5,8 @@ ENV DEBIAN_FRONTEND="noninteractive"
 ENV TZ=Europe/London
 
 # Install packages required by this script
-USER root
 RUN set -ex
+USER root
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y --no-install-recommends wget curl gnupg git default-jdk g++ build-essential xvfb
