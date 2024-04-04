@@ -1,4 +1,4 @@
-FROM node:bookworm
+FROM node:18
 ENV TEST_CONFIG ./src/conf/docker.conf.js
 
 ENV DEBIAN_FRONTEND="noninteractive"
@@ -16,7 +16,7 @@ RUN /bin/sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >>
 
 # Install browsers
 RUN	apt-get update; \
-    apt-get install -y gnome-browser-connector chrome-node-shell firefox-esr
+    apt-get install -y gnome-browser-connector firefox-esr
 
 # Cleanup after install
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
