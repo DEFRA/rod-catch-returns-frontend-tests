@@ -16,7 +16,7 @@ RUN /bin/sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >>
 
 # Install browsers
 RUN	apt-get update; \
-    apt-get install -y firefox google-chrome-stable
+    apt-get install -y gnome-browser-connector chrome-node-shell firefox-esr
 
 # Cleanup after install
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
