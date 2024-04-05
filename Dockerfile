@@ -15,8 +15,9 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 RUN /bin/sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 
 # Install browsers
-RUN	apt-get update; \
-    apt-get install -y gnome-browser-connector firefox-esr
+RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN apt-get update; \
+    apt-get install -y ./google-chrome-stable_current_amd64.deb firefox
 
 # Cleanup after install
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
