@@ -1,21 +1,21 @@
 #!/usr/bin/env groovy
-@Library('defra-shared@master') _
-
 pipeline {
     agent any
     parameters {
         booleanParam(name: 'REBUILD_IMAGE', defaultValue: false, description: 'Force the acceptance test image to be rebuilt?')
     }
     stages {
-        stage('Building test container') {
+        stage('Building test image') {
             steps {
                 script {
                     ansiColor('xterm') {
-                        def buildArgs = "--build-arg http_proxy=${env.http_proxy} --build-arg https_proxy=${env.https_proxy} ."
+                        def buildArgs = "-f Dockerfile"
                         if (params.REBUILD_IMAGE) {
-                            buildArgs = '--no-cache ' + buildArgs
+                            buildArgs += ' --no-cache'
                         }
-                        docker.build("defra/rod-catch-returns-frontend-tests", buildArgs)
+                        sh """
+                            docker build ${buildArgs} -t defra/rod-catch-returns-frontend-tests .
+                        """
                     }
                 }
             }
@@ -24,9 +24,13 @@ pipeline {
             steps {
                 script {
                     ansiColor('xterm') {
-                        def mounts = [ "type=bind,source=${WORKSPACE}/logs,target=/app/logs"]
-                        sh "mkdir -p ${WORKSPACE}/logs"
-                        dockerRun('defra/rod-catch-returns-frontend-tests', null, mounts)
+                        def envString = env.getEnvironment().collect { k, v -> "-e ${k}=\"${v}\"" }.join(' ')
+                        sh """
+                            echo "Testing connectivity"
+                            curl -sSf "${SERVICE_URL}" || exit 1
+                            mkdir -p ${WORKSPACE}/logs
+                            docker run ${envString} --mount type=bind,source=${WORKSPACE}/logs,target=/app/logs defra/rod-catch-returns-frontend-tests:latest --logLevel ${WDIO_LOG_LEVEL}
+                        """
                     }
                 }
             }

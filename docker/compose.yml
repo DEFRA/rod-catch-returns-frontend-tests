@@ -1,0 +1,23 @@
+version: '3.8'
+#######################################################
+# Common project docker build options
+#######################################################
+x-common-build-options: &common-build-options
+  context: ${BUILD_CONTEXT:-../}
+
+services:
+  ##############################################################################################################
+  # defra rod-catch-returns-frontend-tests
+  ##############################################################################################################
+  frontend_acceptance_tests:
+    image: defra/rod-catch-returns-frontend-tests:${TAG:-latest}
+    build:
+      <<: *common-build-options
+      dockerfile: ./${PROJECT_DOCKERFILE:-Dockerfile}
+    volumes:
+      - ./volumes/frontend_acceptance_tests/logs:/app/logs
+    env_file:
+      - ./env/frontend_acceptance_tests.env
+    deploy:
+      mode: replicated
+      replicas: 1

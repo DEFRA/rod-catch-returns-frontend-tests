@@ -9,8 +9,8 @@
     "browserstack": "./node_modules/.bin/wdio ./src/conf/browserstack.conf.js",
     "lint": "./node_modules/eslint/bin/eslint.js **/*.js",
     "lint-fix": "npm run lint -- --fix",
-    "docker-build": "docker build -t defra/rod-catch-returns-frontend-tests . && docker images",
-    "docker-run": "docker run -it --network host -v \"$(pwd)/logs:/app/logs/\" --env-file .env defra/rod-catch-returns-frontend-tests",
+    "docker-build": "docker-compose -f docker/compose.yml build",
+    "docker-run": "docker run --env-file docker/env/frontend_acceptance_tests.env defra/rod-catch-returns-frontend-tests",
     "docker-test": "npm run docker-build && npm run docker-run"
   },
   "repository": {
@@ -23,17 +23,13 @@
   },
   "homepage": "https://github.com/DEFRA/rod-catch-returns-frontend-tests.git#readme",
   "dependencies": {
-    "@wdio/browserstack-service": "^7.19.5",
-    "@wdio/cli": "^7.19.5",
-    "@wdio/codemod": "^0.12.0",
-    "@wdio/cucumber-framework": "^7.19.3",
-    "@wdio/firefox-profile-service": "^7.19.3",
-    "@wdio/junit-reporter": "^7.19.3",
-    "@wdio/local-runner": "^7.19.5",
-    "@wdio/selenium-standalone-service": "^7.19.3",
-    "@wdio/spec-reporter": "^7.19.3",
-    "@wdio/sync": "^7.19.5",
-    "chai": "4.2.0",
+    "@wdio/browserstack-service": "^8.32.3",
+    "@wdio/cli": "^8.32.3",
+    "@wdio/cucumber-framework": "^8.32.3",
+    "@wdio/junit-reporter": "^8.32.3",
+    "@wdio/local-runner": "^8.32.3",
+    "@wdio/spec-reporter": "^8.32.3",
+    "chai": "4.3.8",
     "defra-logging-facade": "git+https://github.com/DEFRA/defra-logging-facade.git",
     "dotenv": "8.2.0",
     "fs-extra": "9.0.1",
@@ -41,9 +37,8 @@
     "moment": "2.29.1",
     "request": "2.88.2",
     "request-promise": "4.2.6",
-    "wdio-chromedriver-service": "^7.3.2",
     "wdio-timeline-reporter": "^5.1.4",
-    "webdriverio": "^7.19.5"
+    "webdriverio": "^8.32.3"
   },
   "devDependencies": {
     "eslint": "7.13.0",

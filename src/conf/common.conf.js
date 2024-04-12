@@ -5,22 +5,11 @@ const fs = require('fs-extra')
 const userManager = require('../js/lib/user-manager')
 
 // Level of logging verbosity: trace | debug | info | warn | error | silent
-const seleniumLogLevel = process.env.SELENIUM_LOG_LEVEL || 'error'
+const logLevel = process.env.SELENIUM_LOG_LEVEL || 'error'
 
 // Ensure logs folder exists
 const logDir = path.resolve(__dirname, 'logs')
 fs.ensureDirSync(logDir)
-
-/*
-   Selenium standalone options.
-
-   Allows for the selenium server version and browser driver version to be defined when running standalone.
-   Drivers should be updated as necessary when new browser releases dictate it.
- */
-const drivers = {
-  chrome: true, // https://chromedriver.chromium.org/
-  firefox: '0.31.0' // https://github.com/mozilla/geckodriver/releases
-}
 
 exports.config = {
   runner: 'local',
@@ -46,7 +35,7 @@ exports.config = {
    */
   sync: true,
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: seleniumLogLevel,
+  logLevel: logLevel,
   // Wdio debugging (use node inspector)
   debug: true,
   // Enables colors for log output.
@@ -96,8 +85,7 @@ exports.config = {
     source: true, // <boolean> hide source uris
     profile: [], // <string[]> (name) specify the profile to use
     strict: true, // <boolean> fail if there are any undefined or pending steps
-    tags: [], // <string[]> (expression) only execute the features or scenarios with tags matching the expression
-    tagExpression: 'not @Pending',
+    tags: 'not @Pending',
     timeout: 150000, // <number> timeout for step definitions
     ignoreUndefinedDefinitions: false, // <boolean> Enable this config to treat undefined definitions as warnings.
     failAmbiguousDefinitions: true
@@ -123,12 +111,5 @@ exports.config = {
           resolve()
         })
     })
-  },
-  services: [
-    ['selenium-standalone', {
-      logPath: './logs/selenium',
-      installArgs: { drivers },
-      args: { drivers }
-    }]
-  ]
+  }
 }
