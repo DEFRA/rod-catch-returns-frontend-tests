@@ -19,7 +19,7 @@ exports.config = {
    * ==================
    */
   specs: [
-    './src/features/**/*.feature'
+    '../features/*.feature'
   ],
   exclude: [
     // 'path/to/excluded/files'
