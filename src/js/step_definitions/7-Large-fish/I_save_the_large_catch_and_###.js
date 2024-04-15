@@ -2,10 +2,10 @@
 const { defineStep } = require("@cucumber/cucumber")
 const LargeCatch = require('../../pages/Large-Catches.page')
 
-defineStep(/^I save the large catch and (return to the summary|add another)$/, function (action) {
+defineStep(/^I save the large catch and (return to the summary|add another)$/, async function (action) {
   if (action === 'add another') {
-    LargeCatch.saveAndAddAnother()
+    await LargeCatch.saveAndAddAnother()
   } else {
-    LargeCatch.continue()
+    await LargeCatch.continue()
   }
 })

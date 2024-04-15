@@ -6,7 +6,7 @@ class SavePage extends Page {
     return '/save'
   }
 
-  checkMessage () {
+  async checkMessage () {
     if (!$('main h1').getText().includes('catch return has been saved')) {
       throw new Error('Catch return was not successfully saved.')
     }

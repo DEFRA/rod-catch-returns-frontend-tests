@@ -6,9 +6,9 @@ class ReviewPage extends Page {
     return '/review'
   }
 
-  clickCancel () {
+  async clickCancel () {
     const clickCancel = browser.element('#return-summary')
-    clickCancel.click()
+    await clickCancel.click()
   }
 }
 

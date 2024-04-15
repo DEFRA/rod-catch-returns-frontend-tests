@@ -11,15 +11,15 @@ class AddLargeFishPage extends Page {
     return '/catches/add'
   }
 
-  setDate (dayOfMonth, monthNumber) {
-    $('#day').setValue(dayOfMonth)
-    $('#month').setValue(monthNumber)
+  async setDate (dayOfMonth, monthNumber) {
+    await $('#day').setValue(dayOfMonth)
+    await $('#month').setValue(monthNumber)
   }
 
-  setRiver (riverName) {
-    if ($('#river').isDisplayed()) {
+  async setRiver (riverName) {
+    if (await $('#river').isDisplayed()) {
       const riverSelector = $('#river')
-      riverSelector.selectByVisibleText(riverName)
+      await riverSelector.selectByVisibleText(riverName)
     } else {
       // No river chooser visible, ensure that the river has been preselected and is in the title (this happens with only a single activity defined)
       const pageHeading = $('h1')
@@ -29,33 +29,33 @@ class AddLargeFishPage extends Page {
     }
   }
 
-  setSpecies (speciesName) {
+  async setSpecies (speciesName) {
     const speciesLabel = $(`label=${speciesName}`)
-    speciesLabel.click()
+    await speciesLabel.click()
   }
 
-  setReleased (released) {
-    Page.clickRadioButton(released ? RADIO_RELEASED_YES_ID : RADIO_RELEASED_NO_ID)
+  async setReleased (released) {
+    await Page.clickRadioButton(released ? RADIO_RELEASED_YES_ID : RADIO_RELEASED_NO_ID)
   }
 
-  setMethod (methodName) {
+  async setMethod (methodName) {
     const methodLabel = $(`label=${methodName}`)
-    methodLabel.click()
+    await methodLabel.click()
   }
 
-  setMetricMass (kg) {
-    Page.clickRadioButton(RADIO_METRIC_ID)
-    $('#kilograms').setValue(kg)
+  async setMetricMass (kg) {
+    await Page.clickRadioButton(RADIO_METRIC_ID)
+    await $('#kilograms').setValue(kg)
   }
 
-  setImperialMass (lbs, oz) {
-    Page.clickRadioButton(RADIO_IMPERIAL_ID)
-    $('#pounds').setValue(lbs)
-    $('#ounces').setValue(oz)
+  async setImperialMass (lbs, oz) {
+    await Page.clickRadioButton(RADIO_IMPERIAL_ID)
+    await $('#pounds').setValue(lbs)
+    await $('#ounces').setValue(oz)
   }
 
-  saveAndAddAnother () {
-    this.clickNavigationLink('//*[@name="add"]')
+  async saveAndAddAnother () {
+    await this.clickNavigationLink('//*[@name="add"]')
   }
 }
 
