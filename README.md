@@ -3,7 +3,7 @@
 Acceptance tests for the Rod Catch Returns (RCR) frontend service.
 
 ## Pre-requisites
-* Node version 14.x or above.
+* Node version 18.x or above.
 
 ## Installation
 
