@@ -5,7 +5,7 @@ class LicenceEntryPage extends Page {
   get url () {
     let ref = '/licence-auth'
     // TODO: This is a temporary workaround - ideally the frontend would serve the licence page for both external and admin journeys using /licence
-    if (browser.options.baseUrl === browser.config.baseAdminUrl) {
+    if (browser.options.baseUrl === browser.options.baseAdminUrl) {
       ref = '/licence'
     }
     return ref

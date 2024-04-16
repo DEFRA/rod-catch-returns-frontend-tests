@@ -6,10 +6,10 @@ const { logger } = require('defra-logging-facade')
 
 defineStep(/I am an (external|administrative) user/, async function (userType) {
   if (userType === 'administrative') {
-    browser.options.baseUrl = browser.config.baseAdminUrl
+    browser.options.baseUrl = browser.options.baseAdminUrl
     await AdminLoginPage.open()
   } else {
-    browser.options.baseUrl = browser.config.baseExternalUrl
+    browser.options.baseUrl = browser.options.baseExternalUrl
     await LicencePage.open()
   }
   logger.info(`Starting ${userType} user journey using base url ${browser.options.baseUrl}`)
