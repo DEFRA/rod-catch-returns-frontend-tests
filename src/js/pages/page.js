@@ -17,7 +17,10 @@ class Page {
   }
 
   async isOpen () {
-    return await browser.getUrl().includes(this.url)
+    const browserUrl = await browser.getUrl()
+    logger.debug(`browserUrl: ${browserUrl}`)
+    logger.debug(`this.url: ${this.url}`)
+    return await browserUrl.includes(this.url)
   }
 
   async checkOpen () {
