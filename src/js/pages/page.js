@@ -24,7 +24,9 @@ class Page {
   async checkOpen () {
     const open = await this.isOpen()
     const title = await browser.getTitle()
+    const url = await browser.getUrl()
     logger.info(`Page.checkopen title: ${title}`)
+    logger.info(`Page.checkopen url: ${url}`)
     if (!open) {
       logger.debug(`Page.checkOpen - async waiting for browser URL ${browser.getUrl()} to match ${this.url}`)
       const fn = await this.isOpen.bind(this)
