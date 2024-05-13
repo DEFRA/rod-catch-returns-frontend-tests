@@ -59,7 +59,7 @@ COPY ./src /app/src
 COPY ./*.js /app/
 
 RUN echo "Testing connectivity within Docker"
-RUN echo "${SERVICE_URL} ${ADMIN_SERVICE_URL}"
+RUN echo "URLs: ${SERVICE_URL} ${ADMIN_SERVICE_URL}"
 RUN curl "${SERVICE_URL}"
 RUN curl "${ADMIN_SERVICE_URL}"
 
