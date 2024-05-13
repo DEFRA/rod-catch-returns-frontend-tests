@@ -1,8 +1,8 @@
 Feature: Debugging
 
   Background:
-    Given I am testing
+    Given I go to GOV.UK
 
    Scenario: Access GOV.UK
-    When I go to GOV.UK
-    Then it should load properly
+    When I am on GOV.UK
+    Then It successfully loads GOV.UK
