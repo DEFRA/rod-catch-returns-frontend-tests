@@ -59,8 +59,6 @@ COPY ./src /app/src
 COPY ./*.js /app/
 
 RUN echo "Testing connectivity within Docker"
-RUN echo "URLs: ${SERVICE_URL} ${ADMIN_SERVICE_URL}"
-RUN curl "${SERVICE_URL}"
-RUN curl "${ADMIN_SERVICE_URL}"
+RUN curl https://rcr-dev.aws.defra.cloud/licence-auth
 
 CMD ["node_modules/.bin/wdio", "src/conf/docker.conf.js"]
