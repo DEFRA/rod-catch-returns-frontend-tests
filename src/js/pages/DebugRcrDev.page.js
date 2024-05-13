@@ -1,10 +1,10 @@
 'use strict'
 const Page = require('./page')
 
-class DebugRcrProdPage extends Page {
+class DebugRcrDevPage extends Page {
   get url () {
-    return 'https://rcr-dev.aws.defra.cloud/licence-auth'
+    return browser.options.baseExternalUrl
   }
 }
 
-module.exports = new DebugRcrProdPage()
+module.exports = new DebugRcrDevPage()

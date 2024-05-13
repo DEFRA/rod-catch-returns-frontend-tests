@@ -24,6 +24,11 @@ pipeline {
             steps {
                 script {
                     ansiColor('xterm') {
+                        sh """
+                            echo "Testing connectivity"
+                            curl -sSf "${SERVICE_URL}" || exit 1
+                            curl -sSf "${ADMIN_SERVICE_URL}" || exit 1
+                        """
                         def mounts = [ "type=bind,source=${WORKSPACE}/logs,target=/app/logs"]
                         sh "mkdir -p ${WORKSPACE}/logs"
                         dockerRun('defra/rod-catch-returns-frontend-tests', null, mounts)
