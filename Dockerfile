@@ -59,7 +59,7 @@ COPY ./src /app/src
 COPY ./*.js /app/
 
 RUN echo "Testing connectivity within Docker"
-RUN curl "${SERVICE_URL}"
-RUN curl "${ADMIN_SERVICE_URL}"
+RUN curl $SERVICE_URL
+RUN curl $ADMIN_SERVICE_URL
 
 CMD ["node_modules/.bin/wdio", "src/conf/docker.conf.js"]
