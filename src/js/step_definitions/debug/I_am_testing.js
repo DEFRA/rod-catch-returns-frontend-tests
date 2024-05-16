@@ -1,6 +1,7 @@
 'use strict'
 const { defineStep } = require("@cucumber/cucumber")
 const DebugPage = require('../../pages/debug.page')
+const InternalDebugPage = require('../../pages/internalDebug.page')
 const DebugRcrProdPage = require('../../pages/DebugRcrProd.page')
 const DebugRcrDevPage = require('../../pages/DebugRcrDev.page')
 const { logger } = require('defra-logging-facade')
@@ -43,4 +44,9 @@ defineStep('I am on RCR dev', async function () {
 
 defineStep('It successfully loads RCR dev', async function () {
   expect(browser).toHaveTitleContaining('Enter your licence details and postcode')
+})
+
+defineStep('I can query the RCR API', async function() {
+  logger.info('Querying RCR API')
+  await InternalDebugPage.open()
 })
