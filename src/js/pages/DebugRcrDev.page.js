@@ -3,7 +3,7 @@ const Page = require('./page')
 
 class DebugRcrDevPage extends Page {
   get url () {
-    return browser.options.baseExternalUrl
+    return `${browser.options.baseExternalUrl}/licence-auth`
   }
 }
 
