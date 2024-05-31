@@ -1,6 +1,6 @@
-#Feature: Login to Rod Catch returns update, delete, first time to the service and submit
+Feature: Login to Rod Catch returns update, delete, first time to the service and submit
 
-#  Background:
+  Background:
     Given I am an external user
     And   I am on the licence entry page
     Then  I submit the licence and postcode for test user 1
