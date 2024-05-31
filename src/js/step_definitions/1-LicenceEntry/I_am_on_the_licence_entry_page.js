@@ -3,8 +3,7 @@ const { defineStep } = require("@cucumber/cucumber")
 const LicencePage = require('../../pages/Licence-page')
 
 defineStep('I am on the licence entry page', async function () {
-  const rcrMarker = await $('#rcrMarker')
-  console.log('rcrMarker:', rcrMarker)
+  console.log('browser.options.baseUrl', browser.options.baseUrl)
   await LicencePage.checkOpen()
   try {
     await browser.saveScreenshot('/var/lib/jenkins/jobs/RCR_DEV_RUN_AC_TESTS/workspace/licence-page.png')
