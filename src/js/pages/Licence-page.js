@@ -3,6 +3,7 @@ const Page = require('./page')
 
 class LicenceEntryPage extends Page {
   get url () {
+    console.log('browser.options.baseUrl', browser.options.baseUrl)
     const isAdminSite = browser.options.baseUrl === browser.options.baseAdminUrl
     return `${browser.options.baseUrl}${isAdminSite ? '/licence' : 'licence-auth'}`
     // let ref = '/licence-auth'
