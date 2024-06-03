@@ -8,6 +8,7 @@ const { logger } = require('defra-logging-facade')
 
 defineStep('I go to GOV.UK', async function () {
   logger.info(`Beginning debug run`)
+  logger.info(`Proxies: http ${process.env.http_proxy} https ${process.env.https_proxy}`)
   await DebugPage.open()
 })
 
