@@ -31,7 +31,7 @@ pipeline {
                         """
                         def mounts = [ "type=bind,source=${WORKSPACE}/logs,target=/app/logs"]
                         sh "mkdir -p ${WORKSPACE}/logs"
-                        dockerRun('defra/rod-catch-returns-frontend-tests', ['docker_args': "-e HTTP_PROXY=${env.http_proxy} -e HTTPS_PROXY=${env.https_proxy}"], mounts)
+                        dockerRun('defra/rod-catch-returns-frontend-tests', null, mounts)
                     }
                 }
             }
