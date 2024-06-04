@@ -7,7 +7,7 @@ class AddSmallFishPage extends Page {
   }
 
   async setRiver (riverName) {
-    if ($('#river').isDisplayed()) {
+    if ((await $('#river')).isDisplayed()) {
       const riverSelector = $('#river')
       await riverSelector.selectByVisibleText(riverName)
     } else {
