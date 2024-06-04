@@ -17,7 +17,7 @@ class Page {
   }
 
   async isOpen () {
-    return await browser.getUrl().includes(this.url)
+    return (await browser.getUrl()).includes(this.url)
   }
 
   async checkOpen () {
