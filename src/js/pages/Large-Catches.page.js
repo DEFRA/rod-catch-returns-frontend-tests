@@ -18,19 +18,19 @@ class AddLargeFishPage extends Page {
 
   async setRiver (riverName) {
     if ((await $('#river')).isDisplayed()) {
-      const riverSelector = $('#river')
+      const riverSelector = await $('#river')
       await riverSelector.selectByVisibleText(riverName)
     } else {
       // No river chooser visible, ensure that the river has been preselected and is in the title (this happens with only a single activity defined)
       const pageHeading = await $('h1')
-      if (!pageHeading.getText().includes(`river ${riverName}`)) {
+      if (!(await pageHeading.getText()).includes(`river ${riverName}`)) {
         throw new Error(`Expected ${riverName} to be preselected but it wasn't!`)
       }
     }
   }
 
   async setSpecies (speciesName) {
-    const speciesLabel = $(`label=${speciesName}`)
+    const speciesLabel = await $(`label=${speciesName}`)
     await speciesLabel.click()
   }
 
@@ -39,13 +39,13 @@ class AddLargeFishPage extends Page {
   }
 
   async setMethod (methodName) {
-    const methodLabel = $(`label=${methodName}`)
+    const methodLabel = await $(`label=${methodName}`)
     await methodLabel.click()
   }
 
   async setMetricMass (kg) {
     await Page.clickRadioButton(RADIO_METRIC_ID)
-    await $('#kilograms').setValue(kg)
+    await (await $('#kilograms')).setValue(kg)
   }
 
   async setImperialMass (lbs, oz) {

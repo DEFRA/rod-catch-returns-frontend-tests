@@ -7,22 +7,22 @@ class RecordsPage extends Page {
   }
 
   async clickRecords () {
-    const link = $('=Records')
+    const link = await $('=Records')
     await link.click()
   }
 
   async enterLicense (license) {
-    await $('input#licenceNumber').setValue(license)
+    await (await $('input#licenceNumber')).setValue(license)
   }
 
   async errorMessage () {
-    if (!$('#licenceNumber-error').getText().includes('The licence number could not be matched')) {
+    if (!(await (await $('#licenceNumber-error')).getText()).includes('The licence number could not be matched')) {
       throw new Error('license is accepted')
     }
   }
 
   async clickContinue () {
-    const button = $('[name="continue"]')
+    const button = await $('[name="continue"]')
     await button.click()
   }
 }
