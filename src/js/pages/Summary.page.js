@@ -26,24 +26,24 @@ class SummaryPage extends Page {
 
   async clickDeleteRiver () {
     logger.debug('About to click Delete River Link')
-    const clickDeleteRiverLink = $('table#river tr:first-child td:nth-child(4) span a:nth-child(1)')
-    const deleteRiverPage = new DeletePage(clickDeleteRiverLink.getAttribute('href'))
+    const clickDeleteRiverLink = await $('table#river tr:first-child td:nth-child(4) span a:nth-child(1)')
+    const deleteRiverPage = new DeletePage(await clickDeleteRiverLink.getAttribute('href'))
     await clickDeleteRiverLink.click()
     await deleteRiverPage.continue()
   }
 
   async clickDeleteSmallCatch () {
     logger.debug('Delete small catch')
-    const clickDeleteSmallCatch = browser.element('table#small tr:first-child td:nth-child(7) span a:nth-child(2)')
-    const deleteSmallPage = new DeletePage(clickDeleteSmallCatch.getAttribute('href'))
+    const clickDeleteSmallCatch = await browser.element('table#small tr:first-child td:nth-child(7) span a:nth-child(2)')
+    const deleteSmallPage = new DeletePage(await clickDeleteSmallCatch.getAttribute('href'))
     await clickDeleteSmallCatch.click()
     await deleteSmallPage.continue()
   }
 
   async clickDeleteLargeCatch () {
     logger.debug('About to click Add a salmon or large sea trout link')
-    const clickDeleteLargeCatch = browser.element('table#large tr:first-child td:nth-child(7) span a:nth-child(2)')
-    const deleteLargePage = new DeletePage(clickDeleteLargeCatch.getAttribute('href'))
+    const clickDeleteLargeCatch = await browser.element('table#large tr:first-child td:nth-child(7) span a:nth-child(2)')
+    const deleteLargePage = new DeletePage(await clickDeleteLargeCatch.getAttribute('href'))
     await clickDeleteLargeCatch.click()
     await deleteLargePage.continue()
   }
@@ -59,11 +59,11 @@ class SummaryPage extends Page {
   }
 
   async checkActivityTableContains (riverName, daysFishedWithMandatoryRelease, daysFishedOther) {
-    const activityTableBody = $('#river tbody')
-    const riverNameCell = activityTableBody.$(`th=${riverName}`)
-    const rowForRiver = riverNameCell.$('..')
-    expect(rowForRiver.$('td:nth-child(2)').getText()).to.equal(daysFishedWithMandatoryRelease)
-    expect(rowForRiver.$('td:nth-child(3)').getText()).to.equal(daysFishedOther)
+    const activityTableBody = await $('#river tbody')
+    const riverNameCell = await activityTableBody.$(`th=${riverName}`)
+    const rowForRiver = await riverNameCell.$('..')
+    expect(await (await rowForRiver.$('td:nth-child(2)')).getText()).to.equal(daysFishedWithMandatoryRelease)
+    expect(await (await rowForRiver.$('td:nth-child(3)')).getText()).to.equal(daysFishedOther)
   }
 }
 
