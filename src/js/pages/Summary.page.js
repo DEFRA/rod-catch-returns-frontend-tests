@@ -54,7 +54,7 @@ class SummaryPage extends Page {
   }
 
   async checkActivityTableLength (expectedLength) {
-    const activityTableBodyRows = $$('#river tbody tr')
+    const activityTableBodyRows = await $$('#river tbody tr')
     expect(activityTableBodyRows.length).to.equal(expectedLength)
   }
 
