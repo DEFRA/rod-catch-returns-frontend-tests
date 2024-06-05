@@ -17,7 +17,7 @@ class AddLargeFishPage extends Page {
   }
 
   async setRiver (riverName) {
-    if ((await $('#river')).isDisplayed()) {
+    if (await (await $('#river')).isDisplayed()) {
       const riverSelector = await $('#river')
       await riverSelector.selectByVisibleText(riverName)
     } else {
