@@ -37,6 +37,9 @@ pipeline {
             archiveArtifacts allowEmptyArchive: true, artifacts: 'logs/**'
             junit 'logs/junit/**'
         }
+        failure {  
+             mail body: "Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: 'noreply@aws.defra.cloud', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "phil.benson@defra.gov.uk";  
+        }
         cleanup {
             cleanWs cleanWhenFailure: true
         }
