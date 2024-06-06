@@ -6,34 +6,34 @@ class AddSmallFishPage extends Page {
     return '/small-catches/add'
   }
 
-  setRiver (riverName) {
-    if ($('#river').isDisplayed()) {
-      const riverSelector = $('#river')
-      riverSelector.selectByVisibleText(riverName)
+  async setRiver (riverName) {
+    if (await (await $('#river')).isDisplayed()) {
+      const riverSelector = await $('#river')
+      await riverSelector.selectByVisibleText(riverName)
     } else {
       // No river chooser visible, ensure that the river has been preselected and is in the title (this happens with only a single activity defined)
-      const pageHeading = $('h1')
-      if (!pageHeading.getText().includes(`river ${riverName}`)) {
+      const pageHeading = await $('h1')
+      if (!(await pageHeading.getText()).includes(`river ${riverName}`)) {
         throw new Error(`Expected ${riverName} to be preselected but it wasn't!`)
       }
     }
   }
 
-  setMonth (monthNumber) {
-    $('#month').setValue(monthNumber)
+  async setMonth (monthNumber) {
+    await $('#month').setValue(monthNumber)
   }
 
-  setQuantity (quantityMethod, quantity) {
+  async setQuantity (quantityMethod, quantity) {
     const selector = '#' + quantityMethod.toLowerCase()
-    $(selector).setValue(quantity)
+    await (await $(selector)).setValue(quantity)
   }
 
-  setReleased (numberReleased) {
-    $('#released').setValue(numberReleased)
+  async setReleased (numberReleased) {
+    await (await $('#released')).setValue(numberReleased)
   }
 
-  saveAndAddAnother () {
-    this.clickNavigationLink('//*[@name="add"]')
+  async saveAndAddAnother () {
+    await this.clickNavigationLink('//*[@name="add"]')
   }
 }
 

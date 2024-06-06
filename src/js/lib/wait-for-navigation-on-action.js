@@ -3,16 +3,16 @@ const { logger } = require('defra-logging-facade')
 const util = require('util')
 util.inspect.defaultOptions = { depth: null, colors: true }
 
-module.exports = function (action) {
+module.exports = async function (action) {
   // Page Id element is embedded on each page by the frontend layout.html
   const oldPageId = $('#pgid') ? $('#pgid').getHTML() : 'NO_OLD_PAGE_ID_FOUND'
-  const oldPageUrl = browser.getUrl()
+  const oldPageUrl = await browser.getUrl()
   let currentPageId = null
 
   logger.debug(`Waiting for navigation, old page id=${oldPageId}`)
   try {
-    action()
-    browser.waitUntil(function () {
+    await action()
+    await browser.waitUntil(function () {
       try {
         currentPageId = $('#pgid').getHTML()
       } catch (e) {

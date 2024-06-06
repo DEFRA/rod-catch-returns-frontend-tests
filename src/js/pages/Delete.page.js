@@ -11,9 +11,9 @@ class DeletePage extends Page {
     return this.href
   }
 
-  clickCancel () {
-    const clickCancel = browser.element('#return-summary')
-    clickCancel.click()
+  async clickCancel () {
+    const clickCancel = await browser.element('#return-summary')
+    await clickCancel.click()
   }
 }
 

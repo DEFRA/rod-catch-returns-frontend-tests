@@ -6,8 +6,8 @@ class SelectSeasonPage extends Page {
     return '/select-year'
   }
 
-  selectSeason (year) {
-    Page.clickRadioButton(`input[value='${year}']`)
+  async selectSeason (year) {
+    await Page.clickRadioButton(`input[value='${year}']`)
   }
 }
 

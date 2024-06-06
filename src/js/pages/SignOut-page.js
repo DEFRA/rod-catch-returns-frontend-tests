@@ -6,9 +6,9 @@ class SignOutPage extends Page {
     return '/logout'
   }
 
-  ClickSignOut () {
+  async ClickSignOut () {
     const link = $('=Sign out')
-    link.click()
+    await link.click()
   }
 }
 

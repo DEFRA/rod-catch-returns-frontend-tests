@@ -21,7 +21,7 @@ function getValidDate (submissionYear) {
   return startOfYear.add(randomDays, 'days')
 }
 
-defineStep('I select a valid catch date', function () {
+defineStep('I select a valid catch date', async function () {
   const catchDate = getValidDate(browser.rcrSubmissionSeason)
-  LargeCatch.setDate(catchDate.format('D'), catchDate.format('M'))
+  await LargeCatch.setDate(catchDate.format('D'), catchDate.format('M'))
 })

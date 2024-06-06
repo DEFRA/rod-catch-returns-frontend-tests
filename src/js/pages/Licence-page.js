@@ -5,34 +5,34 @@ class LicenceEntryPage extends Page {
   get url () {
     let ref = '/licence-auth'
     // TODO: This is a temporary workaround - ideally the frontend would serve the licence page for both external and admin journeys using /licence
-    if (browser.options.baseUrl === browser.config.baseAdminUrl) {
+    if (browser.options.baseUrl === browser.options.baseAdminUrl) {
       ref = '/licence'
     }
     return ref
   }
 
-  enterLicence (licence) {
+  async enterLicence (licence) {
     const userInput = $('#licence')
     if (licence) {
-      userInput.setValue(licence)
+      await userInput.setValue(licence)
     } else {
-      userInput.clearValue()
+      await userInput.clearValue()
     }
   }
 
-  enterPostcode (postcode) {
+  async enterPostcode (postcode) {
     const passInput = $('#postcode')
     if (postcode) {
-      passInput.setValue(postcode)
+      await passInput.setValue(postcode)
     } else {
-      passInput.clearValue()
+      await passInput.clearValue()
     }
   }
 
-  submit (licence, postcode) {
-    this.enterLicence(licence)
-    this.enterPostcode(postcode)
-    this.continue()
+  async submit (licence, postcode) {
+    await this.enterLicence(licence)
+    await this.enterPostcode(postcode)
+    await this.continue()
   }
 }
 

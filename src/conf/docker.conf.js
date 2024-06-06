@@ -16,15 +16,16 @@ const dockerConfig = {
   capabilities: [
     {
       browserName: 'chrome',
+      browserVersion: 'latest',
       'goog:chromeOptions': {
-        args: ['--headless', '--no-sandbox']
+        args: ['--headless', '--disable-gpu', '--no-sandbox']
       }
     },
     {
       browserName: 'firefox',
+      browserVersion: 'latest',
       'moz:firefoxOptions': {
-        // flag to activate Firefox headless mode (see https://github.com/mozilla/geckodriver/blob/master/README.md#firefox-capabilities for more details about moz:firefoxOptions)
-        args: ['--headless']
+        args: ['-headless']
       }
     }
   ],
