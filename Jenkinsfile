@@ -38,7 +38,7 @@ pipeline {
             junit 'logs/junit/**'
         }
         failure {  
-             emailext body: "Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", from: 'noreply@aws.defra.cloud', mimeType: 'text/html', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "Phil.Benson@defra.gov.uk;Iris.Faraway@defra.gov.uk;Scott.Dormand@defra.gov.uk";
+             emailext body: "Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", from: 'noreply@aws.defra.cloud', mimeType: 'text/html', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "Phil.Benson@defra.gov.uk;Iris.Faraway@defra.gov.uk;Scott.Dormand@defra.gov.uk;philbens@gmail.com";
         }
         cleanup {
             cleanWs cleanWhenFailure: true
