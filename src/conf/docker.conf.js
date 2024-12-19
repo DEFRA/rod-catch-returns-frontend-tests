@@ -25,7 +25,8 @@ const dockerConfig = {
       browserName: 'firefox',
       browserVersion: 'latest',
       'moz:firefoxOptions': {
-        args: ['-headless']
+        args: ['-headless'],
+        binary: '/usr/bin/firefox'
       }
     }
   ],
