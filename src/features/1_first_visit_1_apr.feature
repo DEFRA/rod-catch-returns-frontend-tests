@@ -2,12 +2,15 @@ Feature: Login to Rod Catch returns update, delete, first time to the service an
 
   Background:
     Given I am an external user
+  
+  Scenario: Redirect to Licence Auth page
+    Given I navigate to /
+    Then I am redirected to /licence-auth
+
+  Scenario: First login - Save
     And   I am on the licence entry page
     Then  I submit the licence and postcode for test user 1
     And   If it is the extended submission period I select the previous period on the season page
-
-
-  Scenario: First login - Save
     Given I did fish during the season
 
     And  I am on the summary page and select the add river link
