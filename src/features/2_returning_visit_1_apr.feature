@@ -23,6 +23,9 @@ Feature: Login to Rod Catch returns update and return to service, submit
     And  I save the large catch and return to the summary
     And  I am on the summary page and I save and exit the service
     And  I am on the draft saved page
+  
+  Scenario: First login - delete
+    When I am on the delete river page and I click delete
 
   Scenario: Return login - Submit
     When I am on the summary page and select the large catch link
@@ -33,6 +36,14 @@ Feature: Login to Rod Catch returns update and return to service, submit
     And  The catch wasn't released
     And  I save the large catch and return to the summary
     And  I am on the summary page and I click review catch return
-
-  Scenario: First login - delete
-    When I am on the delete river page and I click delete
+    And  I am on the review page and I click submit
+  
+  Scenario: Return login - Submission locked
+    Then I am on the review page
+    And  I expect the review page to show the following activities
+      | River | Days fished (1 Jan to 16 Jun) | Days fished (17 Jun to 31 Dec)  | Fish Caught |
+      | Frome | 15                            | 1                               | 2           |    
+    And  I expect the review page to show the following large catches
+      | Date  | River | Type      | Weight   | Method | Released |
+      | <any> | Frome | Sea Trout | 1lbs 2oz | Fly    | No       |
+      | <any> | Frome | Salmon    | 3lbs 5oz | Fly    | No       |
