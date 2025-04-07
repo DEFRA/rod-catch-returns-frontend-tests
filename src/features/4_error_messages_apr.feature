@@ -30,7 +30,7 @@ Feature: Error messages for anglers
     And   I confirm my activity details and continue
     Then  I expect the error summary to show the following errors
       | There is a problem                                                                |
-      |  The number of days fished must be greater than 0                                 |
+      | The number of days fished must be greater than 0                                 |
     
     # Scenario 2.4 - days fished other too big
     And   I fished the river Ystrad for 10 days with mandatory release and 900 other days
