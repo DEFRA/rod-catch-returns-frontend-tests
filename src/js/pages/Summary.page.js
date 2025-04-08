@@ -14,6 +14,21 @@ class SummaryPage extends Page {
     await this.clickNavigationLink('#activities-add')
   }
 
+  async clickChangeRiver (riverName) {
+    const table = await $('caption*=Rivers fished').parentElement()
+    const rows = await table.$$('tbody tr')
+    for (const row of rows) {
+      const riverCell = await row.$('th[data-label="River"]')
+      const riverText = await riverCell.getText()
+
+      if (riverText.trim() === riverName) {
+        const changeLink = await row.$('a[href*="clear"]')
+        await changeLink.click()
+        break
+      }
+    }
+  }
+
   async clickAddSmallCatch () {
     logger.debug('Add a small catch of under 1 lb link')
     await this.clickNavigationLink('#small-catches-add')
