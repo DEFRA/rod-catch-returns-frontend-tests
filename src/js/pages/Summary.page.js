@@ -2,7 +2,6 @@
 const Page = require('./page')
 const { logger } = require('defra-logging-facade')
 const DeletePage = require('./Delete.page')
-const { expect } = require('chai')
 
 class SummaryPage extends Page {
   get url () {
@@ -69,16 +68,17 @@ class SummaryPage extends Page {
   }
 
   async checkActivityTableLength (expectedLength) {
-    const activityTableBodyRows = await $$('#river tbody tr')
-    expect(activityTableBodyRows.length).to.equal(expectedLength)
+    const table = await $('caption*=Rivers fished').parentElement()
+    const rows = await table.$$('tbody tr')
+    expect(rows.length).toEqual(expectedLength)
   }
 
   async checkActivityTableContains (riverName, daysFishedWithMandatoryRelease, daysFishedOther) {
     const activityTableBody = await $('#river tbody')
     const riverNameCell = await activityTableBody.$(`th=${riverName}`)
     const rowForRiver = await riverNameCell.$('..')
-    expect(await (await rowForRiver.$('td:nth-child(2)')).getText()).to.equal(daysFishedWithMandatoryRelease)
-    expect(await (await rowForRiver.$('td:nth-child(3)')).getText()).to.equal(daysFishedOther)
+    expect(await (await rowForRiver.$('td:nth-child(2)')).getText()).toEqual(daysFishedWithMandatoryRelease)
+    expect(await (await rowForRiver.$('td:nth-child(3)')).getText()).toEqual(daysFishedOther)
   }
 }
 
