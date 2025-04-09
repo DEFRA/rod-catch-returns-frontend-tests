@@ -13,19 +13,32 @@ class SummaryPage extends Page {
     await this.clickNavigationLink('#activities-add')
   }
 
-  async clickChangeRiver (riverName) {
+  async getRiverRow (riverName) {
     const table = await $('caption*=Rivers fished').parentElement()
     const rows = await table.$$('tbody tr')
+
     for (const row of rows) {
-      const riverCell = await row.$('th[data-label="River"]')
+      const riverCell = await row.$('th')
       const riverText = await riverCell.getText()
 
       if (riverText.trim() === riverName) {
-        const changeLink = await row.$('a[href*="clear"]')
-        await changeLink.click()
-        break
+        return row
       }
     }
+
+    throw new Error(`Could not find river row with name: ${riverName}`)
+  }
+
+  async clickChangeRiver (riverName) {
+    const row = await this.getRiverRow(riverName)
+    const changeLink = await row.$('a[href*="clear"]')
+    await changeLink.click()
+  }
+
+  async clickDeleteRiver (riverName) {
+    const row = await this.getRiverRow(riverName)
+    const deleteLink = await row.$('a[href*="/delete/activities"]')
+    await deleteLink.click()
   }
 
   async clickAddSmallCatch () {
@@ -36,14 +49,6 @@ class SummaryPage extends Page {
   async clickAddLargeCatch () {
     logger.debug('About to click Add a salmon or large sea trout link')
     await this.clickNavigationLink('#catches-add')
-  }
-
-  async clickDeleteRiver () {
-    logger.debug('About to click Delete River Link')
-    const clickDeleteRiverLink = await $('table#river tr:first-child td:nth-child(4) span a:nth-child(1)')
-    const deleteRiverPage = new DeletePage(await clickDeleteRiverLink.getAttribute('href'))
-    await clickDeleteRiverLink.click()
-    await deleteRiverPage.continue()
   }
 
   async clickDeleteSmallCatch () {

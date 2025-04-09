@@ -15,6 +15,11 @@ class DeletePage extends Page {
     const clickCancel = await browser.element('#return-summary')
     await clickCancel.click()
   }
+
+  async clickDelete () {
+    const clickDelete = await $('button=Delete')
+    await clickDelete.click()
+  }
 }
 
 module.exports = DeletePage
