@@ -41,9 +41,36 @@ class SummaryPage extends Page {
     await deleteLink.click()
   }
 
+  async getSmallCatchRow (month, riverName) {
+    const table = await $('caption*=Small adult sea trout').parentElement()
+    const rows = await table.$$('tbody tr')
+
+    for (const row of rows) {
+      const monthCell = await row.$('th[data-label="Month"]')
+      const riverCell = await row.$('th[data-label="River"]')
+
+      const [monthText, riverText] = await Promise.all([
+        monthCell?.getText() ?? '',
+        riverCell?.getText() ?? ''
+      ])
+
+      if (monthText.trim() === month && riverText.trim() === riverName) {
+        return row
+      }
+    }
+
+    throw new Error(`Could not find row for ${month} on ${riverName}`)
+  }
+
   async clickAddSmallCatch () {
     logger.debug('Add a small catch of under 1 lb link')
     await this.clickNavigationLink('#small-catches-add')
+  }
+
+  async clickChangeSmallCatch (month, riverName) {
+    const row = await this.getSmallCatchRow(month, riverName)
+    const changeLink = await row.$('a[href*="/clear"]')
+    await changeLink.click()
   }
 
   async clickAddLargeCatch () {

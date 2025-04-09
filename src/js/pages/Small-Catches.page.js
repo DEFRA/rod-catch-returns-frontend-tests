@@ -3,7 +3,7 @@ const Page = require('./page')
 
 class AddSmallFishPage extends Page {
   get url () {
-    return '/small-catches/add'
+    return '/small-catches'
   }
 
   async setRiver (riverName) {
