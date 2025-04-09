@@ -20,6 +20,13 @@ Feature: Login to Rod Catch returns update and return to service, submit
       | Frome | 15                             | 1               |
       | Banwy | 20                             | 5               |
 
+    And  I am on the summary page and select the small catch link
+    *    In January on the river Frome, I caught 5 by fly, 4 by spinner, 2 by bait and released 11
+    And  I save the small catch and return to the summary
+    Then I expect the summary page to show the following small catches
+      | Month   | River |	Fly |	Spinner |	Bait | Released |
+      | January | Frome | 5   | 4       | 2    | 11       |    
+
     And  I am on the summary page and select the large catch link
     And  I caught a fish weighing 1 lbs 2 oz
     And  I select a valid catch date
@@ -31,7 +38,7 @@ Feature: Login to Rod Catch returns update and return to service, submit
     And  I am on the summary page and I save and exit the service
     And  I am on the draft saved page
   
-  Scenario: First login - update river
+  Scenario: Return login - update activity
     When I click change on the activity for the river Banwy
     *    I fished the river Glaslyn for 10 days with mandatory release and 2 other days
     And I confirm my activity details and continue
@@ -40,12 +47,15 @@ Feature: Login to Rod Catch returns update and return to service, submit
       | Frome    | 15                             | 1               |
       | Glaslyn  | 10                             | 2               |
   
-  Scenario: First login - delete
+  Scenario: Return login - delete activity
     When I click delete on the activity for the river Glaslyn
     And  I confirm I want to delete the activity
     Then I expect the summary page to show the following activities
       | River    | DaysFishedWithMandatoryRelease | DaysFishedOther |
       | Frome    | 15                             | 1               |
+  
+  #Scenario: Return login - update small catch
+    #When I click change on the small catch for the river Frome and a valid catch date
 
   Scenario: Return login - Submit
     When I am on the summary page and select the large catch link
@@ -63,7 +73,7 @@ Feature: Login to Rod Catch returns update and return to service, submit
     Then I am on the review page
     And  I expect the review page to show the following activities
       | River   | Days fished (1 Jan to 16 Jun) | Days fished (17 Jun to 31 Dec)  | Fish Caught |
-      | Frome   | 15                            | 1                               | 2           |
+      | Frome   | 15                            | 1                               | 13          |
     And  I expect the review page to show the following large catches
       | Date  | River | Type      | Weight   | Method | Released |
       | <any> | Frome | Sea Trout | 1lbs 2oz | Fly    | No       |
