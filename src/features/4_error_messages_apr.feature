@@ -40,7 +40,7 @@ Feature: Error messages for anglers
       | You have not entered a valid number of days fished between 17 June and 31 Dec |
 
   Scenario: Scenario 3 - An error message is shown on the small catches page
-    Given   I am on the licence entry page
+    Given I am on the licence entry page
     And   I submit the licence and postcode for test user 1
     And   If it is the extended submission period I select the previous period on the season page
     And   I did fish during the season
