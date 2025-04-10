@@ -59,7 +59,7 @@ Feature: Login to Rod Catch returns update and return to service, submit
     *    In January on the river Frome, I caught 3 by fly, 2 by spinner, 1 by bait and released 2
     And  I save the small catch and return to the summary
     Then I expect the summary page to show the following small catches
-      | Month   | River |	Fly |	Spinner |	Bait | Released |
+      | Month   | River | Fly | Spinner | Bait | Released |
       | January | Frome | 3   | 2       | 1    | 2        |
 
   Scenario: Return login - Submit
