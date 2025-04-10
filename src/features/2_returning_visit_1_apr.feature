@@ -73,7 +73,7 @@ Feature: Login to Rod Catch returns update and return to service, submit
     When I click delete on the small catch with the month as February and the river as Frome
     And  I am on the delete small catches page and I click delete
     Then I expect the summary page to show the following small catches
-      | Month   | River |	Fly |	Spinner |	Bait | Released |
+      | Month   | River | Fly | Spinner | Bait | Released |
       | January | Frome | 3   | 2       | 1    | 2        |
 
   Scenario: Return login - Submit
