@@ -25,14 +25,14 @@ Feature: Error messages for anglers
       | There is a problem                                                                |
       | You have not entered a valid number of days fished between 1 January and 16 June  |
     
-    # Scenario 2.3 - days fished with mandatory release and days other are 0
+    # Scenario 2.2 - days fished with mandatory release and days other are 0
     And   I fished the river Ystrad for 0 days with mandatory release and 0 other days
     And   I confirm my activity details and continue
     Then  I expect the error summary to show the following errors
       | There is a problem                                                                |
       | The number of days fished must be greater than 0                                 |
     
-    # Scenario 2.4 - days fished other too big
+    # Scenario 2.3 - days fished other too big
     And   I fished the river Ystrad for 10 days with mandatory release and 900 other days
     And   I confirm my activity details and continue
     Then  I expect the error summary to show the following errors
