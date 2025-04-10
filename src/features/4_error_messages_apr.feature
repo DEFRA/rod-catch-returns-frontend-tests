@@ -7,8 +7,8 @@ Feature: Error messages for anglers
     Given I am on the licence entry page
     When  I submit the licence ABC123 and postcode AA11 1AA
     Then  I expect the error summary to show the following errors
-      | There is a problem                                          |
-      | You have not entered a correct licence number and postcode  |
+      | There is a problem                                         |
+      | You have not entered a correct licence number and postcode |
     And   I am redirected to /licence-auth-fail
 
   Scenario: Scenario 2 - An error message is shown on the activities page
@@ -22,19 +22,50 @@ Feature: Error messages for anglers
     And   I fished the river Ystrad for 900 days with mandatory release and 2 other days
     And   I confirm my activity details and continue
     Then  I expect the error summary to show the following errors
-      | There is a problem                                                                |
-      | You have not entered a valid number of days fished between 1 January and 16 June  |
+      | There is a problem                                                               |
+      | You have not entered a valid number of days fished between 1 January and 16 June |
     
     # Scenario 2.3 - days fished with mandatory release and days other are 0
     And   I fished the river Ystrad for 0 days with mandatory release and 0 other days
     And   I confirm my activity details and continue
     Then  I expect the error summary to show the following errors
-      | There is a problem                                                                |
-      | The number of days fished must be greater than 0                                 |
+      | There is a problem                               |
+      | The number of days fished must be greater than 0 |
     
     # Scenario 2.4 - days fished other too big
     And   I fished the river Ystrad for 10 days with mandatory release and 900 other days
     And   I confirm my activity details and continue
     Then  I expect the error summary to show the following errors
-      | There is a problem                                                                |
-      | You have not entered a valid number of days fished between 17 June and 31 Dec     |
+      | There is a problem                                                            |
+      | You have not entered a valid number of days fished between 17 June and 31 Dec |
+
+  Scenario: Scenario 3 - An error message is shown on the small catches page
+    Given   I am on the licence entry page
+    And   I submit the licence and postcode for test user 1
+    And   If it is the extended submission period I select the previous period on the season page
+    And   I did fish during the season
+    And   I am on the summary page and select the add river link
+    And   I fished the river Frome for 15 days with mandatory release and 1 other days
+    And   I confirm my activity details and continue
+    And   I am on the summary page and select the small catch link
+
+    # Scenario 3.1 - negative caught by fly
+    When  In January on the river Frome, I caught -2 by fly, 2 by spinner, 1 by bait and released 2
+    And   I save the small catch and return to the summary
+    Then  I expect the error summary to show the following errors
+      | There is a problem                                     |
+      | The number caught with a fly must be greater than zero |
+    
+    # Scenario 3.2 - released too high
+    When  In January on the river Frome, I caught 1 by fly, 0 by spinner, 0 by bait and released 30
+    And   I save the small catch and return to the summary
+    Then  I expect the error summary to show the following errors
+      | There is a problem                               |
+      | You have released more fish than you have caught |
+    
+    # Scenario 3.3 - 0 for every field
+    When  In January on the river Frome, I caught 0 by fly, 0 by spinner, 0 by bait and released 30
+    And   I save the small catch and return to the summary
+    Then  I expect the error summary to show the following errors
+      | There is a problem                             |
+      | You have not entered the number of fish caught |
