@@ -64,8 +64,8 @@ Feature: Error messages for anglers
       | You have released more fish than you have caught |
     
     # Scenario 3.3 - 0 for every field
-    When  In January on the river Frome, I caught 0 by fly, 0 by spinner, 0 by bait and released 30
+    When  In January on the river Frome, I caught 0 by fly, 0 by spinner, 0 by bait and released 0
     And   I save the small catch and return to the summary
     Then  I expect the error summary to show the following errors
-      | There is a problem                                                                |
-      | You have not entered a valid number of days fished between 1 January and 16 June  |
+      | There is a problem                             |
+      | You have not entered the number of fish caught |
