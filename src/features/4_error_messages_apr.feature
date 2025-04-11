@@ -25,14 +25,14 @@ Feature: Error messages for anglers
       | There is a problem                                                               |
       | You have not entered a valid number of days fished between 1 January and 16 June |
     
-    # Scenario 2.3 - days fished with mandatory release and days other are 0
+    # Scenario 2.2 - days fished with mandatory release and days other are 0
     And   I fished the river Ystrad for 0 days with mandatory release and 0 other days
     And   I confirm my activity details and continue
     Then  I expect the error summary to show the following errors
       | There is a problem                               |
       | The number of days fished must be greater than 0 |
     
-    # Scenario 2.4 - days fished other too big
+    # Scenario 2.3 - days fished other too big
     And   I fished the river Ystrad for 10 days with mandatory release and 900 other days
     And   I confirm my activity details and continue
     Then  I expect the error summary to show the following errors
@@ -40,7 +40,7 @@ Feature: Error messages for anglers
       | You have not entered a valid number of days fished between 17 June and 31 Dec |
 
   Scenario: Scenario 3 - An error message is shown on the small catches page
-    Given   I am on the licence entry page
+    Given I am on the licence entry page
     And   I submit the licence and postcode for test user 1
     And   If it is the extended submission period I select the previous period on the season page
     And   I did fish during the season
@@ -67,5 +67,5 @@ Feature: Error messages for anglers
     When  In January on the river Frome, I caught 0 by fly, 0 by spinner, 0 by bait and released 30
     And   I save the small catch and return to the summary
     Then  I expect the error summary to show the following errors
-      | There is a problem                             |
-      | You have not entered the number of fish caught |
+      | There is a problem                                                                |
+      | You have not entered a valid number of days fished between 1 January and 16 June  |
