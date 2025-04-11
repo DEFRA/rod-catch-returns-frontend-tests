@@ -6,6 +6,10 @@ defineStep('I expect the review page to show the following activities', async fu
   await Review.validateActivitiesTable(activityTable)
 })
 
-defineStep('I expect the review page to show the following large catches', async function (activityTable) {
-  await Review.validateLargeCatchesTable('Salmon and large adult sea trout', activityTable)
+defineStep('I expect the review page to show the following small catches', async function (smallCatchesTable) {
+  await Review.validateSmallCatchesTable(smallCatchesTable)
+})
+
+defineStep('I expect the review page to show the following large catches', async function (largeCatchesTable) {
+  await Review.validateLargeCatchesTable(largeCatchesTable)
 })
