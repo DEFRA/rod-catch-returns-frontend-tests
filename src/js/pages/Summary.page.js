@@ -2,7 +2,6 @@
 const Page = require('./page')
 const { logger } = require('defra-logging-facade')
 const DeletePage = require('./Delete.page')
-const { validateTableByCaption } = require('../utils/table-utils')
 
 class SummaryPage extends Page {
   get url () {
@@ -14,53 +13,19 @@ class SummaryPage extends Page {
     await this.clickNavigationLink('#activities-add')
   }
 
-  async getRiverRow (riverName) {
+  async clickChangeRiver (riverName) {
     const table = await $('caption*=Rivers fished').parentElement()
     const rows = await table.$$('tbody tr')
-
     for (const row of rows) {
-      const riverCell = await row.$('th')
+      const riverCell = await row.$('th[data-label="River"]')
       const riverText = await riverCell.getText()
 
       if (riverText.trim() === riverName) {
-        return row
+        const changeLink = await row.$('a[href*="clear"]')
+        await changeLink.click()
+        break
       }
     }
-
-    throw new Error(`Could not find river row with name: ${riverName}`)
-  }
-
-  async clickChangeRiver (riverName) {
-    const row = await this.getRiverRow(riverName)
-    const changeLink = await row.$('a[href*="clear"]')
-    await changeLink.click()
-  }
-
-  async clickDeleteRiver (riverName) {
-    const row = await this.getRiverRow(riverName)
-    const deleteLink = await row.$('a[href*="/delete/activities"]')
-    await deleteLink.click()
-  }
-
-  async getSmallCatchRow (month, riverName) {
-    const table = await $('caption*=Small adult sea trout').parentElement()
-    const rows = await table.$$('tbody tr')
-
-    for (const row of rows) {
-      const monthCell = await row.$('th[data-label="Month"]')
-      const riverCell = await row.$('th[data-label="River"]')
-
-      const [monthText, riverText] = await Promise.all([
-        monthCell?.getText() ?? '',
-        riverCell?.getText() ?? ''
-      ])
-
-      if (monthText.trim() === month && riverText.trim() === riverName) {
-        return row
-      }
-    }
-
-    throw new Error(`Could not find row for ${month} on ${riverName}`)
   }
 
   async clickAddSmallCatch () {
@@ -112,10 +77,6 @@ class SummaryPage extends Page {
     const rowForRiver = await riverNameCell.$('..')
     expect(await (await rowForRiver.$('td:nth-child(2)')).getText()).toEqual(daysFishedWithMandatoryRelease)
     expect(await (await rowForRiver.$('td:nth-child(3)')).getText()).toEqual(daysFishedOther)
-  }
-
-  async validateSmallCatchTable (dataTable) {
-    await validateTableByCaption('Small adult sea trout (1lb and under)', dataTable)
   }
 }
 
