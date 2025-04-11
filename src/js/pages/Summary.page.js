@@ -38,14 +38,6 @@ class SummaryPage extends Page {
     await this.clickNavigationLink('#catches-add')
   }
 
-  async clickDeleteRiver () {
-    logger.debug('About to click Delete River Link')
-    const clickDeleteRiverLink = await $('table#river tr:first-child td:nth-child(4) span a:nth-child(1)')
-    const deleteRiverPage = new DeletePage(await clickDeleteRiverLink.getAttribute('href'))
-    await clickDeleteRiverLink.click()
-    await deleteRiverPage.continue()
-  }
-
   async clickDeleteSmallCatch () {
     logger.debug('Delete small catch')
     const clickDeleteSmallCatch = await browser.element('table#small tr:first-child td:nth-child(7) span a:nth-child(2)')

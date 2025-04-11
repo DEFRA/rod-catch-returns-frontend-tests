@@ -1,5 +1,5 @@
 'use strict'
-const { defineStep } = require("@cucumber/cucumber")
+const { defineStep } = require('@cucumber/cucumber')
 const Summary = require('../../pages/Summary.page')
 
 defineStep('I am on the summary page and select the add river link', async function () {
@@ -38,11 +38,6 @@ defineStep('I am on the summary page and I click delete large catch link', async
 defineStep('I am on the summary page and I click delete small catch link', async function () {
   await Summary.checkOpen()
   await Summary.clickDeleteSmallCatch()
-})
-
-defineStep('I am on the summary page and I click delete river link', async function () {
-  await Summary.checkOpen()
-  await Summary.clickDeleteRiver()
 })
 
 defineStep('I am on the summary page', async function () {
