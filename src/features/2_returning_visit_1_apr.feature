@@ -20,6 +20,13 @@ Feature: Login to Rod Catch returns update and return to service, submit
       | Frome | 15                             | 1               |
       | Banwy | 20                             | 5               |
 
+    And  I am on the summary page and select the small catch link
+    *    In January on the river Frome, I caught 5 by fly, 4 by spinner, 2 by bait and released 11
+    And  I save the small catch and return to the summary
+    Then I expect the summary page to show the following small catches
+      | Month   | River | Fly | Spinner | Bait | Released |
+      | January | Frome | 5   | 4       | 2    | 11       |    
+
     And  I am on the summary page and select the large catch link
     And  I caught a fish weighing 1 lbs 2 oz
     And  I select a valid catch date
@@ -31,7 +38,7 @@ Feature: Login to Rod Catch returns update and return to service, submit
     And  I am on the summary page and I save and exit the service
     And  I am on the draft saved page
   
-  Scenario: First login - update river
+  Scenario: Return login - update activity
     When I click change on the activity for the river Banwy
     *    I fished the river Glaslyn for 10 days with mandatory release and 2 other days
     And I confirm my activity details and continue

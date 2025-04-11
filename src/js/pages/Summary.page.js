@@ -33,6 +33,12 @@ class SummaryPage extends Page {
     await this.clickNavigationLink('#small-catches-add')
   }
 
+  async clickChangeSmallCatch (month, riverName) {
+    const row = await this.getSmallCatchRow(month, riverName)
+    const changeLink = await row.$('a[href*="/clear"]')
+    await changeLink.click()
+  }
+
   async clickAddLargeCatch () {
     logger.debug('About to click Add a salmon or large sea trout link')
     await this.clickNavigationLink('#catches-add')
