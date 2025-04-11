@@ -7,6 +7,7 @@ class AddActivitiesPage extends Page {
 
   async selectRiver (riverName) {
     const river = await $('#river')
+    await river.click()
     await river.addValue(riverName)
   }
 

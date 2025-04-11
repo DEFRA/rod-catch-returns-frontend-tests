@@ -11,7 +11,14 @@ Feature: Login to Rod Catch returns update and return to service, submit
     Given I did fish during the season
     And  I am on the summary page and select the add river link
     *    I fished the river Frome for 15 days with mandatory release and 1 other days
+    And  I confirm my activity details and continue
+    And  I am on the summary page and select the add river link
+    *    I fished the river Banwy for 20 days with mandatory release and 5 other days
     And I confirm my activity details and continue
+    Then I expect the summary page to show the following activities
+      | River | DaysFishedWithMandatoryRelease | DaysFishedOther |
+      | Frome | 15                             | 1               |
+      | Banwy | 20                             | 5               |
 
     And  I am on the summary page and select the large catch link
     And  I caught a fish weighing 1 lbs 2 oz
@@ -24,6 +31,15 @@ Feature: Login to Rod Catch returns update and return to service, submit
     And  I am on the summary page and I save and exit the service
     And  I am on the draft saved page
   
+  Scenario: First login - update river
+    When I click change on the activity for the river Banwy
+    *    I fished the river Glaslyn for 10 days with mandatory release and 2 other days
+    And I confirm my activity details and continue
+    Then I expect the summary page to show the following activities
+      | River    | DaysFishedWithMandatoryRelease | DaysFishedOther |
+      | Frome    | 15                             | 1               |
+      | Glaslyn  | 10                             | 2               |
+  
   Scenario: First login - delete
     When I am on the delete river page and I click delete
 
@@ -31,6 +47,7 @@ Feature: Login to Rod Catch returns update and return to service, submit
     When I am on the summary page and select the large catch link
     And  I select a valid catch date
     And  I caught a fish weighing 3 lbs 5 oz
+    And  The catch river is Frome
     And  The catch species is Salmon
     And  The catch method is Fly
     And  The catch wasn't released
@@ -41,8 +58,9 @@ Feature: Login to Rod Catch returns update and return to service, submit
   Scenario: Return login - Submission locked
     Then I am on the review page
     And  I expect the review page to show the following activities
-      | River | Days fished (1 Jan to 16 Jun) | Days fished (17 Jun to 31 Dec)  | Fish Caught |
-      | Frome | 15                            | 1                               | 2           |    
+      | River   | Days fished (1 Jan to 16 Jun) | Days fished (17 Jun to 31 Dec)  | Fish Caught |
+      | Frome   | 15                            | 1                               | 2           |    
+      | Glaslyn | 10                            | 2                               | 0           |
     And  I expect the review page to show the following large catches
       | Date  | River | Type      | Weight   | Method | Released |
       | <any> | Frome | Sea Trout | 1lbs 2oz | Fly    | No       |
