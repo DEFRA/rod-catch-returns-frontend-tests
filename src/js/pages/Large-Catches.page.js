@@ -8,7 +8,7 @@ const RADIO_METRIC_ID = '#system-2'
 
 class AddLargeFishPage extends Page {
   get url () {
-    return '/catches/add'
+    return '/catches'
   }
 
   async setDate (dayOfMonth, monthNumber) {

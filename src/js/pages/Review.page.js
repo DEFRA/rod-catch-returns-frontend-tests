@@ -16,6 +16,10 @@ class ReviewPage extends Page {
     validateTableByCaption('Rivers fished', dataTable)
   }
 
+  async validateSmallCatchesTable (dataTable) {
+    validateTableByCaption('Small adult sea trout (1lb and under)', dataTable)
+  }
+
   async validateLargeCatchesTable (dataTable) {
     validateTableByCaption('Salmon and large adult sea trout', dataTable)
   }

@@ -80,9 +80,36 @@ class SummaryPage extends Page {
     await deleteLink.click()
   }
 
+  async getLargeCatchRow (riverName, type) {
+    const table = await $('caption*=Salmon and large adult sea trout').parentElement()
+    const rows = await table.$$('tbody tr')
+
+    for (const row of rows) {
+      const riverCell = await row.$('th[data-label="River"]')
+      const typeCell = await row.$('td[data-label="Type"]')
+
+      const [riverText, typeText] = await Promise.all([
+        riverCell?.getText() ?? '',
+        typeCell?.getText() ?? ''
+      ])
+
+      if (riverText.trim() === riverName && typeText.trim() === type) {
+        return row
+      }
+    }
+
+    throw new Error(`Could not find row for ${riverName} and ${type}`)
+  }
+
   async clickAddLargeCatch () {
     logger.debug('About to click Add a salmon or large sea trout link')
     await this.clickNavigationLink('#catches-add')
+  }
+
+  async clickChangeLargeCatch (riverName, type) {
+    const row = await this.getLargeCatchRow(riverName, type)
+    const changeLink = await row.$('a[href*="/clear"]')
+    await changeLink.click()
   }
 
   async clickDeleteLargeCatch () {
@@ -114,6 +141,10 @@ class SummaryPage extends Page {
 
   async validateSmallCatchTable (dataTable) {
     await validateTableByCaption('Small adult sea trout (1lb and under)', dataTable)
+  }
+
+  async validateLargeCatchTable (dataTable) {
+    await validateTableByCaption('Salmon and large adult sea trout', dataTable)
   }
 }
 
