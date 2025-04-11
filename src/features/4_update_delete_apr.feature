@@ -50,9 +50,42 @@ Feature: Login to Rod Catch Returns update and delete
       | January  | Frome | 5   | 4       | 2    | 11       |
       | February | Frome | 3   | 2       | 1    | 2        |
   
-  Scenario: Delete elete small catch
+  Scenario: Delete small catch
     When I click delete on the small catch with the month as February and the river as Frome
     And  I am on the delete small catches page and I click delete
     Then I expect the summary page to show the following small catches
       | Month   | River | Fly | Spinner | Bait | Released |
       | January | Frome | 5   | 4       | 2    | 11       |
+  
+  Scenario: Update large catch
+    And  I am on the summary page and select the large catch link
+    And  I caught a fish weighing 1 lbs 2 oz
+    *    I select a valid catch date
+    *    The catch river is Frome
+    *    The catch species is Sea Trout
+    *    The catch method is Fly
+    *    The catch wasn't released
+    And  I save the large catch and add another
+    *    I caught a fish weighing 2.5kg
+    *    I select a valid catch date
+    *    The catch river is Frome
+    *    The catch species is Salmon
+    *    The catch method is Spinner
+    *    The catch was released
+    And  I save the large catch and return to the summary
+    Then I expect the summary page to show the following large catches
+      | Month | River | Type      | Weight   | Method  | Released |
+      | <any> | Frome | Sea Trout | 1lbs 2oz | Fly     | No       |
+      | <any> | Frome | Salmon    | 2.5kg    | Spinner | Yes      |
+    When I click change on the large catch with the river as Frome and the type as Salmon
+    *    I caught a fish weighing 3 lbs 6 oz 
+    *    I select a valid catch date
+    *    The catch river is Frome
+    *    The catch species is Sea Trout
+    *    The catch method is Bait
+    *    The catch wasn't released
+    And  I save the large catch and return to the summary
+    Then I expect the summary page to show the following large catches
+      | Month | River | Type      | Weight   | Method  | Released |
+      | <any> | Frome | Sea Trout | 1lbs 2oz | Fly     | No       |
+      | <any> | Frome | Sea Trout | 3lbs 6oz | Bait    | No      |
