@@ -35,11 +35,6 @@ defineStep('I am on the summary page and I click delete large catch link', async
   await Summary.clickDeleteLargeCatch()
 })
 
-defineStep('I am on the summary page and I click delete small catch link', async function () {
-  await Summary.checkOpen()
-  await Summary.clickDeleteSmallCatch()
-})
-
 defineStep('I am on the summary page', async function () {
   await Summary.checkOpen()
 })

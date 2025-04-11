@@ -74,17 +74,15 @@ class SummaryPage extends Page {
     await changeLink.click()
   }
 
+  async clickDeleteSmallCatch (month, riverName) {
+    const row = await this.getSmallCatchRow(month, riverName)
+    const deleteLink = await row.$('a[href*="/delete/small-catches"]')
+    await deleteLink.click()
+  }
+
   async clickAddLargeCatch () {
     logger.debug('About to click Add a salmon or large sea trout link')
     await this.clickNavigationLink('#catches-add')
-  }
-
-  async clickDeleteSmallCatch () {
-    logger.debug('Delete small catch')
-    const clickDeleteSmallCatch = await browser.element('table#small tr:first-child td:nth-child(7) span a:nth-child(2)')
-    const deleteSmallPage = new DeletePage(await clickDeleteSmallCatch.getAttribute('href'))
-    await clickDeleteSmallCatch.click()
-    await deleteSmallPage.continue()
   }
 
   async clickDeleteLargeCatch () {

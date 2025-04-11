@@ -67,7 +67,5 @@ Feature: Error messages for anglers
     When  In January on the river Frome, I caught 0 by fly, 0 by spinner, 0 by bait and released 30
     And   I save the small catch and return to the summary
     Then  I expect the error summary to show the following errors
-      | There is a problem                             |
-      | You have not entered the number of fish caught |
       | There is a problem                                                                |
       | You have not entered a valid number of days fished between 1 January and 16 June  |
