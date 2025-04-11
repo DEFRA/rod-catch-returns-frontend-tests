@@ -63,7 +63,8 @@ Feature: Login to Rod Catch returns update and return to service, submit
     Then I am on the review page
     And  I expect the review page to show the following activities
       | River   | Days fished (1 Jan to 16 Jun) | Days fished (17 Jun to 31 Dec)  | Fish Caught |
-      | Frome   | 15                            | 1                               | 2           |
+      | Frome   | 15                            | 1                               | 2           |    
+      | Glaslyn | 10                            | 2                               | 0           |
     And  I expect the review page to show the following large catches
       | Date  | River | Type      | Weight   | Method | Released |
       | <any> | Frome | Sea Trout | 1lbs 2oz | Fly    | No       |
