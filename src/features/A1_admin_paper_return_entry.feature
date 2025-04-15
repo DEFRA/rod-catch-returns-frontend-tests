@@ -5,15 +5,15 @@ Feature: Administrative users can manage paper based returns
   
   Scenario: Redirect to login page
     When I navigate to /
-    Then  I am redirected to /login
+    Then I am redirected to /login
 
   Scenario: Enter a new paper return
-    When  I am on the admin login page
-    And   I submit the username and password for admin user 1
-    And   I am on the licence entry page
-    And   I submit the licence and postcode for test user 1
-    And   If it is the extended submission period I select the previous period on the season page
-    And   I did fish during the season
+    When I am on the admin login page
+    And  I submit the username and password for admin user 1
+    And  I am on the licence entry page
+    And  I submit the licence and postcode for test user 1
+    And  If it is the extended submission period I select the previous period on the season page
+    And  I did fish during the season
 
     And  I am on the summary page and select the add river link
     *    I fished the river Ystrad for 2 days with mandatory release and 0 other days
