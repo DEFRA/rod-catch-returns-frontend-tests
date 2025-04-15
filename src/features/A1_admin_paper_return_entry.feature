@@ -2,14 +2,18 @@ Feature: Administrative users can manage paper based returns
 
   Background:
     Given I am an administrative user
-    And   I am on the admin login page
-    Then  I submit the username and password for admin user 1
-    When  I am on the licence entry page
-    Then  I submit the licence and postcode for test user 1
-    And   If it is the extended submission period I select the previous period on the season page
+  
+  Scenario: Redirect to login page
+    When I navigate to /
+    Then I am redirected to /login
 
   Scenario: Enter a new paper return
-    Given I did fish during the season
+    When I am on the admin login page
+    And  I submit the username and password for admin user 1
+    And  I am on the licence entry page
+    And  I submit the licence and postcode for test user 1
+    And  If it is the extended submission period I select the previous period on the season page
+    And  I did fish during the season
 
     And  I am on the summary page and select the add river link
     *    I fished the river Ystrad for 2 days with mandatory release and 0 other days
@@ -37,7 +41,7 @@ Feature: Administrative users can manage paper based returns
     *    In March on the river Frome, I caught 30 by fly, 0 by spinner, 0 by bait and released 0
     And  I save the small catch and return to the summary
 
-    And I expect the summary page to show the following activities
+    Then I expect the summary page to show the following activities
       | River  | DaysFishedWithMandatoryRelease | DaysFishedOther |
       | Frome  | 0                              | 30              |
       | Ystrad | 2                              | 0               |
