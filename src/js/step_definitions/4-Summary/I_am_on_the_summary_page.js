@@ -30,10 +30,6 @@ defineStep('I am on the summary page and I save and exit the service', async fun
 defineStep('I am on the summary page and I continue to the review page', async function () {
   await Summary.continue()
 })
-defineStep('I am on the summary page and I click delete large catch link', async function () {
-  await Summary.checkOpen()
-  await Summary.clickDeleteLargeCatch()
-})
 
 defineStep('I am on the summary page', async function () {
   await Summary.checkOpen()

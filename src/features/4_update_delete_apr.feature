@@ -81,11 +81,19 @@ Feature: Login to Rod Catch Returns update and delete
     *    I caught a fish weighing 3 lbs 6 oz 
     *    I select a valid catch date
     *    The catch river is Frome
-    *    The catch species is Sea Trout
+    *    The catch species is Salmon
     *    The catch method is Bait
     *    The catch wasn't released
     And  I save the large catch and return to the summary
     Then I expect the summary page to show the following large catches
       | Month | River | Type      | Weight   | Method  | Released |
       | <any> | Frome | Sea Trout | 1lbs 2oz | Fly     | No       |
-      | <any> | Frome | Sea Trout | 3lbs 6oz | Bait    | No      |
+      | <any> | Frome | Salmon    | 3lbs 6oz | Bait    | No       |
+  
+  Scenario: Delete large catch
+    When I click delete on the large catch with the river as Frome and the type as Salmon
+    And  I am on the delete large catches page and I click delete
+    Then I expect the summary page to show the following large catches
+      | Month | River | Type      | Weight   | Method  | Released |
+      | <any> | Frome | Sea Trout | 1lbs 2oz | Fly     | No       |
+

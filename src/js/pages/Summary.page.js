@@ -1,7 +1,6 @@
 'use strict'
 const Page = require('./page')
 const { logger } = require('defra-logging-facade')
-const DeletePage = require('./Delete.page')
 const { validateTableByCaption } = require('../utils/table-utils')
 
 class SummaryPage extends Page {
@@ -112,12 +111,10 @@ class SummaryPage extends Page {
     await changeLink.click()
   }
 
-  async clickDeleteLargeCatch () {
-    logger.debug('About to click Add a salmon or large sea trout link')
-    const clickDeleteLargeCatch = await browser.element('table#large tr:first-child td:nth-child(7) span a:nth-child(2)')
-    const deleteLargePage = new DeletePage(await clickDeleteLargeCatch.getAttribute('href'))
-    await clickDeleteLargeCatch.click()
-    await deleteLargePage.continue()
+  async clickDeleteLargeCatch (riverName, type) {
+    const row = await this.getLargeCatchRow(riverName, type)
+    const changeLink = await row.$('a[href*="/delete/catches"]')
+    await changeLink.click()
   }
 
   async clickSaveAsDraft () {
