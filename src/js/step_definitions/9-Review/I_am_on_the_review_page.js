@@ -7,6 +7,11 @@ defineStep('I am on the review page and I click submit', async function () {
   await Review.continue()
 })
 
+defineStep('I am on the review page and I click unlock', async function () {
+  await Review.checkOpen()
+  await Review.clickUnlock()
+})
+
 defineStep('I am on the review page', async function () {
   await Review.checkOpen()
 })

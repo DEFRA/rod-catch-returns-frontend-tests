@@ -56,3 +56,11 @@ Feature: Administrative users can manage paper based returns
     And  I am on the summary page and I click review catch return
     And  I am on the review page and I click submit
     And  I am on the confirmation page
+  
+  Scenario: Unlock submission
+    When I am on the admin login page
+    And  I submit the username and password for admin user 1
+    And  I am on the licence entry page
+    And  I submit the licence and postcode for test user 1
+    And  I am on the review page and I click unlock
+    And  I am on the summary page

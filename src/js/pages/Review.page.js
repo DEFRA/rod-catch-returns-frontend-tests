@@ -12,6 +12,11 @@ class ReviewPage extends Page {
     await clickCancel.click()
   }
 
+  async clickUnlock () {
+    const unlockButton = await $('button[name="unlock"]')
+    await unlockButton.click()
+  }
+
   async validateActivitiesTable (dataTable) {
     validateTableByCaption('Rivers fished', dataTable)
   }
