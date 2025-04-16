@@ -81,3 +81,51 @@ Feature: Error messages for anglers
     Then  I expect the error summary to show the following errors
       | There is a problem                |
       | You have not entered a valid date |
+    
+    # Scenario 4.2 - weight too large in kg
+    When I caught a fish weighing 51kg
+    *    I select a valid catch date
+    *    The catch river is Frome
+    *    The catch species is Salmon
+    *    The catch method is Bait
+    *    The catch wasn't released    
+    And   I save the large catch and return to the summary
+    Then  I expect the error summary to show the following errors
+      | There is a problem                  |
+      | You have not entered a valid weight |
+    
+    # Scenario 4.3 - weight too small in kg
+    When I caught a fish weighing 0kg
+    *    I select a valid catch date
+    *    The catch river is Frome
+    *    The catch species is Salmon
+    *    The catch method is Bait
+    *    The catch wasn't released    
+    And   I save the large catch and return to the summary
+    Then  I expect the error summary to show the following errors
+      | There is a problem                  |
+      | You have not entered a valid weight |
+    
+    # Scenario 4.4 - weight too large in lbs
+    When I caught a fish weighing 1764 lbs 0 oz
+    *    I select a valid catch date
+    *    The catch river is Frome
+    *    The catch species is Salmon
+    *    The catch method is Bait
+    *    The catch wasn't released    
+    And   I save the large catch and return to the summary
+    Then  I expect the error summary to show the following errors
+      | There is a problem                  |
+      | You have not entered a valid weight |
+    
+    # Scenario 4.5 - weight too small in lbs
+    When I caught a fish weighing 0 lbs 0 oz
+    *    I select a valid catch date
+    *    The catch river is Frome
+    *    The catch species is Salmon
+    *    The catch method is Bait
+    *    The catch wasn't released    
+    And   I save the large catch and return to the summary
+    Then  I expect the error summary to show the following errors
+      | There is a problem                  |
+      | You have not entered a valid weight |
