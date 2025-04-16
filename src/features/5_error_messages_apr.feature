@@ -1,6 +1,6 @@
 Feature: Error messages for anglers
 
-  Background:
+  Scenario: setup
     Given I am an external user
 
   Scenario: Scenario 1 - An error message is shown if an invalid licence and postcode is entered
@@ -40,11 +40,6 @@ Feature: Error messages for anglers
       | You have not entered a valid number of days fished between 17 June and 31 Dec |
 
   Scenario: Scenario 3 - An error message is shown on the small catches page
-    Given I am on the licence entry page
-    And   I submit the licence and postcode for test user 1
-    And   If it is the extended submission period I select the previous period on the season page
-    And   I did fish during the season
-    And   I am on the summary page and select the add river link
     And   I fished the river Frome for 15 days with mandatory release and 1 other days
     And   I confirm my activity details and continue
     And   I am on the summary page and select the small catch link
