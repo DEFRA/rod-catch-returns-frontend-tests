@@ -113,6 +113,11 @@ class SummaryPage extends Page {
   async validateLargeCatchTable (dataTable) {
     await validateTableByCaption('Salmon and large adult sea trout', dataTable)
   }
+
+  async excludeSubmission () {
+    const excludeCheckbox = await $('input[name="exclude"]')
+    await excludeCheckbox.click()
+  }
 }
 
 module.exports = new SummaryPage()

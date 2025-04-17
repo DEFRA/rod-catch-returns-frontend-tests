@@ -34,3 +34,7 @@ defineStep('I am on the summary page and I continue to the review page', async f
 defineStep('I am on the summary page', async function () {
   await Summary.checkOpen()
 })
+
+defineStep('I exclude the submission', async function () {
+  await Summary.excludeSubmission()
+})

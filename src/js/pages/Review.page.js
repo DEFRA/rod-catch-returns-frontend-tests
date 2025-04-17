@@ -31,14 +31,19 @@ class ReviewPage extends Page {
 
   async checkExcludeCheckboxCheckedSmallCatch (month, riverName) {
     const row = await getSmallCatchRow(month, riverName)
-    const changeLink = await row.$('input[name="exclude-small-catch"]')
-    await expect(changeLink).toBeChecked()
+    const excludeCheckbox = await row.$('input[name="exclude-small-catch"]')
+    await expect(excludeCheckbox).toBeChecked()
   }
 
   async checkExcludeCheckboxCheckedLargeCatch (riverName, type) {
     const row = await getLargeCatchRow(riverName, type)
-    const changeLink = await row.$('input[name="exclude-catch"]')
-    await expect(changeLink).toBeChecked()
+    const excludeCheckbox = await row.$('input[name="exclude-catch"]')
+    await expect(excludeCheckbox).toBeChecked()
+  }
+
+  async checkExcludeCheckboxCheckedSubmission () {
+    const excludeCheckbox = await $('input[name="exclude"]')
+    await expect(excludeCheckbox).toBeChecked()
   }
 }
 

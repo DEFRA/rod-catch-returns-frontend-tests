@@ -77,7 +77,13 @@ Feature: Administrative users can manage paper based returns
     Then The exclude checkbox is checked for the small catch with the month as January and the river as Ystrad
 
     And  I return to summary
-    When I click exclude on the large catch with the river as Ystrad and and the type as Salmon
+    When I click exclude on the large catch with the river as Ystrad and the type as Salmon
     And  I am on the summary page and I click review catch return
     And  I am on the review page
-    Then The exclude checkbox is checked for the large catch with the river as Ystrad and and the type as Salmon
+    Then The exclude checkbox is checked for the large catch with the river as Ystrad and the type as Salmon
+
+    And  I return to summary
+    When I exclude the submission
+    And  I am on the summary page and I click review catch return
+    And  I am on the review page
+    Then The exclude checkbox is checked for the submission
