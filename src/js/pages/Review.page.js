@@ -1,6 +1,6 @@
 'use strict'
 const Page = require('./page')
-const { validateTableByCaption } = require('../utils/table-utils')
+const { validateTableByCaption, getSmallCatchRow } = require('../utils/table-utils')
 
 class ReviewPage extends Page {
   get url () {
@@ -27,6 +27,12 @@ class ReviewPage extends Page {
 
   async validateLargeCatchesTable (dataTable) {
     validateTableByCaption('Salmon and large adult sea trout', dataTable)
+  }
+
+  async checkExcludeCheckboxCheckedSmallCatch (month, riverName) {
+    const row = await getSmallCatchRow(month, riverName)
+    const changeLink = await row.$('input[name="exclude-small-catch"]')
+    await expect(changeLink).toBeChecked()
   }
 }
 

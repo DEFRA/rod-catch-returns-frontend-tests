@@ -16,6 +16,28 @@ async function validateTableByCaption (captionText, dataTable) {
   }
 }
 
+async function getSmallCatchRow (month, riverName) {
+  const table = await $('caption*=Small adult sea trout (1lb and under)').parentElement()
+  const rows = await table.$$('tbody tr')
+
+  for (const row of rows) {
+    const monthCell = await row.$('th[data-label="Month"]')
+    const riverCell = await row.$('th[data-label="River"]')
+
+    const [monthText, riverText] = await Promise.all([
+      monthCell?.getText() ?? '',
+      riverCell?.getText() ?? ''
+    ])
+
+    if (monthText.trim() === month && riverText.trim() === riverName) {
+      return row
+    }
+  }
+
+  throw new Error(`Could not find row for ${month} on ${riverName}`)
+}
+
 module.exports = {
-  validateTableByCaption
+  validateTableByCaption,
+  getSmallCatchRow
 }

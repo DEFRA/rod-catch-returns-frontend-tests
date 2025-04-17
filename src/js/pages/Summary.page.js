@@ -1,7 +1,7 @@
 'use strict'
 const Page = require('./page')
 const { logger } = require('defra-logging-facade')
-const { validateTableByCaption } = require('../utils/table-utils')
+const { validateTableByCaption, getSmallCatchRow } = require('../utils/table-utils')
 
 class SummaryPage extends Page {
   get url () {
@@ -41,42 +41,27 @@ class SummaryPage extends Page {
     await deleteLink.click()
   }
 
-  async getSmallCatchRow (month, riverName) {
-    const table = await $('caption*=Small adult sea trout').parentElement()
-    const rows = await table.$$('tbody tr')
-
-    for (const row of rows) {
-      const monthCell = await row.$('th[data-label="Month"]')
-      const riverCell = await row.$('th[data-label="River"]')
-
-      const [monthText, riverText] = await Promise.all([
-        monthCell?.getText() ?? '',
-        riverCell?.getText() ?? ''
-      ])
-
-      if (monthText.trim() === month && riverText.trim() === riverName) {
-        return row
-      }
-    }
-
-    throw new Error(`Could not find row for ${month} on ${riverName}`)
-  }
-
   async clickAddSmallCatch () {
     logger.debug('Add a small catch of under 1 lb link')
     await this.clickNavigationLink('#small-catches-add')
   }
 
   async clickChangeSmallCatch (month, riverName) {
-    const row = await this.getSmallCatchRow(month, riverName)
+    const row = await getSmallCatchRow(month, riverName)
     const changeLink = await row.$('a[href*="/clear"]')
     await changeLink.click()
   }
 
   async clickDeleteSmallCatch (month, riverName) {
-    const row = await this.getSmallCatchRow(month, riverName)
+    const row = await getSmallCatchRow(month, riverName)
     const deleteLink = await row.$('a[href*="/delete/small-catches"]')
     await deleteLink.click()
+  }
+
+  async clickExcludeCheckboxSmallCatch (month, riverName) {
+    const row = await getSmallCatchRow(month, riverName)
+    const changeLink = await row.$('input[name="exclude-small-catch"]')
+    await changeLink.click()
   }
 
   async getLargeCatchRow (riverName, type) {
