@@ -1,7 +1,7 @@
 'use strict'
 const Page = require('./page')
 const { logger } = require('defra-logging-facade')
-const { validateTableByCaption, getSmallCatchRow } = require('../utils/table-utils')
+const { validateTableByCaption, getSmallCatchRow, getLargeCatchRow } = require('../utils/table-utils')
 
 class SummaryPage extends Page {
   get url () {
@@ -60,29 +60,8 @@ class SummaryPage extends Page {
 
   async clickExcludeCheckboxSmallCatch (month, riverName) {
     const row = await getSmallCatchRow(month, riverName)
-    const changeLink = await row.$('input[name="exclude-small-catch"]')
-    await changeLink.click()
-  }
-
-  async getLargeCatchRow (riverName, type) {
-    const table = await $('caption*=Salmon and large adult sea trout').parentElement()
-    const rows = await table.$$('tbody tr')
-
-    for (const row of rows) {
-      const riverCell = await row.$('th[data-label="River"]')
-      const typeCell = await row.$('td[data-label="Type"]')
-
-      const [riverText, typeText] = await Promise.all([
-        riverCell?.getText() ?? '',
-        typeCell?.getText() ?? ''
-      ])
-
-      if (riverText.trim() === riverName && typeText.trim() === type) {
-        return row
-      }
-    }
-
-    throw new Error(`Could not find row for ${riverName} and ${type}`)
+    const excludeCheckbox = await row.$('input[name="exclude-small-catch"]')
+    await excludeCheckbox.click()
   }
 
   async clickAddLargeCatch () {
@@ -91,15 +70,21 @@ class SummaryPage extends Page {
   }
 
   async clickChangeLargeCatch (riverName, type) {
-    const row = await this.getLargeCatchRow(riverName, type)
+    const row = await getLargeCatchRow(riverName, type)
     const changeLink = await row.$('a[href*="/clear"]')
     await changeLink.click()
   }
 
   async clickDeleteLargeCatch (riverName, type) {
-    const row = await this.getLargeCatchRow(riverName, type)
+    const row = await getLargeCatchRow(riverName, type)
     const changeLink = await row.$('a[href*="/delete/catches"]')
     await changeLink.click()
+  }
+
+  async clickExcludeCheckboxLargeCatch (riverName, type) {
+    const row = await getLargeCatchRow(riverName, type)
+    const excludeCheckbox = await row.$('input[name="exclude-catch"]')
+    await excludeCheckbox.click()
   }
 
   async clickSaveAsDraft () {

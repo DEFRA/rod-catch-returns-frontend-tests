@@ -70,7 +70,14 @@ Feature: Administrative users can manage paper based returns
     And  I submit the username and password for admin user 1
     And  I am on the licence entry page
     And  I submit the licence and postcode for test user 1
-    And  I click exclude on the small catch with the month as January and the river as Ystrad
+
+    When I click exclude on the small catch with the month as January and the river as Ystrad
     And  I am on the summary page and I click review catch return
     And  I am on the review page
     Then The exclude checkbox is checked for the small catch with the month as January and the river as Ystrad
+
+    And  I return to summary
+    When I click exclude on the large catch with the river as Ystrad and and the type as Salmon
+    And  I am on the summary page and I click review catch return
+    And  I am on the review page
+    Then The exclude checkbox is checked for the large catch with the river as Ystrad and and the type as Salmon
