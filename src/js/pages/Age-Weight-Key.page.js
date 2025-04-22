@@ -19,6 +19,10 @@ class AgeWeightKeyPage extends Page {
   async enterYear (year) {
     await $('input#year').setValue(year)
   }
+
+  async uploadFile (filePath) {
+    await $('#upload').addValue(filePath)
+  }
 }
 
 module.exports = new AgeWeightKeyPage()
