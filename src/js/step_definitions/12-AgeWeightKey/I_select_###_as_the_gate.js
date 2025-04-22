@@ -2,6 +2,6 @@
 const { defineStep } = require('@cucumber/cucumber')
 const AgeWeightKeyPage = require('../../pages/Age-Weight-Key.page')
 
-defineStep('I click on the Age weight key link', async function () {
-  await AgeWeightKeyPage.clickAgeWeightKeyLink()
+defineStep(/I select (.*) as the gate for the age weight key/, async (gate) => {
+  AgeWeightKeyPage.selectGate(gate)
 })
