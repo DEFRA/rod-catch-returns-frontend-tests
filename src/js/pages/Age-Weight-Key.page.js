@@ -12,8 +12,12 @@ class AgeWeightKeyPage extends Page {
   }
 
   async selectGate (gate) {
-    const radioButton = await $('label=Dee').parentElement().$('input[type="radio"]')
+    const radioButton = await $(`label=${gate}`).parentElement().$('input[type="radio"]')
     await radioButton.click()
+  }
+
+  async enterYear (year) {
+    await $('input#year').setValue(year)
   }
 }
 
