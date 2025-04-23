@@ -23,6 +23,10 @@ class AgeWeightKeyPage extends Page {
   async uploadFile (filePath) {
     await $('#upload').addValue(filePath)
   }
+
+  async clickUpload () {
+    await $('button=Upload').click()
+  }
 }
 
 module.exports = new AgeWeightKeyPage()

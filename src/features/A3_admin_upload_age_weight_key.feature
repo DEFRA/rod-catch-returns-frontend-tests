@@ -13,3 +13,7 @@ Feature: Administrative users can manage paper based returns
     When  I select Dee as the gate for the age weight key
     And   I enter the year as the current year for the age weight key
     And   I upload the file age-weight-key (duplicate header).csv to the age weight key
+    And   I click upload
+    Then  I expect the error summary to show the following errors
+      | There is a problem                                 |
+      | The selected file must match the required template |
