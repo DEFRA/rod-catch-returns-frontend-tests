@@ -9,6 +9,15 @@ Feature: Administrative users can manage paper based returns
     When  I click on the Age weight key link 
     Then  I should see the Age weight key page
   
+  Scenario: Successful Upload
+    When  I click on the Age weight key link 
+    And   I select Dee as the gate for the age weight key
+    And   I enter the year as the current year for the age weight key
+    And   I upload the file age-weight-key (valid).csv to the age weight key    
+    And   I click upload
+    And   If I am asked to replace the current age weight key I click yes
+    Then  I am on the age weight key ok page
+  
   Scenario: Upload file with duplicate headers
     When  I click on the Age weight key link 
     And   I select Dee as the gate for the age weight key
@@ -40,11 +49,4 @@ Feature: Administrative users can manage paper based returns
       | There is a problem                                      |
       | The selected file contains a virus, upload another file |
   
-  Scenario: Successful Upload
-    When  I click on the Age weight key link 
-    And   I select Dee as the gate for the age weight key
-    And   I enter the year as the current year for the age weight key
-    And   I upload the file age-weight-key (valid).csv to the age weight key    
-    And   I click upload
-    And   If I am asked to replace the current age weight key I click yes
-    Then  I am on the age weight key ok page
+
