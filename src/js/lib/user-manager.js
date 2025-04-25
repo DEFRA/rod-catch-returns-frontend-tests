@@ -117,7 +117,7 @@ const self = module.exports = {
       const response = await self.getAllGrilseProbablities()
       const grilseProbabilities = response._embedded.grilseProbabilities
 
-      logger.info(`Deleting ${grilseProbabilities.length} grilse probabilities`)
+      logger.debug(`Deleting ${grilseProbabilities.length} grilse probabilities`)
 
       const deletePromises = grilseProbabilities.map(item => {
         const deleteUrl = item._links.self.href
@@ -126,7 +126,7 @@ const self = module.exports = {
       })
 
       await Promise.all(deletePromises)
-      logger.info('Successfully deleted all grilse probabilities')
+      logger.debug('Successfully deleted all grilse probabilities')
       return true
     } catch (error) {
       logger.error('Failed to delete grilse probabilities', error)
