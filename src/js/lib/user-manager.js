@@ -134,7 +134,7 @@ const self = module.exports = {
     }
   },
 
-  getAllGrilseProbablities: async function () {
+  getAllGrilseProbabilities: async function () {
     const requestObject = defaultRequestOptions(undefined, '/api/grilseProbabilities', 'GET')
 
     return await rp(requestObject)
