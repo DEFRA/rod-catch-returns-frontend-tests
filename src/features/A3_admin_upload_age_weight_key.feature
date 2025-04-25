@@ -9,8 +9,18 @@ Feature: Administrative users can manage paper based returns
     When  I click on the Age weight key link 
     Then  I should see the Age weight key page
   
+  Scenario: Successful Upload
+    When  I click on the Age weight key link 
+    And   I select Dee as the gate for the age weight key
+    And   I enter the year as the current year for the age weight key
+    And   I upload the file age-weight-key (valid).csv to the age weight key    
+    And   I click upload
+    And   If I am asked to replace the current age weight key I click yes
+    Then  I am on the age weight key ok page
+  
   Scenario: Upload file with duplicate headers
-    When  I select Dee as the gate for the age weight key
+    When  I click on the Age weight key link 
+    And   I select Dee as the gate for the age weight key
     And   I enter the year as the current year for the age weight key
     And   I upload the file age-weight-key (duplicate header).csv to the age weight key
     And   I click upload
@@ -19,7 +29,8 @@ Feature: Administrative users can manage paper based returns
       | The selected file must match the required template |
   
   Scenario: Upload empty file
-    When  I select Tamar as the gate for the age weight key
+    When  I click on the Age weight key link 
+    And   I select Tamar as the gate for the age weight key
     And   I enter the year as the current year for the age weight key
     And   I upload the file age-weight-key (empty).csv to the age weight key
     And   I click upload
@@ -28,7 +39,8 @@ Feature: Administrative users can manage paper based returns
       | The selected file is empty |
   
   Scenario: Upload infected file
-    When  I select Dee as the gate for the age weight key
+    When  I click on the Age weight key link 
+    And   I select Dee as the gate for the age weight key
     And   I enter the year as the current year for the age weight key
     And   I upload the file eicar.com.csv to the age weight key
     And   I click upload
