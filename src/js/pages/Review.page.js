@@ -1,6 +1,6 @@
 'use strict'
 const Page = require('./page')
-const { validateTableByCaption } = require('../utils/table-utils')
+const { validateTableByCaption, getSmallCatchRow, getLargeCatchRow } = require('../utils/table-utils')
 
 class ReviewPage extends Page {
   get url () {
@@ -8,7 +8,7 @@ class ReviewPage extends Page {
   }
 
   async clickCancel () {
-    const clickCancel = browser.element('#return-summary')
+    const clickCancel = $('#return-summary')
     await clickCancel.click()
   }
 
@@ -27,6 +27,23 @@ class ReviewPage extends Page {
 
   async validateLargeCatchesTable (dataTable) {
     validateTableByCaption('Salmon and large adult sea trout', dataTable)
+  }
+
+  async checkExcludeCheckboxCheckedSmallCatch (month, riverName) {
+    const row = await getSmallCatchRow(month, riverName)
+    const excludeCheckbox = await row.$('input[name="exclude-small-catch"]')
+    await expect(excludeCheckbox).toBeChecked()
+  }
+
+  async checkExcludeCheckboxCheckedLargeCatch (riverName, type) {
+    const row = await getLargeCatchRow(riverName, type)
+    const excludeCheckbox = await row.$('input[name="exclude-catch"]')
+    await expect(excludeCheckbox).toBeChecked()
+  }
+
+  async checkExcludeCheckboxCheckedSubmission () {
+    const excludeCheckbox = await $('input[name="exclude"]')
+    await expect(excludeCheckbox).toBeChecked()
   }
 }
 

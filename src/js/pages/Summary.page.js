@@ -1,7 +1,7 @@
 'use strict'
 const Page = require('./page')
 const { logger } = require('defra-logging-facade')
-const { validateTableByCaption } = require('../utils/table-utils')
+const { validateTableByCaption, getSmallCatchRow, getLargeCatchRow } = require('../utils/table-utils')
 
 class SummaryPage extends Page {
   get url () {
@@ -41,63 +41,27 @@ class SummaryPage extends Page {
     await deleteLink.click()
   }
 
-  async getSmallCatchRow (month, riverName) {
-    const table = await $('caption*=Small adult sea trout').parentElement()
-    const rows = await table.$$('tbody tr')
-
-    for (const row of rows) {
-      const monthCell = await row.$('th[data-label="Month"]')
-      const riverCell = await row.$('th[data-label="River"]')
-
-      const [monthText, riverText] = await Promise.all([
-        monthCell?.getText() ?? '',
-        riverCell?.getText() ?? ''
-      ])
-
-      if (monthText.trim() === month && riverText.trim() === riverName) {
-        return row
-      }
-    }
-
-    throw new Error(`Could not find row for ${month} on ${riverName}`)
-  }
-
   async clickAddSmallCatch () {
     logger.debug('Add a small catch of under 1 lb link')
     await this.clickNavigationLink('#small-catches-add')
   }
 
   async clickChangeSmallCatch (month, riverName) {
-    const row = await this.getSmallCatchRow(month, riverName)
+    const row = await getSmallCatchRow(month, riverName)
     const changeLink = await row.$('a[href*="/clear"]')
     await changeLink.click()
   }
 
   async clickDeleteSmallCatch (month, riverName) {
-    const row = await this.getSmallCatchRow(month, riverName)
+    const row = await getSmallCatchRow(month, riverName)
     const deleteLink = await row.$('a[href*="/delete/small-catches"]')
     await deleteLink.click()
   }
 
-  async getLargeCatchRow (riverName, type) {
-    const table = await $('caption*=Salmon and large adult sea trout').parentElement()
-    const rows = await table.$$('tbody tr')
-
-    for (const row of rows) {
-      const riverCell = await row.$('th[data-label="River"]')
-      const typeCell = await row.$('td[data-label="Type"]')
-
-      const [riverText, typeText] = await Promise.all([
-        riverCell?.getText() ?? '',
-        typeCell?.getText() ?? ''
-      ])
-
-      if (riverText.trim() === riverName && typeText.trim() === type) {
-        return row
-      }
-    }
-
-    throw new Error(`Could not find row for ${riverName} and ${type}`)
+  async clickExcludeCheckboxSmallCatch (month, riverName) {
+    const row = await getSmallCatchRow(month, riverName)
+    const excludeCheckbox = await row.$('input[name="exclude-small-catch"]')
+    await excludeCheckbox.click()
   }
 
   async clickAddLargeCatch () {
@@ -106,15 +70,21 @@ class SummaryPage extends Page {
   }
 
   async clickChangeLargeCatch (riverName, type) {
-    const row = await this.getLargeCatchRow(riverName, type)
+    const row = await getLargeCatchRow(riverName, type)
     const changeLink = await row.$('a[href*="/clear"]')
     await changeLink.click()
   }
 
   async clickDeleteLargeCatch (riverName, type) {
-    const row = await this.getLargeCatchRow(riverName, type)
+    const row = await getLargeCatchRow(riverName, type)
     const changeLink = await row.$('a[href*="/delete/catches"]')
     await changeLink.click()
+  }
+
+  async clickExcludeCheckboxLargeCatch (riverName, type) {
+    const row = await getLargeCatchRow(riverName, type)
+    const excludeCheckbox = await row.$('input[name="exclude-catch"]')
+    await excludeCheckbox.click()
   }
 
   async clickSaveAsDraft () {
@@ -142,6 +112,11 @@ class SummaryPage extends Page {
 
   async validateLargeCatchTable (dataTable) {
     await validateTableByCaption('Salmon and large adult sea trout', dataTable)
+  }
+
+  async excludeSubmission () {
+    const excludeCheckbox = await $('input[name="exclude"]')
+    await excludeCheckbox.click()
   }
 }
 
