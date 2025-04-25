@@ -112,7 +112,7 @@ const self = module.exports = {
     }
   },
 
-  deleteAllGrilseProbablities: async function () {
+  deleteAllGrilseProbabilities: async function () {
     try {
       const response = await self.getAllGrilseProbablities()
       const grilseProbabilities = response._embedded.grilseProbabilities
