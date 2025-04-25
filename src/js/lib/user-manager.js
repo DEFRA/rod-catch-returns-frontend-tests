@@ -110,5 +110,33 @@ const self = module.exports = {
     } catch (e) {
       logger.error(`Error fetching contact detail for with username=${user.username} and password=${user.password}`, e)
     }
+  },
+
+  deleteAllGrilseProbablities: async function () {
+    try {
+      const response = await self.getAllGrilseProbablities()
+      const grilseProbabilities = response._embedded.grilseProbabilities
+
+      logger.info(`Deleting ${grilseProbabilities.length} grilse probabilities`)
+
+      const deletePromises = grilseProbabilities.map(item => {
+        const deleteUrl = item._links.self.href
+        logger.debug(`Deleting grilse probability at: ${deleteUrl}`)
+        return rp(defaultRequestOptions(undefined, deleteUrl, 'DELETE'))
+      })
+
+      await Promise.all(deletePromises)
+      logger.info('Successfully deleted all grilse probabilities')
+      return true
+    } catch (error) {
+      logger.error('Failed to delete grilse probabilities', error)
+      throw error
+    }
+  },
+
+  getAllGrilseProbablities: async function () {
+    const requestObject = defaultRequestOptions(undefined, '/api/grilseProbabilities', 'GET')
+
+    return await rp(requestObject)
   }
 }
