@@ -26,3 +26,14 @@ Feature: Administrative users can manage paper based returns
     Then  I expect the error summary to show the following errors
       | There is a problem         |
       | The selected file is empty |
+  
+  Scenario: Upload infected file
+    When  I select Dee as the gate for the age weight key
+    And   I enter the year as the current year for the age weight key
+    And   I upload the file eicar.com.csv to the age weight key
+    And   I click upload
+    # NOTE: If this test fail locally, check if antivirus is running. 
+    # The admin frontend requires the antivirus to be running, if not a generic error message will be shown instead.
+    Then  I expect the error summary to show the following errors
+      | There is a problem                                      |
+      | The selected file contains a virus, upload another file | 
