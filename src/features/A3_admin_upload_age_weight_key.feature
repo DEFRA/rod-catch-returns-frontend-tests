@@ -48,5 +48,3 @@ Feature: Administrative users can manage paper based returns
     Then  I expect the error summary to show the following errors
       | There is a problem                                      |
       | The selected file contains a virus, upload another file |
-  
-
