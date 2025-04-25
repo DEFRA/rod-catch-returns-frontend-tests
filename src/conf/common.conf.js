@@ -109,7 +109,7 @@ exports.config = {
           return userManager.deleteAllUserSubmissions()
         })
         .then(() => {
-          return userManager.deleteAllGrilseProbablities()
+          return userManager.deleteAllGrilseProbabilities()
         })
         .then(() => {
           resolve()
