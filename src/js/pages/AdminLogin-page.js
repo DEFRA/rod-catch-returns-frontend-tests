@@ -7,17 +7,15 @@ class AdminLoginPage extends Page {
   }
 
   async setUsername (username) {
-    await $('input#user').setValue(username)
+    await $('input[type="email"]').setValue(username)
   }
 
   async setPassword (password) {
-    await $('input#password').setValue(password)
+    await $('input[type="password"]').setValue(password)
   }
 
-  async submit (username, password) {
-    await this.setUsername(username)
-    await this.setPassword(password)
-    await this.continue()
+  async next () {
+    await $('input[type="submit"]').click()
   }
 }
 

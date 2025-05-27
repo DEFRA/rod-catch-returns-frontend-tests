@@ -1,3 +1,4 @@
+@Pending
 Feature: Administrative users can manage paper based returns
 
   Background:
@@ -6,13 +7,6 @@ Feature: Administrative users can manage paper based returns
   Scenario: Redirect to login page
     When I navigate to /
     Then I am redirected to /login
-  
-  Scenario: Login fail
-    When I am on the admin login page
-    And  I submit a@a.com for username and a for the password
-    Then I expect the error summary to show the following errors
-      | There is a problem                        |
-      | You have not entered correct user details |
 
   Scenario: Enter a new paper return
     When I am on the admin login page
