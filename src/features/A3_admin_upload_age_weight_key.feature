@@ -9,6 +9,43 @@ Feature: Administrative users can manage paper based returns
     When  I click on the Age weight key link 
     Then  I should see the Age weight key page
   
+  Scenario: No gate selected
+    When  I click on the Age weight key link
+    And   I enter the year as the current year for the age weight key
+    And   I upload the file age-weight-key (valid).csv to the age weight key    
+    And   I click upload
+    Then  I expect the error summary to show the following errors
+      | There is a problem       |
+      | Select an age weight key |
+  
+  Scenario: No year entered
+    When  I click on the Age weight key link
+    And   I select Dee as the gate for the age weight key
+    And   I upload the file age-weight-key (valid).csv to the age weight key    
+    And   I click upload
+    Then  I expect the error summary to show the following errors
+      | There is a problem |
+      | Enter a year       |
+  
+  Scenario: Invalid year
+    When  I click on the Age weight key link
+    And   I enter the year as 1970 for the age weight key
+    And   I select Dee as the gate for the age weight key
+    And   I upload the file age-weight-key (valid).csv to the age weight key    
+    And   I click upload
+    Then  I expect the error summary to show the following errors
+      | There is a problem |
+      | Enter year between |
+    
+  Scenario: No file selected
+    When  I click on the Age weight key link 
+    And   I select Dee as the gate for the age weight key
+    And   I enter the year as the current year for the age weight key
+    And   I click upload
+    Then  I expect the error summary to show the following errors
+      | There is a problem |
+      | Select a file      |
+  
   Scenario: Successful Upload
     When  I click on the Age weight key link 
     And   I select Dee as the gate for the age weight key
