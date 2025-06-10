@@ -8,12 +8,12 @@ Feature: Administrative users can manage paper based returns
   Scenario: Admin clicks the Age weight key page
     When  I click on the Age weight key link 
     Then  I should see the Age weight key page
-  
+
   Scenario: Cancel upload
     When  I click on the Age weight key link 
     And   I click cancel
     Then  I am on the licence entry page
-  
+
   Scenario: No gate selected
     When  I click on the Age weight key link
     And   I enter the year as the current year for the age weight key
