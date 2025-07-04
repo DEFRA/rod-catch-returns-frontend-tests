@@ -46,19 +46,19 @@ Notes:
         <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
       </ConfigTestElement>
       <hashTree/>
-      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Logins" enabled="true">
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Logins">
         <stringProp name="delimiter">,</stringProp>
         <stringProp name="fileEncoding">UTF-8</stringProp>
         <stringProp name="filename">logins.csv</stringProp>
         <boolProp name="ignoreFirstLine">true</boolProp>
         <boolProp name="quotedData">true</boolProp>
         <boolProp name="recycle">false</boolProp>
-        <stringProp name="shareMode">shareMode.all</stringProp>
+        <stringProp name="shareMode">shareMode.thread</stringProp>
         <boolProp name="stopThread">true</boolProp>
         <stringProp name="variableNames">licence,postcode</stringProp>
       </CSVDataSet>
       <hashTree/>
-      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Rivers" enabled="true">
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Rivers">
         <stringProp name="delimiter">,</stringProp>
         <stringProp name="fileEncoding">UTF-8</stringProp>
         <stringProp name="filename">rivers.csv</stringProp>
@@ -70,7 +70,7 @@ Notes:
         <stringProp name="variableNames">riverId,riverName</stringProp>
       </CSVDataSet>
       <hashTree/>
-      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Delays" enabled="true">
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Delays">
         <collectionProp name="Arguments.arguments">
           <elementProp name="delay_ms_login_base" elementType="Argument">
             <stringProp name="Argument.name">delay_ms_login_base</stringProp>
@@ -111,6 +111,36 @@ Notes:
         </collectionProp>
       </Arguments>
       <hashTree/>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="api_url" elementType="Argument">
+            <stringProp name="Argument.name">api_url</stringProp>
+            <stringProp name="Argument.value">http://localhost:9580</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="Delete Existing Submissions">
+        <intProp name="ThreadGroup.num_threads">1</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <intProp name="LoopController.loops">-1</intProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </SetupThreadGroup>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename">DeleteSubmissions.groovy</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script"></stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+      </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="[TG] - Did Not Fish Users">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
@@ -122,7 +152,7 @@ Notes:
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <CacheManager guiclass="CacheManagerGui" testclass="CacheManager" testname="HTTP Cache Manager" enabled="true">
+        <CacheManager guiclass="CacheManagerGui" testclass="CacheManager" testname="HTTP Cache Manager">
           <boolProp name="clearEachIteration">true</boolProp>
           <boolProp name="useExpires">true</boolProp>
           <intProp name="maxSize">500</intProp>
@@ -175,7 +205,7 @@ Notes:
           <hashTree/>
         </hashTree>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="[TG] - Zero Catch Users" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="[TG] - Zero Catch Users">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -255,7 +285,7 @@ Notes:
           <hashTree/>
         </hashTree>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="[TG] - Full Submission Users" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="[TG] - Full Submission Users">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -357,7 +387,7 @@ Notes:
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET /licence-auth">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET /licence-auth" enabled="true">
             <stringProp name="TestPlan.comments">Detected the start of a redirect chain</stringProp>
             <stringProp name="HTTPSampler.path">/licence-auth</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -370,7 +400,7 @@ Notes:
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Reset Test Variables for User">
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Reset Test Variables for User" enabled="true">
               <stringProp name="cacheKey">true</stringProp>
               <stringProp name="filename">ResetTestVariables.groovy</stringProp>
               <stringProp name="parameters"></stringProp>
@@ -378,7 +408,7 @@ Notes:
               <stringProp name="scriptLanguage">groovy</stringProp>
             </JSR223PreProcessor>
             <hashTree/>
-            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extract Crumb Token Name">
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extract Crumb Token Name" enabled="true">
               <stringProp name="RegexExtractor.useHeaders">false</stringProp>
               <stringProp name="RegexExtractor.refname">crumbTokenName</stringProp>
               <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;(rcr\d{4})&quot; value=</stringProp>
@@ -388,7 +418,7 @@ Notes:
               <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
             </RegexExtractor>
             <hashTree/>
-            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extract Crumb Token Value">
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extract Crumb Token Value" enabled="true">
               <stringProp name="RegexExtractor.useHeaders">false</stringProp>
               <stringProp name="RegexExtractor.refname">crumbTokenValue</stringProp>
               <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; name=&quot;rcr\d{4}&quot; value=&quot;([^&quot;]+)&quot;</stringProp>
@@ -445,13 +475,13 @@ Notes:
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Login - Uniform Random Timer">
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Login - Uniform Random Timer" enabled="true">
               <stringProp name="ConstantTimer.delay">${delay_ms_login_base}</stringProp>
               <stringProp name="RandomTimer.range">${delay_ms_login_random}</stringProp>
               <stringProp name="TestPlan.comments">Recorded:56880ms</stringProp>
             </UniformRandomTimer>
             <hashTree/>
-            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion - Check user logged in">
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion - Check user logged in" enabled="true">
               <stringProp name="cacheKey">true</stringProp>
               <stringProp name="filename">LoginAssertion.groovy</stringProp>
               <stringProp name="parameters"></stringProp>
@@ -459,7 +489,7 @@ Notes:
               <stringProp name="scriptLanguage">groovy</stringProp>
             </JSR223Assertion>
             <hashTree/>
-            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion - Check submission is clean">
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion - Check submission is clean" enabled="true">
               <stringProp name="cacheKey">true</stringProp>
               <stringProp name="filename">CleanSubmissionAssertion.groovy</stringProp>
               <stringProp name="parameters"></stringProp>
@@ -467,7 +497,7 @@ Notes:
               <stringProp name="scriptLanguage">groovy</stringProp>
             </JSR223Assertion>
             <hashTree/>
-            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - Check for season selector">
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - Check for season selector" enabled="true">
               <stringProp name="cacheKey">true</stringProp>
               <stringProp name="filename">LoginRedirectTest.groovy</stringProp>
               <stringProp name="parameters"></stringProp>
@@ -490,7 +520,7 @@ Notes:
             <boolProp name="IfController.useExpression">true</boolProp>
           </IfController>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST /select-year">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST /select-year" enabled="true">
               <stringProp name="TestPlan.comments">Detected the start of a redirect chain</stringProp>
               <boolProp name="HTTPSampler.image_parser">true</boolProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
@@ -558,7 +588,7 @@ Notes:
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Submit Delay - Uniform Random Timer">
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Submit Delay - Uniform Random Timer" enabled="true">
               <stringProp name="ConstantTimer.delay">${delay_ms_other_base}</stringProp>
               <stringProp name="RandomTimer.range">${delay_ms_other_random}</stringProp>
               <stringProp name="TestPlan.comments">Recorded:3776ms</stringProp>
@@ -573,7 +603,7 @@ Notes:
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST /did-you-fish">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST /did-you-fish" enabled="true">
             <stringProp name="TestPlan.comments">Detected the start of a redirect chain</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
             <stringProp name="HTTPSampler.path">/did-you-fish</stringProp>
@@ -602,7 +632,7 @@ Notes:
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Submit Delay - Uniform Random Timer">
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Submit Delay - Uniform Random Timer" enabled="true">
               <stringProp name="ConstantTimer.delay">${delay_ms_other_base}</stringProp>
               <stringProp name="RandomTimer.range">${delay_ms_other_random}</stringProp>
               <stringProp name="TestPlan.comments">Recorded:3776ms</stringProp>
@@ -690,7 +720,7 @@ Notes:
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Submit Delay - Uniform Random Timer">
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Submit Delay - Uniform Random Timer" enabled="true">
               <stringProp name="ConstantTimer.delay">${delay_ms_other_base}</stringProp>
               <stringProp name="RandomTimer.range">${delay_ms_other_random}</stringProp>
               <stringProp name="TestPlan.comments">Recorded:3776ms</stringProp>
@@ -792,13 +822,13 @@ Notes:
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Submit Delay - Uniform Random Timer">
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Submit Delay - Uniform Random Timer" enabled="true">
               <stringProp name="ConstantTimer.delay">${delay_ms_other_base}</stringProp>
               <stringProp name="RandomTimer.range">${delay_ms_other_random}</stringProp>
               <stringProp name="TestPlan.comments">Recorded:3776ms</stringProp>
             </UniformRandomTimer>
             <hashTree/>
-            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Setup small catch data">
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Setup small catch data" enabled="true">
               <stringProp name="cacheKey">true</stringProp>
               <stringProp name="filename">SetupSmallCatch.groovy</stringProp>
               <stringProp name="parameters"></stringProp>
@@ -930,13 +960,13 @@ Notes:
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Submit Delay - Uniform Random Timer">
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Submit Delay - Uniform Random Timer" enabled="true">
               <stringProp name="ConstantTimer.delay">${delay_ms_other_base}</stringProp>
               <stringProp name="RandomTimer.range">${delay_ms_other_random}</stringProp>
               <stringProp name="TestPlan.comments">Recorded:3776ms</stringProp>
             </UniformRandomTimer>
             <hashTree/>
-            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Setup large catch data">
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Setup large catch data" enabled="true">
               <stringProp name="cacheKey">true</stringProp>
               <stringProp name="filename">SetupLargeCatch.groovy</stringProp>
               <stringProp name="parameters"></stringProp>
@@ -986,7 +1016,7 @@ Notes:
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Submit Delay - Uniform Random Timer">
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Submit Delay - Uniform Random Timer" enabled="true">
               <stringProp name="ConstantTimer.delay">${delay_ms_other_base}</stringProp>
               <stringProp name="RandomTimer.range">${delay_ms_other_random}</stringProp>
               <stringProp name="TestPlan.comments">Recorded:3776ms</stringProp>
@@ -1006,7 +1036,7 @@ Notes:
           </hashTree>
         </hashTree>
       </hashTree>
-      <TestFragmentController guiclass="TestFragmentControllerGui" testclass="TestFragmentController" testname="Submit Return and View Confirmation"/>
+      <TestFragmentController guiclass="TestFragmentControllerGui" testclass="TestFragmentController" testname="Submit Return and View Confirmation" enabled="true"/>
       <hashTree>
         <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Submit Return Transaction" enabled="true">
           <boolProp name="TransactionController.includeTimers">false</boolProp>
@@ -1034,7 +1064,7 @@ Notes:
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
               <collectionProp name="Asserion.test_strings">
                 <stringProp name="-1623863644">Catch return complete</stringProp>
               </collectionProp>
@@ -1044,7 +1074,7 @@ Notes:
               <intProp name="Assertion.test_type">16</intProp>
             </ResponseAssertion>
             <hashTree/>
-            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Submit Delay - Uniform Random Timer">
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Submit Delay - Uniform Random Timer" enabled="true">
               <stringProp name="ConstantTimer.delay">${delay_ms_other_base}</stringProp>
               <stringProp name="RandomTimer.range">${delay_ms_other_random}</stringProp>
               <stringProp name="TestPlan.comments">Recorded:3776ms</stringProp>
@@ -1127,7 +1157,7 @@ Notes:
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
-      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
