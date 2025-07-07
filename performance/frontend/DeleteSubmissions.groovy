@@ -7,7 +7,7 @@ def http = HttpClients.createDefault()
 
 def licenceNumber = vars.get("licence")
 def postcode = vars.get("postcode")
-def season = 2025
+def season = new Date().format("yyyy") 
 
 def apiUrl = vars.get("api_url")
 

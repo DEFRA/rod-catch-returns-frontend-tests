@@ -2,6 +2,15 @@
 
 Performance tests for the Rod Catch Returns (RCR) frontend service.
 
+## Create local.properties
+Create a local.properties in the performance/frontend directory use local.properties.example as a guide.
+
+| Name          | Description                                                                            |
+| --------------| -------------------------------------------------------------------------------------- |
+| serverName    | the domain the RCR public frontend                                                     |
+| apiUrl        | the full url of the Java API                                                           |
+| loginDataFile | which login file to use, can be logins-dev.csv, logins-test.csv or logins-pre-prod.csv |
+
 ## Running using JMeter
 
 The performance tests use JMeter to run. You can run them using Docker (see Docker section below), but to make modifications locally, it is advised to install Java and [JMeter](https://jmeter.apache.org/). Run JMeter from this directory i.e.
@@ -21,13 +30,15 @@ Once the GUI is loaded, File > Open > Frontend Tests.jmx
 
 ![Screenshot of GUI](readme-images/gui.png)
 
-You can change the url it points to by changing "Server Name or IP"
+You will need to change the following
+- Server Name or IP - the RCR public frontend url
+- 
 
 To run, just press the green triangle (start button).
 
 ### Command line
 
-To run using the command line (modify the location of where your JMeter is installed)
+Make sure you have created the local.properties above. To run using the command line run (modify the location of where your JMeter is installed):
 
 ```
 ~/apache-jmeter-5.6.3/bin/jmeter -n -t Frontend\ Tests.jmx -l log.log -e -o output
