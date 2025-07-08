@@ -4,6 +4,6 @@ logs/
 node_modules/
 .env
 *.log
-output/
+results/
 local.properties
 

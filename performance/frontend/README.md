@@ -41,11 +41,18 @@ To run, just press the green triangle (start button).
 Make sure you have created the local.properties above. To run using the command line run (modify the location of where your JMeter is installed):
 
 ```
-~/apache-jmeter-5.6.3/bin/jmeter -n -t Frontend\ Tests.jmx -l log.log -e -o output -q local.properties
+~/apache-jmeter-5.6.3/bin/jmeter -n -t Frontend\ Tests.jmx -l log.log -e -o results/html-report -q local.properties
 ```
 
-This will run the tests and produce a report
+This will run the tests and produce a report.
 
 ## Docker
 
-TBC
+To run using docker, make sure you have created the local.properties. Then in `/performance/frontend` run:
+```
+docker build -t jmeter-with-report .
+```
+To build the image, then the following to run it
+```
+docker run --rm -v "$PWD:/tests" jmeter-with-report
+```
