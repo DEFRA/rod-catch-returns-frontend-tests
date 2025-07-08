@@ -23,7 +23,7 @@ cd /performance/frontend
 
 To bring up the JMeter GUI, if installed in the home directory in linux, it will be
 ```
-~/apache-jmeter-5.6.3/bin/jmeter 
+~/apache-jmeter-5.6.3/bin/jmeter -q local.properties
 ```
 
 Once the GUI is loaded, File > Open > Frontend Tests.jmx
@@ -41,7 +41,7 @@ To run, just press the green triangle (start button).
 Make sure you have created the local.properties above. To run using the command line run (modify the location of where your JMeter is installed):
 
 ```
-~/apache-jmeter-5.6.3/bin/jmeter -n -t Frontend\ Tests.jmx -l log.log -e -o output
+~/apache-jmeter-5.6.3/bin/jmeter -n -t Frontend\ Tests.jmx -l log.log -e -o output -q local.properties
 ```
 
 This will run the tests and produce a report
