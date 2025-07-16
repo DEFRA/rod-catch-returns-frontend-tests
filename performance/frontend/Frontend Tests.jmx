@@ -13,6 +13,8 @@ Notes:
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
     </TestPlan>
     <hashTree>
       <DNSCacheManager guiclass="DNSCachePanel" testclass="DNSCacheManager" testname="DNS Cache Manager">
@@ -121,7 +123,7 @@ Notes:
         </collectionProp>
       </Arguments>
       <hashTree/>
-      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="[SU] - Delete Submissions">
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="[SU] - Delete Submissions" enabled="true">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -132,7 +134,7 @@ Notes:
         </elementProp>
       </SetupThreadGroup>
       <hashTree>
-        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Delete Submissions">
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Delete Submissions" enabled="true">
           <stringProp name="scriptLanguage">groovy</stringProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename">DeleteSubmissions.groovy</stringProp>
@@ -141,7 +143,7 @@ Notes:
         </JSR223Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="[TG] - Did Not Fish Users">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="[TG] - Did Not Fish Users" enabled="true">
         <intProp name="ThreadGroup.num_threads">5</intProp>
         <intProp name="ThreadGroup.ramp_time">300</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -205,7 +207,7 @@ Notes:
           <hashTree/>
         </hashTree>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="[TG] - Zero Catch Users">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="[TG] - Zero Catch Users" enabled="true">
         <intProp name="ThreadGroup.num_threads">15</intProp>
         <intProp name="ThreadGroup.ramp_time">300</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -285,7 +287,7 @@ Notes:
           <hashTree/>
         </hashTree>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="[TG] - Full Submission Users">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="[TG] - Full Submission Users" enabled="true">
         <intProp name="ThreadGroup.num_threads">80</intProp>
         <intProp name="ThreadGroup.ramp_time">300</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -1083,7 +1085,7 @@ Notes:
           </hashTree>
         </hashTree>
       </hashTree>
-      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
@@ -1120,7 +1122,7 @@ Notes:
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
-      <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="false">
+      <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>

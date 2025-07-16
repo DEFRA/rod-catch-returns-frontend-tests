@@ -23,6 +23,6 @@ CMD bash -c '\
     mkdir -p /tests/results/html-report && \
     chmod -R a+w /tests/results && \
     jmeter -n -t "Frontend Tests.jmx" \
-           -l log.log \
+           -l results/result.jtl \
            -e -o results/html-report \
            -q local.properties'

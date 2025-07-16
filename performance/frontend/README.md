@@ -16,7 +16,7 @@ Create a local.properties in the performance/frontend directory use local.proper
 The performance tests use JMeter to run. You can run them using Docker (see Docker section below), but to make modifications locally, it is advised to install Java and [JMeter](https://jmeter.apache.org/). Run JMeter from this directory i.e.
 
 ```
-cd /performance/frontend
+cd performance/frontend
 ```
 
 ### GUI
@@ -41,14 +41,14 @@ To run, just press the green triangle (start button).
 Make sure you have created the local.properties above. To run using the command line run (modify the location of where your JMeter is installed):
 
 ```
-~/apache-jmeter-5.6.3/bin/jmeter -n -t Frontend\ Tests.jmx -l log.log -e -o results/html-report -q local.properties
+~/apache-jmeter-5.6.3/bin/jmeter -n -t Frontend\ Tests.jmx -l results/result.jtl -e -o results/html-report -q local.properties
 ```
 
 This will run the tests and produce a report.
 
 ## Docker
 
-To run using docker, make sure you have created the local.properties. Then in `/performance/frontend` run:
+To run using docker, make sure you have created the local.properties. Then in `performance/frontend` run:
 ```
 docker build -t jmeter-with-report .
 ```
