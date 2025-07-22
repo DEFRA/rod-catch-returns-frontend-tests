@@ -2,7 +2,7 @@ Random random = new Random()
 
 // The date caught
 vars.put("dayNumber", "" + (random.nextInt(28) + 1))
-vars.put("monthNumber", "" + (random.nextInt(12) + 1))
+vars.put("monthNumber", "" + 1)
 
 // Was the catch released
 String[] releasedOptions = ["true", "false"]
