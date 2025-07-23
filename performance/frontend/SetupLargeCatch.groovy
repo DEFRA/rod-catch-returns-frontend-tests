@@ -1,8 +1,15 @@
-Random random = new Random()
+// Get 10 days before today using Groovy's built-in date math
+def tenDaysAgo = new Date() - 10
 
-// The date caught
-vars.put("dayNumber", "" + (random.nextInt(28) + 1))
-vars.put("monthNumber", "" + 1)
+// Extract day and month
+int dayNumber = tenDaysAgo[Calendar.DAY_OF_MONTH]
+int monthNumber = tenDaysAgo[Calendar.MONTH] + 1 // Calendar.MONTH is zero-based
+
+// Set JMeter variables
+vars.put("dayNumber", "" + dayNumber)
+vars.put("monthNumber", "" + monthNumber)
+
+Random random = new Random()
 
 // Was the catch released
 String[] releasedOptions = ["true", "false"]

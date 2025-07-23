@@ -11,8 +11,12 @@ vars.put("releasedCount", releasedCount.toString())
 
 // Month of the small catch entry
 Integer monthIndex = null
-String[] months = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"]
+String[] allMonths = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"]
 HashSet usedMonths = vars.getObject("usedMonths")
+
+// Only include months up to the current one
+int currentMonthIndex = Calendar.getInstance().get(Calendar.MONTH) // 0-based
+String[] months = allMonths[0..currentMonthIndex] // Slice array up to current month
 
 if (usedMonths == null) {
     usedMonths = new HashSet()
