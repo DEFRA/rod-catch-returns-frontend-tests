@@ -3,3 +3,6 @@ logs/
 *.iml
 node_modules/
 .env
+*.log
+results/
+local.properties
