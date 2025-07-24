@@ -10,12 +10,14 @@ pipeline {
         stage('Building test container') {
             steps {
                 script {
-                    ansiColor('xterm') {
-                        def buildArgs = " ."
-                        if (params.REBUILD_IMAGE) {
-                            buildArgs = '--no-cache ' + buildArgs
+                    dir('performance/frontend') {
+                        ansiColor('xterm') {
+                            def buildArgs = " ."
+                            if (params.REBUILD_IMAGE) {
+                                buildArgs = '--no-cache ' + buildArgs
+                            }
+                            docker.build("defra/rod-catch-returns-performance-tests", buildArgs)
                         }
-                        docker.build("defra/rod-catch-returns-performance-tests", buildArgs)
                     }
                 }
             }
