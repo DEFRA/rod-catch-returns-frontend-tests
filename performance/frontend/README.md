@@ -39,3 +39,14 @@ Make sure you have created the local.properties above and create a folder called
 ```
 
 This will run the tests and produce a report.
+
+## Running Using Docker
+
+To run using docker, make sure you have created the local.properties. Then in `performance/frontend` run:
+```
+docker build -t jmeter-with-report .
+```
+To build the image, then the following to run it
+```
+docker run --rm -v "$PWD:/tests" jmeter-with-report
+```
