@@ -1,0 +1,43 @@
+#!/usr/bin/env groovy
+@Library('defra-shared@master') _
+
+pipeline {
+    agent any
+    parameters {
+        booleanParam(name: 'REBUILD_IMAGE', defaultValue: false, description: 'Force the performance test image to be rebuilt?')
+    }
+    stages {
+        stage('Building test container') {
+            steps {
+                script {
+                    ansiColor('xterm') {
+                        def buildArgs = " ."
+                        if (params.REBUILD_IMAGE) {
+                            buildArgs = '--no-cache ' + buildArgs
+                        }
+                        docker.build("defra/rod-catch-returns-performance-tests", buildArgs)
+                    }
+                }
+            }
+        }
+        stage('Executing tests') {
+            steps {
+                script {
+                    ansiColor('xterm') {
+                        def mounts = [ "type=bind,source=${WORKSPACE}/logs,target=/app/logs"]
+                        sh "mkdir -p ${WORKSPACE}/results"
+                        dockerRun('defra/rod-catch-returns-performance-tests', null, null, "-v '$PWD:/tests'")
+                    }
+                }
+            }
+        }
+    }
+    post {
+        always {
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'results/**'
+        }
+        cleanup {
+            cleanWs cleanWhenFailure: true
+        }
+    }
+}
