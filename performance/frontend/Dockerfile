@@ -23,7 +23,14 @@ COPY . /tests
 CMD bash -c '\
     mkdir -p /tests/results/html-report && \
     chmod -R a+w /tests/results && \
+    if [ -f local.properties ]; then \
+        echo "Using local.properties"; \
+        JMETER_ARGS="-q local.properties"; \
+    else \
+        echo "Using environment variables"; \
+        JMETER_ARGS="-JserverName=${SERVER_NAME} -JapiUrl=${API_URL} -JloginDataFile=${LOGIN_DATA_FILE}"; \
+    fi && \
     jmeter -n -t "Frontend Tests.jmx" \
            -l results/result.jtl \
            -e -o results/html-report \
-           -q local.properties'
+           $JMETER_ARGS'
