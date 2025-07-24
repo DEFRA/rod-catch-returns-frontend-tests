@@ -25,10 +25,12 @@ pipeline {
         stage('Executing tests') {
             steps {
                 script {
-                    ansiColor('xterm') {
-                        def mounts = [ "type=bind,source=${WORKSPACE}/logs,target=/app/logs"]
-                        sh "mkdir -p ${WORKSPACE}/results"
-                        dockerRun('defra/rod-catch-returns-performance-tests', null, null, "-v '$PWD:/tests'")
+                    dir('performance/frontend') {
+                        ansiColor('xterm') {
+                            def mounts = [ "type=bind,source=${WORKSPACE}/logs,target=/app/logs"]
+                            sh "mkdir -p ${WORKSPACE}/results"
+                            dockerRun('defra/rod-catch-returns-performance-tests', null, null, "-v '$PWD:/tests'")
+                        }
                     }
                 }
             }
