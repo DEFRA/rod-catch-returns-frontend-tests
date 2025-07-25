@@ -31,6 +31,7 @@ CMD bash -c '\
         JMETER_ARGS="-JserverName=${SERVER_NAME} -JapiUrl=${API_URL} -JloginDataFile=${LOGIN_DATA_FILE}"; \
     fi && \
     jmeter -n -t "Frontend Tests.jmx" \
-           -l results/result.jtl \
-           -e -o results/html-report \
-           $JMETER_ARGS'
+        -l /dev/stdout \
+        -j /dev/stdout \
+        -e -o results/html-report \
+        $JMETER_ARGS'

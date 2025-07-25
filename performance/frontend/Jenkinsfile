@@ -16,14 +16,7 @@ pipeline {
                             if (params.REBUILD_IMAGE) {
                                 buildArgs = '--no-cache ' + buildArgs
                             }
-                            def image = docker.build("defra/rod-catch-returns-performance-tests", buildArgs)
-
-                            // sh "mkdir -p ${WORKSPACE}/results"
-                            // image.run(
-                            //     "--rm " +
-                            //     "-v ${WORKSPACE}:/tests"
-
-                            // )
+                            docker.build("defra/rod-catch-returns-performance-tests", buildArgs)
                         }
                     }
                 }
@@ -34,7 +27,6 @@ pipeline {
                 script {
                     dir('performance/frontend') {
                         ansiColor('xterm') {
-                            def mounts = [ "type=bind,source=${WORKSPACE}/tests,target=/app/tests"]
                             def cwd = pwd()
                             sh "mkdir -p ${cwd}/results"
                             dockerRun('defra/rod-catch-returns-performance-tests', null, [], "-v '${cwd}:/tests'")
@@ -46,7 +38,9 @@ pipeline {
     }
     post {
         always {
-            archiveArtifacts allowEmptyArchive: true, artifacts: 'results/**'
+            dir('performance/frontend') {
+                archiveArtifacts allowEmptyArchive: true, artifacts: 'results/**'
+            }
         }
         cleanup {
             cleanWs cleanWhenFailure: true
