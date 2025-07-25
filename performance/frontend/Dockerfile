@@ -32,6 +32,5 @@ CMD bash -c '\
     fi && \
     jmeter -n -t "Frontend Tests.jmx" \
         -l /dev/stdout \
-        -j /dev/stdout \
         -e -o results/html-report \
         $JMETER_ARGS'
