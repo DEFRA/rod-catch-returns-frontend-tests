@@ -39,7 +39,7 @@ pipeline {
     post {
         always {
             dir('performance/frontend') {
-                archiveArtifacts allowEmptyArchive: true, artifacts: 'results/html-report/**'
+                archiveArtifacts allowEmptyArchive: true, artifacts: 'results/**'
             }
         }
         cleanup {
