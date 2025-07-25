@@ -3,6 +3,13 @@
 
 pipeline {
     agent any
+    options {
+        ansiColor('xterm')
+        timestamps()
+        disableConcurrentBuilds()
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+        timeout(time: 1, unit: 'HOURS')
+    }
     parameters {
         booleanParam(name: 'REBUILD_IMAGE', defaultValue: false, description: 'Force the performance test image to be rebuilt?')
     }
@@ -11,13 +18,11 @@ pipeline {
             steps {
                 script {
                     dir('performance/frontend') {
-                        ansiColor('xterm') {
-                            def buildArgs = " ."
-                            if (params.REBUILD_IMAGE) {
-                                buildArgs = '--no-cache ' + buildArgs
-                            }
-                            docker.build("defra/rod-catch-returns-performance-tests", buildArgs)
+                        def buildArgs = " ."
+                        if (params.REBUILD_IMAGE) {
+                            buildArgs = '--no-cache ' + buildArgs
                         }
+                        docker.build("defra/rod-catch-returns-performance-tests", buildArgs)
                     }
                 }
             }
@@ -26,11 +31,9 @@ pipeline {
             steps {
                 script {
                     dir('performance/frontend') {
-                        ansiColor('xterm') {
-                            def cwd = pwd()
-                            sh "mkdir -p ${cwd}/results"
-                            dockerRun('defra/rod-catch-returns-performance-tests', null, [], "-v '${cwd}:/tests'")
-                        }
+                        def cwd = pwd()
+                        sh "mkdir -p ${cwd}/results"
+                        dockerRun('defra/rod-catch-returns-performance-tests', null, [], "-v '${cwd}:/tests'")
                     }
                 }
             }
