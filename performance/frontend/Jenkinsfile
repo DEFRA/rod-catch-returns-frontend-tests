@@ -18,12 +18,12 @@ pipeline {
                             }
                             def image = docker.build("defra/rod-catch-returns-performance-tests", buildArgs)
 
-                            sh "mkdir -p ${WORKSPACE}/results"
-                            image.run(
-                                "--rm " +
-                                "-v ${WORKSPACE}:/tests"
+                            // sh "mkdir -p ${WORKSPACE}/results"
+                            // image.run(
+                            //     "--rm " +
+                            //     "-v ${WORKSPACE}:/tests"
 
-                            )
+                            // )
                         }
                     }
                 }
@@ -36,7 +36,7 @@ pipeline {
                         ansiColor('xterm') {
                             def mounts = [ "type=bind,source=${WORKSPACE}/tests,target=/app/tests"]
                             sh "mkdir -p ${WORKSPACE}/results"
-                           // dockerRun('defra/rod-catch-returns-performance-tests', null, mounts, "-v '${WORKSPACE}:/tests'")
+                            dockerRun('defra/rod-catch-returns-performance-tests', null, mounts, "-v '${WORKSPACE}:/tests'")
                         }
                     }
                 }
