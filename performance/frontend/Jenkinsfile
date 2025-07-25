@@ -35,8 +35,9 @@ pipeline {
                     dir('performance/frontend') {
                         ansiColor('xterm') {
                             def mounts = [ "type=bind,source=${WORKSPACE}/tests,target=/app/tests"]
-                            sh "mkdir -p ${WORKSPACE}/results"
-                            dockerRun('defra/rod-catch-returns-performance-tests', null, mounts, "-v '${WORKSPACE}:/tests'")
+                            def cwd = pwd()
+                            sh "mkdir -p ${cwd}/results"
+                            dockerRun('defra/rod-catch-returns-performance-tests', null, [], "-v '${cwd}:/tests'")
                         }
                     }
                 }
