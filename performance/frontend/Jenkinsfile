@@ -16,7 +16,7 @@ pipeline {
                             if (params.REBUILD_IMAGE) {
                                 buildArgs = '--no-cache ' + buildArgs
                             }
-                            docker.build("defra/rod-catch-returns-performance-tests", buildArgs)
+                            def image = docker.build("defra/rod-catch-returns-performance-tests", buildArgs)
 
                             sh "mkdir -p ${WORKSPACE}/results"
                             image.run(
