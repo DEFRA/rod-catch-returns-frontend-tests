@@ -40,6 +40,15 @@ pipeline {
         always {
             dir('performance/frontend') {
                 archiveArtifacts allowEmptyArchive: true, artifacts: 'results/**'
+                publishHTML([ 
+                    reportDir: 'results/html-report', 
+                    reportFiles: 'index.html',
+                    reportName: 'JMeter Report',
+                    reportTitles: 'JMeter Performance Test Report',
+                    keepAll: true,
+                    allowMissing: true,
+                    alwaysLinkToLastBuild: true
+                ])
             }
         }
         cleanup {
