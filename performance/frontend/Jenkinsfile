@@ -21,7 +21,7 @@ pipeline {
                             sh "mkdir -p ${WORKSPACE}/results"
                             image.run(
                                 "--rm " +
-                                "-v ${WORKSPACE}:/tests " +
+                                "-v ${WORKSPACE}:/tests"
 
                             )
                         }
