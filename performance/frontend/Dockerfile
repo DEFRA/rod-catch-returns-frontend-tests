@@ -1,5 +1,5 @@
 
-FROM alpine:3.19
+FROM alpine:3.22
 
 # Install dependencies
 RUN apk add --no-cache openjdk17 curl unzip bash
