@@ -3,6 +3,8 @@ const Page = require('./page')
 const { logger } = require('defra-logging-facade')
 const { validateTableByCaption, getSmallCatchRow, getLargeCatchRow } = require('../utils/table-utils')
 
+const SELECTOR_CONTINUE = '//*[@name="continue"]'
+
 class SummaryPage extends Page {
   get url () {
     return '/summary'
@@ -117,6 +119,12 @@ class SummaryPage extends Page {
   async excludeSubmission () {
     const excludeCheckbox = await $('input[name="exclude"]')
     await excludeCheckbox.click()
+  }
+
+  async continue () {
+    await this.checkOpen()
+    await $(SELECTOR_CONTINUE).waitForEnabled(SELECTOR_CONTINUE)
+    await this.clickNavigationLink(SELECTOR_CONTINUE)
   }
 }
 

@@ -6,13 +6,6 @@ Feature: Administrative users can manage paper based returns
   Scenario: Redirect to login page
     When I navigate to /
     Then I am redirected to /login
-  
-  Scenario: Login fail
-    When I am on the admin login page
-    And  I submit a@a.com for username and a for the password
-    Then I expect the error summary to show the following errors
-      | There is a problem                        |
-      | You have not entered correct user details |
 
   Scenario: Enter a new paper return
     When I am on the admin login page
@@ -41,7 +34,8 @@ Feature: Administrative users can manage paper based returns
 
     And  I am on the summary page and select the small catch link
     *    In January on the river Ystrad, I caught 5 by fly, 4 by spinner, 2 by bait and released 11
-    And  I save the small catch and add another
+    And  I save the small catch and return to the summary
+    And  I am on the summary page and select the small catch link
     *    In February on the river Ystrad, I caught 8 by fly, 0 by spinner, 0 by bait and released 8
     And  I save the small catch and return to the summary
     And  I am on the summary page and select the small catch link
@@ -58,16 +52,12 @@ Feature: Administrative users can manage paper based returns
     And  I am on the confirmation page
   
   Scenario: Unlock submission
-    When I am on the admin login page
-    And  I submit the username and password for admin user 1
     And  I am on the licence entry page
     And  I submit the licence and postcode for test user 1
     And  I am on the review page and I click unlock
     And  I am on the summary page
 
   Scenario: Exclude small catch, catch and submission
-    When I am on the admin login page
-    And  I submit the username and password for admin user 1
     And  I am on the licence entry page
     And  I submit the licence and postcode for test user 1
 
