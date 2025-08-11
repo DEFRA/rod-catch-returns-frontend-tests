@@ -9,25 +9,24 @@ vars.put("baitCount", method2Count.toString())
 vars.put("spinnerCount", method3Count.toString())
 vars.put("releasedCount", releasedCount.toString())
 
-// Month of the small catch entry
-Integer monthIndex = null
-String[] months = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"]
+int currentMonthIndex = Calendar.getInstance().get(Calendar.MONTH) // 0-based
 HashSet usedMonths = vars.getObject("usedMonths")
 
 if (usedMonths == null) {
     usedMonths = new HashSet()
 }
 
-if (usedMonths.size() == months.length) {
-    log.error("No more months available, you can only have " + months.length + " small catches.")
+if (usedMonths.size() == currentMonthIndex + 1) {
+    log.error("No more months available, you can only have " + (currentMonthIndex + 1) + " small catches.")
     ctx.getEngine().stopTest()
     return
 }
 
+Integer monthIndex = null
 while (monthIndex == null || usedMonths.contains(monthIndex)) {
-    monthIndex = random.nextInt(months.length)
+    monthIndex = random.nextInt(currentMonthIndex + 1) // ensures it's within range
 }
 
 usedMonths.add(monthIndex)
 vars.putObject("usedMonths", usedMonths)
-vars.put("month", months[monthIndex])
+vars.put("month", (monthIndex + 1).toString()) // Convert 0-based to 1-based
