@@ -29,8 +29,28 @@ CMD bash -c '\
         echo "Using environment variables"; \
         JMETER_ARGS="-JserverName=${SERVER_NAME} -JapiUrl=${API_URL} -JloginDataFile=${LOGIN_DATA_FILE}"; \
     fi && \
+    PROXY_ARGS="" && \
+    if [ -n "$HTTP_PROXY" ]; then \
+        hostport=$(echo $HTTP_PROXY | sed -E "s#^https?://##") && \
+        host=$(echo $hostport | cut -d: -f1) && \
+        port=$(echo $hostport | cut -d: -f2) && \
+        PROXY_ARGS="$PROXY_ARGS -Dhttp.proxyHost=$host -Dhttp.proxyPort=$port" && \
+        echo "Configured HTTP proxy: $host:$port"; \
+    fi && \
+    if [ -n "$HTTPS_PROXY" ]; then \
+        hostport=$(echo $HTTPS_PROXY | sed -E "s#^https?://##") && \
+        host=$(echo $hostport | cut -d: -f1) && \
+        port=$(echo $hostport | cut -d: -f2) && \
+        PROXY_ARGS="$PROXY_ARGS -Dhttps.proxyHost=$host -Dhttps.proxyPort=$port" && \
+        echo "Configured HTTPS proxy: $host:$port"; \
+    fi && \
+    if [ -n "$no_proxy" ]; then \
+        PROXY_ARGS="$PROXY_ARGS -Dhttp.nonProxyHosts=$(echo $no_proxy | sed "s/,/|/g")" && \
+        echo "Configured no_proxy: $no_proxy"; \
+    fi && \
     jmeter -n -t "Frontend Tests.jmx" \
         -l results/result.jtl \
         -j /dev/stdout \
         -e -o results/html-report \
-        $JMETER_ARGS'
+        $JMETER_ARGS $PROXY_ARGS'
+       
