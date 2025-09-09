@@ -53,4 +53,3 @@ CMD bash -c '\
         -j /dev/stdout \
         -e -o results/html-report \
         $JMETER_ARGS $PROXY_ARGS'
-       
