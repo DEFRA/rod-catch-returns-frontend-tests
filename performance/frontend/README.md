@@ -3,13 +3,16 @@
 Performance tests for the Rod Catch Returns (RCR) frontend service.
 
 ## Create local.properties
-Create a local.properties in the performance/frontend directory, use local.properties.example as a guide.
+Create a local.properties in the performance/frontend directory, use local.properties.example as a guide. The proxy settings are optional and are only used in pre-prod
 
 | Name          | Description                                                                            |
 | --------------| -------------------------------------------------------------------------------------- |
 | serverName    | the domain of the RCR public frontend (do not include https://)                        |
 | apiUrl        | the full url of the Java API                                                           |
 | loginDataFile | which login file to use, can be logins-dev.csv, logins-test.csv or logins-pre-prod.csv |
+| no_proxy      | comma separated list of domain names for proxy settings should be bypassed
+| HTTP_PROXY    | the proxy server to use for HTTP requests
+| HTTPS_PROXY   | the proxy server to use for HTTPS requests
 
 ## Running using JMeter
 
