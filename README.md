@@ -52,6 +52,7 @@ npm run docker-build
 ```bash
 npm run docker-run
 ```
+Running in a Docker container against a locally running version of the application does not currently work. See https://eaflood.atlassian.net/browse/IWTF-4819 for more detail. However, it does work when pointing to one of the environments.
 
 ### Browserstack
 To run on browserstack additional configuration files are required:
