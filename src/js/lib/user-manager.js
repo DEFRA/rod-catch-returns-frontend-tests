@@ -1,6 +1,7 @@
 'use strict'
 const { logger } = require('defra-logging-facade')
 const rp = require('request-promise')
+const isDocker = require('../utils/is-docker')
 const API_URL = process.env.API_URL || 'http://localhost:9580/'
 
 if (!API_URL.endsWith('/')) {
@@ -41,6 +42,16 @@ async function readUsersFromEnvironment (userCallback, userType = 'USER') {
   }
 }
 
+function resolveDockerHostLink (link) {
+  const dockerHostPattern = /^http:\/\/host\.docker\.internal:\d+\/?/
+
+  if (link.includes('host.docker.internal') && !isDocker()) {
+    return link.replace(dockerHostPattern, API_URL)
+  }
+
+  return link
+}
+
 const self = module.exports = {
   users: [],
   admins: [],
@@ -76,7 +87,8 @@ const self = module.exports = {
     logger.debug(`Clearing existing ${season} submission data for ${user.username}`)
     const sub = await self.getSubmission(user, season)
     if (sub && sub._links.self.href) {
-      const requestObject = defaultRequestOptions(user, sub._links.self.href, 'DELETE')
+      const formattedDeleteUrl = resolveDockerHostLink(sub._links.self.href)
+      const requestObject = defaultRequestOptions(user, formattedDeleteUrl, 'DELETE')
       try {
         await rp(requestObject)
         return true
@@ -120,9 +132,9 @@ const self = module.exports = {
       logger.debug(`Deleting ${grilseProbabilities.length} grilse probabilities`)
 
       const deletePromises = grilseProbabilities.map(item => {
-        const deleteUrl = item._links.self.href
-        logger.debug(`Deleting grilse probability at: ${deleteUrl}`)
-        return rp(defaultRequestOptions(undefined, deleteUrl, 'DELETE'))
+        const formattedDeleteUrl = resolveDockerHostLink(item._links.self.href)
+        logger.debug(`Deleting grilse probability at: ${formattedDeleteUrl}`)
+        return rp(defaultRequestOptions(undefined, formattedDeleteUrl, 'DELETE'))
       })
 
       await Promise.all(deletePromises)
