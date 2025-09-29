@@ -8,7 +8,7 @@ Create a local.properties in the performance/frontend directory, use local.prope
 | Name          | Description                                                                            |
 | --------------| -------------------------------------------------------------------------------------- |
 | serverName    | the domain of the RCR public frontend (do not include https://)                        |
-| apiUrl        | the full url of the Java API                                                           |
+| apiUrl        | the full url of the JS API                                                           |
 | loginDataFile | which login file to use, can be logins-dev.csv, logins-test.csv or logins-pre-prod.csv |
 | no_proxy      | comma separated list of domain names for proxy settings should be bypassed
 | HTTP_PROXY    | the proxy server to use for HTTP requests
