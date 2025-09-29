@@ -2,7 +2,7 @@
 const { logger } = require('defra-logging-facade')
 const rp = require('request-promise')
 const isDocker = require('../utils/is-docker')
-const API_URL = process.env.API_URL || 'http://localhost:9580/'
+const API_URL = process.env.API_URL || 'http://localhost:5000/'
 
 if (!API_URL.endsWith('/')) {
   throw new Error('API_URL environment variable must end with a /')
