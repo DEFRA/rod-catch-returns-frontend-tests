@@ -115,7 +115,7 @@ Notes:
         <collectionProp name="Arguments.arguments">
           <elementProp name="api_url" elementType="Argument">
             <stringProp name="Argument.name">api_url</stringProp>
-            <stringProp name="Argument.value">${__P(apiUrl,https://localhost:9580)}</stringProp>
+            <stringProp name="Argument.value">${__P(apiUrl,https://localhost:5000)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
