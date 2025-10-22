@@ -1,8 +1,8 @@
 'use strict'
-const { defineStep } = require("@cucumber/cucumber")
+const { defineStep } = require('@cucumber/cucumber')
 const AdminLoginPage = require('../../pages/AdminLogin-page')
 const LicencePage = require('../../pages/Licence-page')
-const { logger } = require('defra-logging-facade')
+const logger = require('../../utils/logger')
 
 defineStep(/I am an (external|administrative) user/, async function (userType) {
   if (userType === 'administrative') {

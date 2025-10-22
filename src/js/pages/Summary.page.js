@@ -1,6 +1,6 @@
 'use strict'
 const Page = require('./page')
-const { logger } = require('defra-logging-facade')
+const logger = require('../utils/logger')
 const { validateTableByCaption, getSmallCatchRow, getLargeCatchRow } = require('../utils/table-utils')
 
 const SELECTOR_CONTINUE = '//*[@name="continue"]'

@@ -1,5 +1,5 @@
 'use strict'
-const { logger } = require('defra-logging-facade')
+const logger = require('../utils/logger')
 const util = require('util')
 util.inspect.defaultOptions = { depth: null, colors: true }
 

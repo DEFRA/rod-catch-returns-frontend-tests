@@ -14,7 +14,7 @@
  * Use without the --delete flag will show the build id's to be deleted (but won't delete anything)
  * Use without the --pattern=blah flag will result in all builds being in scope for deletion
  */
-const { logger } = require('defra-logging-facade')
+const logger = require('./src/js/utils/logger')
 const lodash = require('lodash')
 const request = require('request')
 const args = process.argv.slice(2)

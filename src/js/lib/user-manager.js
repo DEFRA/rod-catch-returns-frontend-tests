@@ -1,5 +1,5 @@
 'use strict'
-const { logger } = require('defra-logging-facade')
+const logger = require('../utils/logger')
 const rp = require('request-promise')
 const isDocker = require('../utils/is-docker')
 const API_URL = process.env.API_URL || 'http://localhost:5000/'
