@@ -1,5 +1,5 @@
 'use strict'
-require('dotenv').config({ debug: process.env.DEBUG })
+require('dotenv')
 const path = require('path')
 const fs = require('fs-extra')
 const userManager = require('../js/lib/user-manager')

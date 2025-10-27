@@ -31,6 +31,7 @@ RCR_USER1_PASSWORD=
 RCR_USER2_USERNAME=
 RCR_USER2_PASSWORD=
 no_proxy=
+DEBUG=rcr-tests:*
 ```
 
 ## Execution
