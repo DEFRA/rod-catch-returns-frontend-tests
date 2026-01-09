@@ -54,12 +54,14 @@ Feature: Administrative users can manage paper based returns
   Scenario: Unlock submission
     And  I am on the licence entry page
     And  I submit the licence and postcode for test user 1
+    And  If it is the extended submission period I select the previous period on the season page
     And  I am on the review page and I click unlock
     And  I am on the summary page
 
   Scenario: Exclude small catch, catch and submission
     And  I am on the licence entry page
     And  I submit the licence and postcode for test user 1
+    And  If it is the extended submission period I select the previous period on the season page
 
     When I click exclude on the small catch with the month as January and the river as Ystrad
     And  I am on the summary page and I click review catch return
