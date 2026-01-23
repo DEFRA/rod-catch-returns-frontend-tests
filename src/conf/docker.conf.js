@@ -16,7 +16,7 @@ const dockerConfig = {
   capabilities: [
     {
       browserName: 'chrome',
-      browserVersion: 'latest',
+      browserVersion: 'stable',
       'goog:chromeOptions': {
         args: ['--headless', '--disable-gpu', '--no-sandbox']
       }
