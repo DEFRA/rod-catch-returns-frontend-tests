@@ -65,7 +65,8 @@ Feature: Login to Rod Catch returns update and return to service, submit
     Then I am on the review page
     And  I expect the review page to show the following activities
       | River   | Days fished (1 Jan to 16 Jun) | Days fished (17 Jun to 31 Dec)  | Fish Caught |
-      | Frome   | 15                            | 1                               | 8           |
+      | Banwy   | 20                            | 5                               | 0           |
+      | Frome   | 15                            | 1                               | 13           |
     And  I expect the review page to show the following small catches
       | Month   | River |	Fly |	Spinner |	Bait | Released |
       | January | Frome | 5   | 4       | 2    | 11       |
