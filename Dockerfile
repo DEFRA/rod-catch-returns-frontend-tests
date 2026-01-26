@@ -29,7 +29,7 @@ RUN apt-get install -y firefox
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 22.22.0
+ENV NODE_VERSION 24.13.0
 
 # Replace shell with bash so we can source files
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
