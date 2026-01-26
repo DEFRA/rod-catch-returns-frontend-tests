@@ -5,16 +5,16 @@ util.inspect.defaultOptions = { depth: null, colors: true }
 
 module.exports = async function (action) {
   // Page Id element is embedded on each page by the frontend layout.html
-  const oldPageId = $('#pgid') ? $('#pgid').getHTML() : 'NO_OLD_PAGE_ID_FOUND'
+  const oldPageId = $('#pgid') ? await $('#pgid').getHTML() : 'NO_OLD_PAGE_ID_FOUND'
   const oldPageUrl = await browser.getUrl()
   let currentPageId = null
 
   logger.debug(`Waiting for navigation, old page id=${oldPageId}`)
   try {
     await action()
-    await browser.waitUntil(function () {
+    await browser.waitUntil(async function () {
       try {
-        currentPageId = $('#pgid').getHTML()
+        currentPageId = await $('#pgid').getHTML()
       } catch (e) {
         currentPageId = null
       }
