@@ -1,33 +1,58 @@
 'use strict'
-const logger = require('../utils/logger')
-const util = require('util')
-util.inspect.defaultOptions = { depth: null, colors: true }
 
-module.exports = async function (action) {
-  // Page Id element is embedded on each page by the frontend layout.html
-  const oldPageId = $('#pgid') ? await $('#pgid').getHTML() : 'NO_OLD_PAGE_ID_FOUND'
-  const oldPageUrl = await browser.getUrl()
+const logger = require('../utils/logger')
+
+const getPageId = async () => {
+  const el = await $('#pgid')
+  return (await el.isExisting()) ? await el.getHTML() : null
+}
+
+/**
+ * Executes an action and waits for page navigation to complete.
+ * Navigation is detected by a change in the hidden #pgid element,
+ * which is embedded on each page by the frontend layout.html
+ *
+ * @param {Function} action - async function that triggers navigation
+ */
+module.exports = async function waitForNavigation (action) {
+  const oldPageId = await getPageId()
+  const oldUrl = await browser.getUrl()
   let currentPageId = null
 
-  logger.debug(`Waiting for navigation, old page id=${oldPageId}`)
+  logger.debug(`Waiting for navigation. Old pageId=${oldPageId ?? 'NONE'}`)
+
   try {
     await action()
-    await browser.waitUntil(async function () {
-      try {
-        currentPageId = await $('#pgid').getHTML()
-      } catch (e) {
-        currentPageId = null
+    await browser.waitUntil(async () => {
+      currentPageId = await getPageId()
+      const hasChanged = currentPageId !== null && currentPageId !== oldPageId
+
+      if (!hasChanged) {
+        logger.debug(`Still waiting for navigation... old=${oldPageId}, current=${currentPageId}`)
       }
 
-      const hasChanged = (currentPageId !== null && currentPageId !== oldPageId)
-      if (!hasChanged) {
-        logger.debug(`Waiting for page to load (loaded: ${hasChanged}).  [Old page id: ${util.inspect(oldPageId)}, current page id: ${util.inspect(currentPageId)}]`)
-      }
       return hasChanged
-    }, browser.options.waitforTimeout, 'expected page id to change as result of action', browser.options.waitforInterval)
-  } catch (e) {
-    logger.error(`Expected page id (${oldPageId}) to change within ${browser.options.waitforTimeout}ms of navigation.  Current page id is ${currentPageId}`, e)
-    throw e
+    },
+    {
+      timeout: browser.options.waitforTimeout,
+      interval: browser.options.waitforInterval,
+      timeoutMsg: `Expected pageId to change from "${oldPageId}"`
+    }
+    )
+  } catch (error) {
+    logger.error(
+      `Navigation failed: pageId did not change within ${browser.options.waitforTimeout}ms.
+       Old pageId=${oldPageId}, current pageId=${currentPageId}`,
+      error
+    )
+    throw error
   }
-  logger.debug(`Page load complete.  [Old page: id=${util.inspect(oldPageId)}, url=${oldPageUrl}.  Current page: id=${util.inspect(currentPageId)}, url=${browser.getUrl()}]`)
+
+  const newUrl = await browser.getUrl()
+
+  logger.debug(
+    `Navigation complete.
+     Old page: id=${oldPageId}, url=${oldUrl}
+     New page: id=${currentPageId}, url=${newUrl}`
+  )
 }
