@@ -1,5 +1,4 @@
 'use strict'
-
 const logger = require('../utils/logger')
 
 const getPageId = async () => {
@@ -19,7 +18,7 @@ module.exports = async function waitForNavigation (action) {
   const oldUrl = await browser.getUrl()
   let currentPageId = null
 
-  logger.debug(`Waiting for navigation. Old pageId=${oldPageId ?? 'NONE'}`)
+  logger.debug(`Waiting for navigation, old pageId=${oldPageId ?? 'NONE'}`)
 
   try {
     await action()
@@ -37,12 +36,10 @@ module.exports = async function waitForNavigation (action) {
       timeout: browser.options.waitforTimeout,
       interval: browser.options.waitforInterval,
       timeoutMsg: `Expected pageId to change from "${oldPageId}"`
-    }
-    )
+    })
   } catch (error) {
     logger.error(
-      `Navigation failed: pageId did not change within ${browser.options.waitforTimeout}ms.
-       Old pageId=${oldPageId}, current pageId=${currentPageId}`,
+      `Navigation failed: pageId did not change within ${browser.options.waitforTimeout}ms. Old pageId=${oldPageId}, current pageId=${currentPageId}`,
       error
     )
     throw error
@@ -50,9 +47,5 @@ module.exports = async function waitForNavigation (action) {
 
   const newUrl = await browser.getUrl()
 
-  logger.debug(
-    `Navigation complete.
-     Old page: id=${oldPageId}, url=${oldUrl}
-     New page: id=${currentPageId}, url=${newUrl}`
-  )
+  logger.debug(`Navigation complete. Old page: id=${oldPageId}, url=${oldUrl} New page: id=${currentPageId}, url=${newUrl}`)
 }
