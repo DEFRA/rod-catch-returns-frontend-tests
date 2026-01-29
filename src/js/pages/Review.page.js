@@ -18,15 +18,15 @@ class ReviewPage extends Page {
   }
 
   async validateActivitiesTable (dataTable) {
-    validateTableByCaption('Rivers fished', dataTable)
+    return validateTableByCaption('Rivers fished', dataTable)
   }
 
   async validateSmallCatchesTable (dataTable) {
-    validateTableByCaption('Small adult sea trout (1lb and under)', dataTable)
+    return validateTableByCaption('Small adult sea trout (1lb and under)', dataTable)
   }
 
   async validateLargeCatchesTable (dataTable) {
-    validateTableByCaption('Salmon and large adult sea trout', dataTable)
+    return validateTableByCaption('Salmon and large adult sea trout', dataTable)
   }
 
   async checkExcludeCheckboxCheckedSmallCatch (month, riverName) {
