@@ -20,17 +20,21 @@ def columns = header.split(",")
 
 log.info "CSV Columns: ${columns.join(', ')}"
 
+def currentYear = Calendar.instance.get(Calendar.YEAR)
+def seasons = [
+    currentYear.toString(),
+    (currentYear - 1).toString()
+]
+
 for (line in lines) {
     def values = line.split(",", -1)
     def data = [columns, values].transpose().collectEntries { it }
 
     def licenceNumber = data["licence"]
     def postcode = data["postcode"]
-
-    def season = new Date().format("yyyy")
     def apiUrl = vars.get("api_url")  // Ensure this is set in the test plan or User Defined Vars
 
-    log.info "Using licenceNumber=${licenceNumber}, postcode=${postcode}, season=${season}"
+    log.info "Using licenceNumber=${licenceNumber}, postcode=${postcode}, seasons=${seasons}"
 
     try {
         // 1. GET contactId
@@ -43,23 +47,27 @@ for (line in lines) {
         def contactId = contactJson.contact.id
         log.info "Fetched contactId=${contactId}"
 
-        // 2. GET submissionId
-        def getSubmission = new HttpGet("${apiUrl}/api/submissions/search/getByContactIdAndSeason?contact_id=${contactId}&season=${season}")
-        def subRes = http.execute(getSubmission)
-        def statusCode = subRes.getStatusLine().getStatusCode()
+        seasons.each { season ->
+            log.info "Processing season=${season}"
 
-        if (statusCode == 200) {
-            def subJson = new JsonSlurper().parseText(EntityUtils.toString(subRes.entity))
-            def submissionId = subJson._links.self.href.tokenize('/').last()
-            log.info "Fetched submissionId=${submissionId}"
+            // 2. GET submissionId
+            def getSubmission = new HttpGet("${apiUrl}/api/submissions/search/getByContactIdAndSeason?contact_id=${contactId}&season=${season}")
+            def subRes = http.execute(getSubmission)
+            def statusCode = subRes.getStatusLine().getStatusCode()
 
-            // 3. DELETE submission
-            def deleteReq = new HttpDelete("${apiUrl}/api/submissions/${submissionId}")
-            def delRes = http.execute(deleteReq)
-            def delStatus = delRes.getStatusLine().statusCode
-            log.info "Delete status code: ${delStatus}"
-        } else {
-            log.info "No submissions found (status ${statusCode})"
+            if (statusCode == 200) {
+                def subJson = new JsonSlurper().parseText(EntityUtils.toString(subRes.entity))
+                def submissionId = subJson._links.self.href.tokenize('/').last()
+                log.info "Fetched submissionId=${submissionId}"
+
+                // 3. DELETE submission
+                def deleteReq = new HttpDelete("${apiUrl}/api/submissions/${submissionId}")
+                def delRes = http.execute(deleteReq)
+                def delStatus = delRes.getStatusLine().statusCode
+                log.info "Delete status code: ${delStatus}"
+            } else {
+                log.info "No submissions found (status ${statusCode})"
+            }
         }
 
     } catch (Exception e) {
