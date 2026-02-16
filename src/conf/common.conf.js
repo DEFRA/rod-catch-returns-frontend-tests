@@ -76,7 +76,23 @@ export const commonConfig = {
   framework: 'cucumber',
 
   // Test reporter for stdout.
-  reporters: ['spec'],
+  reporters: [
+    'spec',
+    [
+      'junit',
+      {
+        outputDir: './logs/junit',
+        errorOptions: {
+          error: 'message',
+          failure: 'message',
+          stacktrace: 'stack'
+        },
+        outputFileFormat: function (options) {
+          return `wdio.${options.capabilities.browserName.toLowerCase()}-${options.cid}.xml`
+        }
+      }
+    ]
+  ],
 
   baseExternalUrl: process.env.SERVICE_URL || 'http://localhost:3000',
   baseAdminUrl: process.env.ADMIN_SERVICE_URL || 'http://localhost:4000',
