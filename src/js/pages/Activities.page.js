@@ -1,8 +1,8 @@
-const Page = require('./asyncPage.js')
+import Page from './page.js'
 
 class AddActivitiesPage extends Page {
   get url () {
-    return '/activities/add'
+    return '/activities'
   }
 
   async selectRiver (riverName) {
@@ -22,4 +22,4 @@ class AddActivitiesPage extends Page {
   }
 }
 
-module.exports = new AddActivitiesPage()
+export default new AddActivitiesPage()

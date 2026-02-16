@@ -1,4 +1,4 @@
-const createDebug = require('debug')
+import createDebug from 'debug'
 
 // if DEBUG is not set, default to show error and info
 if (!process.env.DEBUG) {
@@ -15,7 +15,7 @@ error.color = 1 // red
 const debug = createDebug('rcr-tests:debug')
 debug.color = 4 // blue
 
-module.exports = {
+export default {
   info,
   error,
   debug

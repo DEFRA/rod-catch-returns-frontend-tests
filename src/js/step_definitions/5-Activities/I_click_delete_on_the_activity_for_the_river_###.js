@@ -1,6 +1,5 @@
-'use strict'
-const { defineStep } = require('@cucumber/cucumber')
-const Summary = require('../../pages/Summary.page')
+import Summary from '../../pages/Summary.page'
+import { defineStep } from '@cucumber/cucumber'
 
 defineStep(/I click delete on the activity for the river (.*)/, async function (riverName) {
   await Summary.open()

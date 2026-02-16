@@ -1,6 +1,5 @@
-'use strict'
-const { defineStep } = require('@cucumber/cucumber')
-const Review = require('../../pages/Review.page')
+import Review from '../../pages/Review.page'
+import { defineStep } from '@cucumber/cucumber'
 
 defineStep('I expect the review page to show the following activities', async function (activityTable) {
   await Review.validateActivitiesTable(activityTable)

@@ -1,5 +1,4 @@
-'use strict'
-const Page = require('./page')
+import Page from './page'
 
 class DeletePage extends Page {
   constructor (href) {
@@ -22,4 +21,4 @@ class DeletePage extends Page {
   }
 }
 
-module.exports = DeletePage
+export default DeletePage

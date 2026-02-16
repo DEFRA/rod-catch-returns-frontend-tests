@@ -1,6 +1,5 @@
-'use strict'
-const { defineStep } = require('@cucumber/cucumber')
-const AgeWeightKeyPageOk = require('../../pages/Age-Weight-Key-Ok.page')
+import AgeWeightKeyPageOk from '../../pages/Age-Weight-Key-Ok.page'
+import { defineStep } from '@cucumber/cucumber'
 
 defineStep('I am on the age weight key ok page', async function () {
   await AgeWeightKeyPageOk.checkOpen()

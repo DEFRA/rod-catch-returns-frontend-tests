@@ -1,6 +1,5 @@
-'use strict'
-const { defineStep } = require('@cucumber/cucumber')
-const Summary = require('../../pages/Summary.page')
+import Summary from '../../pages/Summary.page'
+import { defineStep } from '@cucumber/cucumber'
 
 defineStep(/I click (change|delete|exclude) on the large catch with the river as (.*) and the type as (.*)/, async (action, riverName, type) => {
   if (action === 'change') {

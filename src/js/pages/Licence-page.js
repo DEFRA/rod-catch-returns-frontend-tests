@@ -1,5 +1,4 @@
-'use strict'
-const Page = require('./page')
+import Page from './page'
 
 class LicenceEntryPage extends Page {
   get url () {
@@ -11,21 +10,22 @@ class LicenceEntryPage extends Page {
     return ref
   }
 
-  async enterLicence (licence) {
-    const userInput = $('#licence')
-    if (licence) {
-      await userInput.setValue(licence)
+  get licence () { return $('#licence') }
+  get postcode () { return $('#postcode') }
+
+  async enterLicence (licenceValue) {
+    if (licenceValue) {
+      await this.licence.setValue(licenceValue)
     } else {
-      await userInput.clearValue()
+      await this.licence.clearValue()
     }
   }
 
-  async enterPostcode (postcode) {
-    const passInput = $('#postcode')
-    if (postcode) {
-      await passInput.setValue(postcode)
+  async enterPostcode (postcodeValue) {
+    if (postcodeValue) {
+      await this.postcode.setValue(postcodeValue)
     } else {
-      await passInput.clearValue()
+      await this.postcode.clearValue()
     }
   }
 
@@ -36,4 +36,4 @@ class LicenceEntryPage extends Page {
   }
 }
 
-module.exports = new LicenceEntryPage()
+export default new LicenceEntryPage()

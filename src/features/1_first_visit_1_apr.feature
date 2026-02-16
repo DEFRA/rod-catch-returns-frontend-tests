@@ -2,11 +2,11 @@ Feature: Login to Rod Catch returns update, delete, first time to the service an
 
   Background:
     Given I am an external user
-  
+
   Scenario: Redirect to Licence Auth page
     Given I navigate to /
-    Then I am redirected to /licence-auth
-
+    Then  I am redirected to /licence-auth
+  
   Scenario: First login - Save
     And   I am on the licence entry page
     Then  I submit the licence and postcode for test user 1
@@ -46,6 +46,3 @@ Feature: Login to Rod Catch returns update, delete, first time to the service an
 
     And  I am on the summary page and I save and exit the service
     And  I am on the draft saved page
-
-#  Scenario: First login - delete
-#    When I am on the delete river page and I click delete

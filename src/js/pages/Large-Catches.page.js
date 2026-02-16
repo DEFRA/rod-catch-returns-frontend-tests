@@ -1,5 +1,4 @@
-'use strict'
-const Page = require('./page')
+import Page from './page'
 
 const RADIO_RELEASED_YES_ID = '#released'
 const RADIO_RELEASED_NO_ID = '#released-2'
@@ -59,4 +58,4 @@ class AddLargeFishPage extends Page {
   }
 }
 
-module.exports = new AddLargeFishPage()
+export default new AddLargeFishPage()

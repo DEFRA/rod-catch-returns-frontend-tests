@@ -1,4 +1,4 @@
-async function validateTableByCaption (captionText, dataTable) {
+export async function validateTableByCaption (captionText, dataTable) {
   // Find the table by its caption
   const table = await $(`caption*=${captionText}`).parentElement()
 
@@ -24,7 +24,7 @@ async function validateTableByCaption (captionText, dataTable) {
  * @returns {Promise<WebdriverIO.Element>} - The matching table row element
  * @throws {Error} - If no matching row is found
  */
-async function findTableRow (captionSelector, selectorValuePairs) {
+export async function findTableRow (captionSelector, selectorValuePairs) {
   const table = await $(captionSelector).parentElement()
   const rows = await table.$$('tbody tr')
 
@@ -57,7 +57,7 @@ async function findTableRow (captionSelector, selectorValuePairs) {
  * @returns {Promise<WebdriverIO.Element>} - The matching table row
  * @throws {Error} - If no matching row is found
  */
-async function getSmallCatchRow (month, riverName) {
+export async function getSmallCatchRow (month, riverName) {
   return findTableRow(
     'caption*=Small adult sea trout (1lb and under)',
     {
@@ -75,7 +75,7 @@ async function getSmallCatchRow (month, riverName) {
  * @returns {Promise<WebdriverIO.Element>} - The matching table row
  * @throws {Error} - If no matching row is found
  */
-async function getLargeCatchRow (riverName, type) {
+export async function getLargeCatchRow (riverName, type) {
   return findTableRow(
     'caption*=Salmon and large adult sea trout',
     {
@@ -83,10 +83,4 @@ async function getLargeCatchRow (riverName, type) {
       'td[data-label="Type"]': type
     }
   )
-}
-
-module.exports = {
-  validateTableByCaption,
-  getSmallCatchRow,
-  getLargeCatchRow
 }

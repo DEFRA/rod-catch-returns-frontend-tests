@@ -1,6 +1,5 @@
-'use strict'
-const { defineStep } = require('@cucumber/cucumber')
-const Summary = require('../../pages/Summary.page')
+import Summary from '../../pages/Summary.page'
+import { defineStep } from '@cucumber/cucumber'
 
 defineStep('I am on the summary page and select the add river link', async function () {
   await Summary.checkOpen()

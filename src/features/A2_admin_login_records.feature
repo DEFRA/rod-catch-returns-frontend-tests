@@ -11,4 +11,6 @@ Feature: Administrative users can check the license number in the records page
 
   Scenario: Admin enters invalid license number and sees error message
     Then I enter invalid license number '12240222-3'DC3FNK-ACRKP3'
-    Then I see an error message
+    Then  I expect the error summary to show the following errors
+      | There is a problem                      |
+      | The licence number could not be matched |

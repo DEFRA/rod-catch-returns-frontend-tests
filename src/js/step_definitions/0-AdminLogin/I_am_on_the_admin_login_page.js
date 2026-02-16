@@ -1,6 +1,5 @@
-'use strict'
-const { defineStep } = require("@cucumber/cucumber")
-const AdminLoginPage = require('../../pages/AdminLogin-page')
+import AdminLoginPage from '../../pages/Admin-login.page'
+import { defineStep } from '@cucumber/cucumber'
 
 defineStep('I am on the admin login page', async function () {
   await AdminLoginPage.checkOpen()

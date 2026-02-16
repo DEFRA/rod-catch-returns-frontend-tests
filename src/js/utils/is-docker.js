@@ -1,29 +1,35 @@
-'use strict'
-const fs = require('fs')
+import fs from 'node:fs'
 
-let isDocker
+let isDockerCached
 
-function hasDockerEnv () {
+const hasDockerEnv = () => {
   try {
     fs.statSync('/.dockerenv')
     return true
-  } catch (_) {
+  } catch {
     return false
   }
 }
 
-function hasDockerCGroup () {
+const hasDockerCGroup = () => {
   try {
     return fs.readFileSync('/proc/self/cgroup', 'utf8').includes('docker')
-  } catch (_) {
+  } catch {
     return false
   }
 }
 
-module.exports = () => {
-  if (isDocker === undefined) {
-    isDocker = hasDockerEnv() || hasDockerCGroup()
+const hasDockerMountInfo = () => {
+  try {
+    return fs.readFileSync('/proc/self/mountinfo', 'utf8').includes('/docker/containers/')
+  } catch {
+    return false
   }
-
-  return isDocker
 }
+
+const isDocker = () => {
+  isDockerCached ??= hasDockerEnv() || hasDockerCGroup() || hasDockerMountInfo()
+  return isDockerCached
+}
+
+export default isDocker

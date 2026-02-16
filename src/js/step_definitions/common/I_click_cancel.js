@@ -1,5 +1,4 @@
-'use strict'
-const { defineStep } = require('@cucumber/cucumber')
+import { defineStep } from '@cucumber/cucumber'
 
 defineStep('I click cancel', async function () {
   const cancelButton = await $('=Cancel')

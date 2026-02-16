@@ -1,5 +1,4 @@
-'use strict'
-const Page = require('./page')
+import Page from './page'
 
 class SavePage extends Page {
   get url () {
@@ -13,4 +12,4 @@ class SavePage extends Page {
   }
 }
 
-module.exports = new SavePage()
+export default new SavePage()

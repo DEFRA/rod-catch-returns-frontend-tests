@@ -1,6 +1,5 @@
-'use strict'
-const { defineStep } = require("@cucumber/cucumber")
-const SmallCatch = require('../../pages/Small-Catches.page')
+import SmallCatch from '../../pages/Small-Catches.page'
+import { defineStep } from '@cucumber/cucumber'
 
 defineStep(/^I save the small catch and (return to the summary|add another)$/, async function (action) {
   if (action === 'add another') {

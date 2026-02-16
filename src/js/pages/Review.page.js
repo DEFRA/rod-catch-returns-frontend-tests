@@ -1,6 +1,5 @@
-'use strict'
-const Page = require('./page')
-const { validateTableByCaption, getSmallCatchRow, getLargeCatchRow } = require('../utils/table-utils')
+import { getLargeCatchRow, getSmallCatchRow, validateTableByCaption, } from '../utils/table-utils'
+import Page from './page'
 
 class ReviewPage extends Page {
   get url () {
@@ -47,4 +46,4 @@ class ReviewPage extends Page {
   }
 }
 
-module.exports = new ReviewPage()
+export default new ReviewPage()

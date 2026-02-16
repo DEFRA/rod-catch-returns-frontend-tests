@@ -1,5 +1,4 @@
-'use strict'
-const Page = require('./asyncPage.js')
+import Page from './page'
 
 const SELECTOR_FISHED_YES = '#dyf'
 const SELECTOR_FISHED_NO = '#dyf-2'
@@ -14,4 +13,4 @@ class SelectDYFPage extends Page {
   }
 }
 
-module.exports = new SelectDYFPage()
+export default new SelectDYFPage()

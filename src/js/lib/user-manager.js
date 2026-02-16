@@ -1,35 +1,56 @@
-'use strict'
-const logger = require('../utils/logger')
-const rp = require('request-promise')
-const isDocker = require('../utils/is-docker')
+import isDocker from '../utils/is-docker.js'
+import logger from '../utils/logger.js'
+
 const API_URL = process.env.API_URL || 'http://localhost:5000/'
 
 if (!API_URL.endsWith('/')) {
   throw new Error('API_URL environment variable must end with a /')
 }
 
-function defaultRequestOptions (user, path, method = 'GET', qs = {}) {
+const buildUrl = (path, qs = {}) => {
   if (path.startsWith('/')) {
     path = path.substring(1)
   }
-  const uri = path.startsWith('http') ? path : API_URL + path
-  return {
-    method: method,
-    uri: uri,
-    qs: qs,
-    json: true
-  }
+
+  const baseUrl = path.startsWith('http') ? path : API_URL + path
+  const url = new URL(baseUrl)
+
+  Object.entries(qs).forEach(([key, value]) => {
+    if (value !== undefined && value !== null) {
+      url.searchParams.append(key, value)
+    }
+  })
+
+  return url.toString()
 }
 
-async function readUsersFromEnvironment (userCallback, userType = 'USER') {
+const fetchJson = async ({ method = 'GET', uri }) => {
+  const response = await fetch(uri, { method })
+
+  if (!response.ok) {
+    const error = new Error(`HTTP ${response.status}`)
+    error.statusCode = response.status
+    throw error
+  }
+
+  // Some DELETE endpoints may return no body
+  if (response.status === 204) {
+    return null
+  }
+
+  return response.json()
+}
+
+const readUsersFromEnvironment = async (userCallback, userType = 'USER') => {
   logger.debug('Loading users from environment')
+
   let i = 0
   let found = true
 
   while (found && ++i) {
     const username = process.env[`RCR_${userType}${i}_USERNAME`]
     const password = process.env[`RCR_${userType}${i}_PASSWORD`]
-    found = !!username && !!password
+    found = Boolean(username && password)
 
     if (found) {
       const user = {
@@ -37,12 +58,13 @@ async function readUsersFromEnvironment (userCallback, userType = 'USER') {
         password: password.trim(),
         contactId: null
       }
+
       await userCallback(user)
     }
   }
 }
 
-function resolveDockerHostLink (link) {
+const resolveDockerHostLink = link => {
   const dockerHostPattern = /^http:\/\/host\.docker\.internal:\d+\/?/
 
   if (link.includes('host.docker.internal') && !isDocker()) {
@@ -52,92 +74,127 @@ function resolveDockerHostLink (link) {
   return link
 }
 
-const self = module.exports = {
+const api = {
   users: [],
   admins: [],
-  initialise: async function () {
-    await readUsersFromEnvironment(async (user) => {
-      user.contactId = await self.getContactId(user)
-      self.users.push(user)
+
+  async initialise () {
+    await readUsersFromEnvironment(async user => {
+      user.contactId = await api.getContactId(user)
+      api.users.push(user)
     }, 'USER')
-    await readUsersFromEnvironment(async (user) => {
-      self.admins.push(user)
+
+    await readUsersFromEnvironment(async user => {
+      api.admins.push(user)
     }, 'ADMIN')
   },
-  getUser: function (userNumber) {
-    if (userNumber < 1 || userNumber > self.users.length) {
+
+  getUser (userNumber) {
+    if (userNumber < 1 || userNumber > api.users.length) {
       throw new Error(`Unable to find user with number ${userNumber}`)
     }
-    return self.users[userNumber - 1]
+    return api.users[userNumber - 1]
   },
-  getAdmin: function (adminNumber) {
-    if (adminNumber < 1 || adminNumber > self.admins.length) {
+
+  getAdmin (adminNumber) {
+    if (adminNumber < 1 || adminNumber > api.admins.length) {
       throw new Error(`Unable to find user with number ${adminNumber}`)
     }
-    return self.admins[adminNumber - 1]
+    return api.admins[adminNumber - 1]
   },
 
-  deleteAllUserSubmissions: async function () {
+  async deleteAllUserSubmissions () {
     const year = new Date().getFullYear()
-    for (const user of self.users) {
-      await Promise.all([self.deleteSubmission(user, year), self.deleteSubmission(user, year - 1)])
+
+    for (const user of api.users) {
+      await Promise.all([
+        api.deleteSubmission(user, year),
+        api.deleteSubmission(user, year - 1)
+      ])
     }
   },
-  deleteSubmission: async function (user, season) {
+
+  async deleteSubmission (user, season) {
     logger.debug(`Clearing existing ${season} submission data for ${user.username}`)
-    const sub = await self.getSubmission(user, season)
-    if (sub && sub._links.self.href) {
-      const formattedDeleteUrl = resolveDockerHostLink(sub._links.self.href)
-      const requestObject = defaultRequestOptions(user, formattedDeleteUrl, 'DELETE')
+
+    const sub = await api.getSubmission(user, season)
+
+    if (sub && sub._links?.self?.href) {
+      const deleteUrl = resolveDockerHostLink(sub._links.self.href)
+
       try {
-        await rp(requestObject)
+        await fetchJson({
+          method: 'DELETE',
+          uri: deleteUrl
+        })
         return true
-      } catch (e) {
-        logger.error(`Error deleting ${season} submission for username=${user.username} and password=${user.password}`)
-        throw e
+      } catch (error) {
+        logger.error(
+          `Error deleting ${season} submission for username=${user.username}`
+        )
+        throw error
       }
     }
   },
 
-  getSubmission: async function (user, season) {
-    const requestObject = defaultRequestOptions(user, '/api/submissions/search/getByContactIdAndSeason', 'GET', {
-      contact_id: user.contactId,
-      season: season
-    })
+  async getSubmission (user, season) {
+    const uri = buildUrl(
+      '/api/submissions/search/getByContactIdAndSeason',
+      {
+        contact_id: user.contactId,
+        season
+      }
+    )
+
     try {
-      return await rp(requestObject)
-    } catch (e) {
-      if (e.statusCode === 404) {
+      return await fetchJson({ uri })
+    } catch (error) {
+      if (error.statusCode === 404) {
         return null
       }
-      logger.error(`Error finding submissions contact id ${user.contactId} with username=${user.username} and password=${user.password}`, e)
+
+      logger.error(
+        `Error finding submissions for contact id ${user.contactId}`,
+        error
+      )
     }
   },
 
-  getContactId: async function (user) {
-    const requestObject = defaultRequestOptions(user, `/api/licence/${user.username}?verification=${user.password}`)
+  async getContactId (user) {
+    const uri = buildUrl(
+      `/api/licence/${user.username}`,
+      { verification: user.password }
+    )
+
     try {
-      const result = await rp(requestObject)
+      const result = await fetchJson({ uri })
       return result.contact.id
-    } catch (e) {
-      logger.error(`Error fetching contact detail for with username=${user.username} and password=${user.password}`, e)
+    } catch (error) {
+      logger.error(
+        `Error fetching contact detail for username=${user.username}`,
+        error
+      )
     }
   },
 
-  deleteAllGrilseProbabilities: async function () {
+  async deleteAllGrilseProbabilities () {
     try {
-      const response = await self.getAllGrilseProbabilities()
+      const response = await api.getAllGrilseProbabilities()
       const grilseProbabilities = response._embedded.grilseProbabilities
 
       logger.debug(`Deleting ${grilseProbabilities.length} grilse probabilities`)
 
-      const deletePromises = grilseProbabilities.map(item => {
-        const formattedDeleteUrl = resolveDockerHostLink(item._links.self.href)
-        logger.debug(`Deleting grilse probability at: ${formattedDeleteUrl}`)
-        return rp(defaultRequestOptions(undefined, formattedDeleteUrl, 'DELETE'))
-      })
+      await Promise.all(
+        grilseProbabilities.map(item => {
+          const deleteUrl = resolveDockerHostLink(item._links.self.href)
+          logger.debug(`Deleting grilse probability at: ${deleteUrl}`)
+          return fetchJson({
+            method: 'DELETE',
+            uri: deleteUrl
+          })
+        })
+      )
 
-      await Promise.all(deletePromises)
       logger.debug('Successfully deleted all grilse probabilities')
       return true
     } catch (error) {
@@ -146,9 +203,10 @@ const self = module.exports = {
     }
   },
 
-  getAllGrilseProbabilities: async function () {
-    const requestObject = defaultRequestOptions(undefined, '/api/grilseProbabilities', 'GET')
-
-    return await rp(requestObject)
+  async getAllGrilseProbabilities () {
+    const uri = buildUrl('/api/grilseProbabilities')
+    return fetchJson({ uri })
   }
 }
+
+export default api
