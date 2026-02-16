@@ -1,4 +1,4 @@
-import isDocker from '../utils/is-docker.js'
+import isDocker from 'is-docker'
 import logger from '../utils/logger.js'
 
 const API_URL = process.env.API_URL || 'http://localhost:5000/'
