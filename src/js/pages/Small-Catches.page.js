@@ -1,5 +1,4 @@
-'use strict'
-const Page = require('./page')
+import Page from './page'
 
 class AddSmallFishPage extends Page {
   get url () {
@@ -37,4 +36,4 @@ class AddSmallFishPage extends Page {
   }
 }
 
-module.exports = new AddSmallFishPage()
+export default new AddSmallFishPage()

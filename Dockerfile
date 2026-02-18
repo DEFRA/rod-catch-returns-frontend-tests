@@ -1,5 +1,4 @@
 FROM ubuntu:latest
-ENV TEST_CONFIG ./src/conf/docker.conf.js
 
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV TZ=Europe/London

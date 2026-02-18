@@ -1,6 +1,6 @@
-'use strict'
-const { defineStep } = require("@cucumber/cucumber")
-const Season = require('../../pages/Season-Select.page')
+import Season from '../../pages/Season-Select.page'
+import { defineStep } from '@cucumber/cucumber'
+
 const today = new Date()
 
 defineStep(/^If it is the extended submission period I select the (current|previous) period on the season page$/, async function (periodName) {

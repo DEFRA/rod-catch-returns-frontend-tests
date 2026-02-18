@@ -1,7 +1,6 @@
-'use strict'
-const Page = require('./page')
-const logger = require('../utils/logger')
-const { validateTableByCaption, getSmallCatchRow, getLargeCatchRow } = require('../utils/table-utils')
+import { getLargeCatchRow, getSmallCatchRow, validateTableByCaption, } from '../utils/table-utils'
+import Page from './page'
+import logger from '../utils/logger'
 
 const SELECTOR_CONTINUE = '//*[@name="continue"]'
 
@@ -128,4 +127,4 @@ class SummaryPage extends Page {
   }
 }
 
-module.exports = new SummaryPage()
+export default new SummaryPage()

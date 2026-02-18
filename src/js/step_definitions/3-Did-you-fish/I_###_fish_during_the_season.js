@@ -1,6 +1,5 @@
-'use strict'
-const { defineStep } = require("@cucumber/cucumber")
-const DYF = require('../../pages/Did-you-fish.page')
+import DYF from '../../pages/Did-you-fish.page'
+import { defineStep } from '@cucumber/cucumber'
 
 defineStep(/^I (did|didn't) fish during the season$/, async (didThey) => {
   await DYF.checkOpen()

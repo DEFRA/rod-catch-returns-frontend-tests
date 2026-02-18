@@ -1,5 +1,4 @@
-'use strict'
-const Page = require('./page')
+import Page from './page'
 
 class AgeWeightKeyPage extends Page {
   get url () {
@@ -29,4 +28,4 @@ class AgeWeightKeyPage extends Page {
   }
 }
 
-module.exports = new AgeWeightKeyPage()
+export default new AgeWeightKeyPage()

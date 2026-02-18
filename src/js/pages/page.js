@@ -1,14 +1,10 @@
-'use strict'
-const logger = require('../utils/logger')
-const waitForNav = require('../lib/wait-for-navigation-on-action')
+import logger from '../utils/logger'
+import waitForNav from '../lib/wait-for-navigation-on-action'
 const SELECTOR_CONTINUE = '//*[@name="continue"]'
 
-class Page {
-  /**
-   * The expected URL for the page.  Must be overridden by subclass implementations
-   */
-  get url () {
-    throw new Error('Page implementation does not override method url()')
+export default class Page {
+  constructor () {
+    this.title = 'My Page'
   }
 
   async open () {
@@ -16,24 +12,21 @@ class Page {
     await browser.url(this.url)
   }
 
-  async isOpen () {
-    return (await browser.getUrl()).includes(this.url)
-  }
-
   async checkOpen () {
-    const open = await this.isOpen()
-    if (!open) {
-      logger.debug(`Page.checkOpen - async waiting for browser URL ${browser.getUrl()} to match ${this.url}`)
-      const fn = await this.isOpen.bind(this)
-      const url = this.url
-      try {
-        await browser.waitUntil(fn, browser.options.waitforTimeout, `Expected URL '${browser.getUrl()}' to contain '${url}'`, 1000)
-      } catch (e) {
-        logger.error('Error checking if page is open ', e)
-        throw e
-      }
-      logger.debug(`Page.checkOpen - async checking for ${this.url} completed successfully`)
+    try {
+      await browser.waitUntil(
+        async () => ((await browser.getUrl()).includes(this.url)),
+        {
+          timeout: browser.options.waitforTimeout,
+          interval: browser.options.waitforInterval,
+          timeoutMsg: `The url did not match the expected url:${this.url}`
+        }
+      )
+    } catch (e) {
+      logger.error('Error checking if page is open ', e)
+      throw e
     }
+    logger.debug(`Page.checkOpen - async checking for ${this.url} completed successfully`)
   }
 
   async continue () {
@@ -54,8 +47,7 @@ class Page {
     if (!sel.endsWith('+ label')) {
       sel += ' + label'
     }
-    await $(sel).click()
+    const radioButton = await $(sel)
+    await radioButton.click()
   }
 }
-
-module.exports = Page

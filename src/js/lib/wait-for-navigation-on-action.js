@@ -1,7 +1,6 @@
-'use strict'
-const logger = require('../utils/logger')
+import logger from '../utils/logger'
 
-const getPageId = async () => {
+async function getPageId () {
   const el = await $('#pgid')
   return (await el.isExisting()) ? await el.getHTML() : null
 }
@@ -13,7 +12,7 @@ const getPageId = async () => {
  *
  * @param {Function} action - async function that triggers navigation
  */
-module.exports = async function waitForNavigation (action) {
+async function waitForNavigation (action) {
   const oldPageId = await getPageId()
   const oldUrl = await browser.getUrl()
   let currentPageId = null
@@ -49,3 +48,5 @@ module.exports = async function waitForNavigation (action) {
 
   logger.debug(`Navigation complete. Old page: id=${oldPageId}, url=${oldUrl} New page: id=${currentPageId}, url=${newUrl}`)
 }
+
+export default waitForNavigation

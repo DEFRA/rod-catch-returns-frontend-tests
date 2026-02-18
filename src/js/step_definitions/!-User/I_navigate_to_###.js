@@ -1,5 +1,5 @@
-const { defineStep } = require('@cucumber/cucumber')
+import { defineStep } from '@cucumber/cucumber'
 
-defineStep(/I navigate to (.*)/, async function (url) {
+defineStep(/I navigate to (.*)/, async (url) => {
   await browser.url(url)
 })

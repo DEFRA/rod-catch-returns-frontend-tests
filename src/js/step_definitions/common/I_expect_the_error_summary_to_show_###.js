@@ -1,5 +1,4 @@
-'use strict'
-const { defineStep } = require('@cucumber/cucumber')
+import { defineStep } from '@cucumber/cucumber'
 
 defineStep('I expect the error summary to show the following errors', async function (dataTable) {
   const expectedErrors = dataTable.raw().flat()

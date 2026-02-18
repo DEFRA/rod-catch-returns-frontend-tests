@@ -1,7 +1,5 @@
-'use strict'
-const os = require('os')
-const lodash = require('lodash')
-const commonConfig = require('./common.conf').config
+import { commonConfig } from './common.conf.js'
+import os from 'os'
 
 const browserstackUser = process.env.BROWSERSTACK_USERNAME
 const browserstackKey = process.env.BROWSERSTACK_ACCESS_KEY
@@ -13,18 +11,21 @@ if (!(browserstackUser || browserstackKey)) {
 const setupCapabilities = function (capabilitiesArray) {
   let buildTimestamp = new Date().toISOString()
   buildTimestamp = buildTimestamp.substring(0, buildTimestamp.length - 8)
-  return capabilitiesArray.map(cap => lodash.defaultsDeep(cap, {
-    build: `${process.env.USER}@${os.hostname()} ${buildTimestamp}`.replace(/[^A-Za-z0-9 :._@]/g, '_'),
-    maxInstances: 1,
-    project: 'Rod Catch Returns',
-    'browserstack.local': true,
-    'browserstack.debug': true,
-    'browserstack.video': true,
-    'browserstack.timezone': 'London',
-    'browserstack.javascriptEnabled': true,
-    pageLoadStrategy: 'normal',
-    acceptSslCerts: true
-  }))
+  return capabilitiesArray.map(cap =>
+    ({
+      ...cap,
+      build: `${process.env.USER}@${os.hostname()} ${buildTimestamp}`.replace(/[^A-Za-z0-9 :._@]/g, '_'),
+      maxInstances: 1,
+      project: 'Rod Catch Returns',
+      'browserstack.local': true,
+      'browserstack.debug': true,
+      'browserstack.video': true,
+      'browserstack.timezone': 'London',
+      'browserstack.javascriptEnabled': true,
+      pageLoadStrategy: 'normal',
+      acceptSslCerts: true
+
+    }))
 }
 
 let browserStackProxyOpts = {}
@@ -36,7 +37,8 @@ if (process.env.BROWSER_PROXY_HOST) {
   }
 }
 
-const browserStackConfig = {
+export const config = {
+  ...commonConfig,
   // ==================
   // Browserstack selenium host/port
   // ==================
@@ -52,11 +54,12 @@ const browserStackConfig = {
   key: browserstackKey,
   browserstackLocal: true,
 
-  browserstackOpts: lodash.defaultsDeep(browserStackProxyOpts, {
+  browserstackOpts: {
+    ...browserStackProxyOpts,
     logFile: './logs/local.log',
     force: true,
     forceLocal: true
-  }),
+  },
   // Default timeout for all waitFor* commands.
   waitforTimeout: 90000,
 
@@ -128,17 +131,6 @@ const browserStackConfig = {
       browser_version: '70.0'
     }
   ]),
-
-  // ===================
-  // Test Configurations
-  // ===================
-
-  // Set a base URL in order to shorten url command calls. If your url parameter starts
-  // with "/", then the base url gets prepended.
-  baseExternalUrl: process.env.SERVICE_URL || 'http://localhost:3000',
-  baseAdminUrl: process.env.ADMIN_SERVICE_URL || 'http://localhost:4000',
-  baseUrl: process.env.SERVICE_URL || 'http://localhost:3000',
-
   // Test runner services
   services: ['browserstack'],
 
@@ -148,6 +140,4 @@ const browserStackConfig = {
     // Increase step timeout on browserstack (things just seem to take longer!)
     timeout: 240000
   }
-
 }
-exports.config = lodash.defaultsDeep(browserStackConfig, commonConfig)

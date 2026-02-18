@@ -1,6 +1,9 @@
-'use strict'
-const { defineStep } = require('@cucumber/cucumber')
-const Review = require('../../pages/Review.page')
+import Review from '../../pages/Review.page'
+import { defineStep } from '@cucumber/cucumber'
+
+defineStep('I am on the review page', async function () {
+  await Review.checkOpen()
+})
 
 defineStep('I am on the review page and I click submit', async function () {
   await Review.checkOpen()
@@ -10,8 +13,4 @@ defineStep('I am on the review page and I click submit', async function () {
 defineStep('I am on the review page and I click unlock', async function () {
   await Review.checkOpen()
   await Review.clickUnlock()
-})
-
-defineStep('I am on the review page', async function () {
-  await Review.checkOpen()
 })

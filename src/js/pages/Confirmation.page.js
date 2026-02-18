@@ -1,5 +1,4 @@
-'use strict'
-const Page = require('./page')
+import Page from './page'
 
 class ConfirmationPage extends Page {
   get url () {
@@ -7,4 +6,4 @@ class ConfirmationPage extends Page {
   }
 }
 
-module.exports = new ConfirmationPage()
+export default new ConfirmationPage()

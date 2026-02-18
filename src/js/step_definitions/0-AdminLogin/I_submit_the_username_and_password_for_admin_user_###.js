@@ -1,7 +1,6 @@
-'use strict'
-const { defineStep } = require('@cucumber/cucumber')
-const AdminLoginPage = require('../../pages/AdminLogin-page')
-const logger = require('../../utils/logger')
+import AdminLoginPage from '../../pages/Admin-login.page'
+import { defineStep } from '@cucumber/cucumber'
+import logger from '../../utils/logger'
 
 defineStep(/I submit the username and password for admin user ([1-9][0-9]*)/, async (adminNumber) => {
   const user = await browser.getAdmin(adminNumber)

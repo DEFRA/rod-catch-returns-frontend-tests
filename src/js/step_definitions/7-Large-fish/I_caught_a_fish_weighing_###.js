@@ -1,6 +1,5 @@
-'use strict'
-const { defineStep } = require("@cucumber/cucumber")
-const LargeCatch = require('../../pages/Large-Catches.page')
+import LargeCatch from '../../pages/Large-Catches.page'
+import { defineStep } from '@cucumber/cucumber'
 
 defineStep(/^I caught a fish weighing (\d+(?:\.\d+)?)\s*kg$/, async function (kg) {
   await LargeCatch.setMetricMass(kg)

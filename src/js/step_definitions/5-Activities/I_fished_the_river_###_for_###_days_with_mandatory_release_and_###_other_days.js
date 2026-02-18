@@ -1,6 +1,5 @@
-'use strict'
-const { defineStep } = require("@cucumber/cucumber")
-const Activity = require('../../pages/Add-Activities.page')
+import Activity from '../../pages/Activities.page'
+import { defineStep } from '@cucumber/cucumber'
 
 defineStep(/I fished the river (.*) for (\d+) days with mandatory release and (\d+) other days/, async (riverName, daysWithMandatoryRelease, daysOther) => {
   await Activity.checkOpen()

@@ -1,5 +1,5 @@
-const { defineStep } = require('@cucumber/cucumber')
+import { defineStep } from '@cucumber/cucumber'
 
-defineStep(/I am redirected to (.*)/, async function (url) {
+defineStep(/I am redirected to (.*)/, async (url) => {
   await expect(browser).toHaveUrl(expect.stringContaining(url))
 })

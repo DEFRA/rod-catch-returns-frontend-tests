@@ -1,10 +1,9 @@
-'use strict'
-const { defineStep } = require('@cucumber/cucumber')
-const AdminLoginPage = require('../../pages/AdminLogin-page')
-const LicencePage = require('../../pages/Licence-page')
-const logger = require('../../utils/logger')
+import AdminLoginPage from '../../pages/Admin-login.page'
+import LicencePage from '../../pages/Licence-page'
+import { defineStep } from '@wdio/cucumber-framework'
+import logger from '../../utils/logger'
 
-defineStep(/I am an (external|administrative) user/, async function (userType) {
+defineStep(/I am an (external|administrative) user/, async (userType) => {
   if (userType === 'administrative') {
     browser.options.baseUrl = browser.options.baseAdminUrl
     await AdminLoginPage.open()

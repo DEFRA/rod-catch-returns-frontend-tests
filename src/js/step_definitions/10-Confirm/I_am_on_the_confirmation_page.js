@@ -1,6 +1,5 @@
-'use strict'
-const { defineStep } = require("@cucumber/cucumber")
-const ConfirmPage = require('../../pages/Confirmation.page')
+import ConfirmPage from '../../pages/Confirmation.page'
+import { defineStep } from '@cucumber/cucumber'
 
 defineStep('I am on the confirmation page', async function () {
   await ConfirmPage.checkOpen()
