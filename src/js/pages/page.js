@@ -1,4 +1,3 @@
-// https://webdriver.io/docs/pageobjects/
 import logger from '../utils/logger'
 import waitForNav from '../lib/wait-for-navigation-on-action'
 const SELECTOR_CONTINUE = '//*[@name="continue"]'
