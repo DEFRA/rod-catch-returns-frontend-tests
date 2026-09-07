@@ -40,8 +40,7 @@ RUN mkdir -p /usr/local/nvm \
     && source $NVM_DIR/nvm.sh \
     && nvm install $NODE_VERSION \
     && nvm alias default $NODE_VERSION \
-    && nvm use default \
-    && npm install -g npm@$NPM_VERSION
+    && nvm use default
 
 ENV NODE_PATH=$NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
@@ -54,6 +53,7 @@ VOLUME /app/logs
 # Install packages
 COPY ./package*.json /app/
 COPY .npmrc /app/
+RUN npm install -g npm@$NPM_VERSION
 RUN node --version
 RUN npm install
 
