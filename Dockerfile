@@ -53,7 +53,7 @@ VOLUME /app/logs
 # Install packages
 COPY ./package*.json /app/
 COPY .npmrc /app/
-RUN npm install -g npm@11.19.1
+RUN npm install -g npm@$NPM_VERSION
 RUN npm --version
 RUN npm install
 
