@@ -17,7 +17,7 @@ class ReviewPage extends Page {
   }
 
   async setConfirmationCheckbox () {
-    const confirmationCheckbox = await $('label[for="agree"]')
+    const confirmationCheckbox = await $('input[name="agree"]')
     await confirmationCheckbox.click()
   }
 

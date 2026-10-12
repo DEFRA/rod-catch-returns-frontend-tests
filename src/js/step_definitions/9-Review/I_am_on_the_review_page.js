@@ -5,7 +5,7 @@ defineStep('I am on the review page', async function () {
   await Review.checkOpen()
 })
 
-defineStep('I am on the review page and I confirm and I click submit', async function () {
+defineStep('I am on the review page and I click confirm and I click submit', async function () {
   await Review.checkOpen()
   await Review.setConfirmationCheckbox()
   await Review.continue()
