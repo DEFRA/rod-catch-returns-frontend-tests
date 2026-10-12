@@ -59,7 +59,7 @@ Feature: Login to Rod Catch returns update and return to service, submit
       | <any> | Frome | Sea Trout | 1lbs 2oz | Fly     | No       |
       | <any> | Frome | Salmon    | 3lbs 5oz | Fly     | No      |
     And  I am on the summary page and I click review catch return
-    And  I am on the review page and I click submit
+    And  I am on the review page and I confirm and I click submit
 
   Scenario: Return login - Submission locked
     Then I am on the review page

@@ -16,6 +16,11 @@ class ReviewPage extends Page {
     await unlockButton.click()
   }
 
+  async setConfirmationCheckbox () {
+    const confirmationCheckbox = await $('label[for="agree"]')
+    await confirmationCheckbox.click()
+  }
+
   async validateActivitiesTable (dataTable) {
     return validateTableByCaption('Rivers fished', dataTable)
   }

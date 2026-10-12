@@ -2,7 +2,7 @@ Feature: Administrative users can manage paper based returns
 
   Background:
     Given I am an administrative user
-  
+
   Scenario: Redirect to login page
     When I navigate to /
     Then I am redirected to /login
@@ -48,9 +48,9 @@ Feature: Administrative users can manage paper based returns
       | Ystrad | 2                              | 0               |
 
     And  I am on the summary page and I click review catch return
-    And  I am on the review page and I click submit
+    And  I am on the review page and I confirm and I click submit
     And  I am on the confirmation page
-  
+
   Scenario: Unlock submission
     And  I am on the licence entry page
     And  I submit the licence and postcode for test user 1
