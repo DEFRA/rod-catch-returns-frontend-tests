@@ -28,7 +28,7 @@ RUN apt-get install -y firefox
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV NVM_DIR=/usr/local/nvm
-ENV NODE_VERSION=24.13.0
+ENV NODE_VERSION=24.22.1
 ENV NPM_VERSION=11.19.1
 
 # Replace shell with bash so we can source files
